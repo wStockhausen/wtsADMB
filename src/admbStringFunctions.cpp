@@ -265,7 +265,7 @@ void wts::adstring_matrix::write(ostream & os){
 
 /****************************************************************
 * name      : CompareAdstrings                                  *
-* purpose   : Class with memeber function to determine if       *
+* purpose   : Class with member function to determine if       *
 *               lhs < rhs for input adstrings lhs, rhs          *
 ****************************************************************/
 bool wts::CompareAdstrings::debug = false;

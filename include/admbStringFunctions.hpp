@@ -84,7 +84,7 @@ namespace wts{
             adstring_array& operator() (_CONST int i);
             adstring_array& operator[] (_CONST int i);
             int indexmin(){return idxmn;}
-            int indexmax(){return idxmn+nAAs;}
+            int indexmax(){return idxmn+nAAs-1;}
             int size(){return nAAs;}
             void to_lower(){for (int i=0;i<nAAs;i++) (*ppAAs[i]).to_lower();}
             void read(cifstream & is);

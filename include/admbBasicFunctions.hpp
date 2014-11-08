@@ -210,6 +210,120 @@ namespace wts{
     ivector getBounds(_CONST  dvar5_array& o);
     ivector getBounds(_CONST  dvar6_array& o);
     ivector getBounds(_CONST  dvar7_array& o);
+    
+    /**
+     * Create, dimension and initialize a dmatrix using
+     * an ivector.
+     * 
+     * @param dims - the dimensions (alternating low/high)
+     * @return - the dimensioned array
+     */
+    dmatrix dimDmatrix(ivector& dims);
+    
+    /**
+     * Create, dimension and initialize a d3_array using
+     * an ivector.
+     * 
+     * @param dims - the dimensions (alternating low/high)
+     * @return - the dimensioned array
+     */
+    d3_array dimD3array(ivector& dims);
+    
+    /**
+     * Create, dimension and initialize a d4_array using
+     * an ivector.
+     * 
+     * @param dims - the dimensions (alternating low/high)
+     * @return - the dimensioned array
+     */
+    d4_array dimD4array(ivector& dims);
+    
+    /**
+     * Create, dimension and initialize a d5_array using
+     * an ivector.
+     * 
+     * @param dims - the dimensions (alternating low/high)
+     * @return - the dimensioned array
+     */
+    d5_array dimD5array(ivector& dims);
+    
+    /**
+     * Create, dimension and initialize a d6_array using
+     * an ivector.
+     * 
+     * @param dims - the dimensions (alternating low/high)
+     * @return - the dimensioned array
+     */
+    d6_array dimD6array(ivector& dims);
+    
+    /**
+     * Create, dimension and initialize a d7_array using
+     * an ivector.
+     * 
+     * @param dims - the dimensions (alternating low/high)
+     * @return - the dimensioned array
+     */
+    d7_array dimD7array(ivector& dims);
+        
+    /**
+     * Permute dimensions of a dmatrix. Same as transpose.
+     * 
+     * @param perm - ivector of length 2 indicating permutation
+     * @param n_ij -dmatrix to permute (transpose)
+     * 
+     * @return dmatrix with permuted dimensions
+     */
+    dmatrix permuteDims(ivector& perm, dmatrix& n_ij);
+    
+    /**
+     * Permute dimensions of a d3_array.
+     * 
+     * @param perm - ivector of length 3 indicating permutation
+     * @param n_ijk -d3_array to permute
+     * 
+     * @return d3_array with permuted dimensions
+     */
+    d3_array permuteDims(ivector& perm, d3_array& n_ijk);
+    
+    /**
+     * Permute dimensions of a d4_array.
+     * 
+     * @param perm - ivector of length 4 indicating permutation
+     * @param n_ijkl -d4_array to permute
+     * 
+     * @return d4_array with permuted dimensions
+     */
+    d4_array permuteDims(ivector& perm, d4_array& n_ijkl);
+    
+    /**
+     * Permute dimensions of a d5_array.
+     * 
+     * @param perm - ivector of length 5 indicating permutation
+     * @param n_ijklm -d5_array to permute
+     * 
+     * @return d5_array with permuted dimensions
+     */
+    d5_array permuteDims(ivector& perm, d5_array& n_ijklm);
+    
+    /**
+     * Permute dimensions of a d6_array.
+     * 
+     * @param perm - ivector of length 6 indicating permutation
+     * @param n_ijklmn -d6_array to permute
+     * 
+     * @return d6_array with permuted dimensions
+     */
+    d6_array permuteDims(ivector& perm, d6_array& n_ijklmn);
+    
+    /**
+     * Permute dimensions of a d7_array.
+     * 
+     * @param perm - ivector of length 7 indicating permutation
+     * @param n_ijklmn -d7_array to permute
+     * 
+     * @return d7_array with permuted dimensions
+     */
+    d7_array permuteDims(ivector& perm, d7_array& n_ijklmn);
 
     /*************************************************
     * name      : getIndexVector                     *
@@ -231,7 +345,7 @@ namespace wts{
 
     /*************************************************
     * name      : value                              *
-    * purpose   : return _CONST ant version of array   *
+    * purpose   : return _CONSTant version of array   *
     *************************************************/
     //-------------------------------------------------------------
     d4_array value(_CONST  dvar4_array& o);

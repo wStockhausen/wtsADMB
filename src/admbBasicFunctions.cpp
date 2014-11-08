@@ -334,6 +334,406 @@ ivector wts::getBounds(_CONST dvar7_array& o){
     return(b);
 }
 
+/**
+ * Create, dimension and initialize a dmatrix using
+ * an ivector.
+ * 
+ * @param dims - the dimensions (alternating low/high)
+ * @return - the dimensioned array
+ */
+dmatrix wts::dimDmatrix(ivector& dims){
+    dmatrix a(dims[1],dims[2],dims[3],dims[4]);
+    return(a);
+}
+
+/**
+ * Create, dimension and initialize a d3_array using
+ * an ivector.
+ * 
+ * @param dims - the dimensions (alternating low/high)
+ * @return - the dimensioned array
+ */
+d3_array wts::dimD3array(ivector& dims){
+    d3_array a(dims[1],dims[2],dims[3],dims[4],dims[5],dims[6]);
+    return(a);
+}
+
+/**
+ * Create, dimension and initialize a d4_array using
+ * an ivector.
+ * 
+ * @param dims - the dimensions (alternating low/high)
+ * @return - the dimensioned array
+ */
+d4_array wts::dimD4array(ivector& dims){
+    d4_array a(dims[1],dims[2],dims[3],dims[4],
+               dims[5],dims[6],dims[7],dims[8]);
+    return(a);
+}
+
+/**
+ * Create, dimension and initialize a d5_array using
+ * an ivector.
+ * 
+ * @param dims - the dimensions (alternating low/high)
+ * @return - the dimensioned array
+ */
+d5_array wts::dimD5array(ivector& dims){
+    d5_array a(dims[1],dims[2],dims[3],dims[4],dims[5],dims[6],
+               dims[7],dims[8],dims[9],dims[10]);
+    return(a);
+}
+
+/**
+ * Create, dimension and initialize a d6_array using
+ * an ivector.
+ * 
+ * @param dims - the dimensions (alternating low/high)
+ * @return - the dimensioned array
+ */
+d6_array wts::dimD6array(ivector& dims){
+    d6_array a(dims[1],dims[2],dims[3],dims[4],dims[5],dims[6],
+               dims[7],dims[8],dims[9],dims[10],dims[11],dims[12]);
+    return(a);
+}
+
+/**
+ * Create and dimension a d7_array using an ivector.
+ * 
+ * @param dims - the dimensions (alternating low/high)
+ * @return - the dimensioned array
+ */
+d7_array wts::dimD7array(ivector& dims){
+    d7_array a(dims[1],dims[2],dims[3],dims[4],dims[5],dims[6],dims[7],dims[8],
+               dims[9],dims[10],dims[11],dims[12],dims[13],dims[14]);
+    return(a);
+}
+
+/**
+ * Permute dimensions of a dmatrix--really just a transpose.
+ * 
+ * @param perm - ivector indicating permutation
+ * @param n_ij -dmatrix to permute
+ * 
+ * @return dmatrix with permuted dimensions
+ */
+dmatrix wts::permuteDims(ivector& i2p, dmatrix& n_i){
+    return trans(n_i);
+}
+
+/**
+ * Permute dimensions of a d3_array.
+ * 
+ * @param perm - ivector indicating permutation
+ * @param n_ijk -d3_array to permute
+ * 
+ * @return d3_array with permuted dimensions
+ */
+d3_array wts::permuteDims(ivector& i2p, d3_array& n_i){
+    int mxi = 3;
+    cout<<"starting permuteDims(d3_array&)"<<endl;
+    if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
+        std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
+        std::cout<<"i2p must have length "<<mxi<<"."<<endl;
+        std::cout<<"i2p = "<<i2p<<endl;
+        std::cout<<"Aborting..."<<endl;
+        std::exit(-1);
+    }
+    ivector bnds = getBounds(n_i);
+    ivector pbnds(1,2*mxi);
+    for (int i=1;i<=mxi;i++) {
+        pbnds(2*i2p(i)-1) = bnds(2*i-1);
+        pbnds(2*i2p(i))   = bnds(2*i);
+    }
+    d3_array n_p = dimD3array(pbnds); 
+    n_p.initialize();
+    
+    ivector i(1,mxi);//index vector for original array
+    ivector p(1,mxi);//permuted index vector {p[i2p[j]] = i[j]}
+    
+    int j;
+    j = 1;
+    for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+        p[i2p[j]] = i[j];
+        j=2;
+        for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+            p[i2p[j]] = i[j];
+            j=3;
+            for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                p[i2p[j]] = i[j];
+                n_p(p[1],p[2],p[3]) = 
+                    n_i(i[1],i[2],i[3]);
+            }
+            j=2;
+        }
+        j=1;
+    }
+    cout<<"finished permuteDims(d3_array&)"<<endl;
+    return n_p;
+}
+
+/**
+ * Permute dimensions of a d4_array.
+ * 
+ * @param perm - ivector indicating permutation
+ * @param n_ijkl -d4_array to permute
+ * 
+ * @return d4_array with permuted dimensions
+ */
+d4_array wts::permuteDims(ivector& i2p, d4_array& n_i){
+    int mxi = 4;
+    cout<<"starting permuteDims(d4_array&)"<<endl;
+    if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
+        std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
+        std::cout<<"i2p must have length "<<mxi<<"."<<endl;
+        std::cout<<"i2p = "<<i2p<<endl;
+        std::cout<<"Aborting..."<<endl;
+        std::exit(-1);
+    }
+    ivector bnds = getBounds(n_i);
+    ivector pbnds(1,2*mxi);
+    for (int i=1;i<=mxi;i++) {
+        pbnds(2*i2p(i)-1) = bnds(2*i-1);
+        pbnds(2*i2p(i))   = bnds(2*i);
+    }
+    d4_array n_p = dimD4array(pbnds); 
+    n_p.initialize();
+    
+    ivector i(1,mxi);//index vector for original array
+    ivector p(1,mxi);//permuted index vector {p[i2p[j]] = i[j]}
+    
+    int j;
+    j = 1;
+    for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+        p[i2p[j]] = i[j];
+        j=2;
+        for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+            p[i2p[j]] = i[j];
+            j=3;
+            for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                p[i2p[j]] = i[j];
+                j=4;
+                for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                    p[i2p[j]] = i[j];
+                    n_p(p[1],p[2],p[3],p[4]) = 
+                        n_i(i[1],i[2],i[3],i[4]);
+                }
+                j=3;
+            }
+            j=2;
+        }
+        j=1;
+    }
+    cout<<"finished permuteDims(d4_array&)"<<endl;
+    return n_p;
+}
+
+/**
+ * Permute dimensions of a d5_array.
+ * 
+ * @param perm - ivector indicating permutation
+ * @param n_ijklmn -d5_array to permute
+ * 
+ * @return d5_array with permuted dimensions
+ */
+d5_array wts::permuteDims(ivector& i2p, d5_array& n_i){
+    cout<<"starting permuteDims(d5_array&)"<<endl;
+    int mxi = 5;
+    if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
+        std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
+        std::cout<<"i2p must have length "<<mxi<<"."<<endl;
+        std::cout<<"i2p = "<<i2p<<endl;
+        std::cout<<"Aborting..."<<endl;
+        std::exit(-1);
+    }
+    ivector bnds = getBounds(n_i);
+    ivector pbnds(1,2*mxi);
+    for (int i=1;i<=mxi;i++) {
+        pbnds(2*i2p(i)-1) = bnds(2*i-1);
+        pbnds(2*i2p(i))   = bnds(2*i);
+    }
+    cout<<"bnds  = "<<bnds<<endl;
+    cout<<"pbnds = "<<pbnds<<endl;
+    d5_array n_p = dimD5array(pbnds); 
+    n_p.initialize();
+    cout<<"bounds(n_p) = "<<getBounds(n_p)<<endl;
+    
+    ivector i(1,mxi);//index vector for original array
+    ivector p(1,mxi);//permuted index vector {p[i2p[j]] = i[j]}
+    
+    int j;
+    j = 1;
+    for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+        p[i2p[j]] = i[j];
+        j=2;
+        for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+            p[i2p[j]] = i[j];
+            j=3;
+            for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                p[i2p[j]] = i[j];
+                j=4;
+                for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                    p[i2p[j]] = i[j];
+                    j=5;
+                    for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                        p[i2p[j]] = i[j];
+                        cout<<endl<<"i = "<<i<<endl<<"p = "<<p<<endl;
+                        cout<<"n_i[i] = "<<n_i(i[1],i[2],i[3],i[4],i[5])<<endl;
+                        n_p(p[1],p[2],p[3],p[4],p[5]) = 
+                            n_i(i[1],i[2],i[3],i[4],i[5]);
+                        cout<<"n_p[p] = "<<n_p(p[1],p[2],p[3],p[4],p[5])<<endl;
+                    }
+                    j=4;
+                }
+                j=3;
+            }
+            j=2;
+        }
+        j=1;
+    }
+    cout<<"finished permuteDims(d5_array&)"<<endl;
+    return n_p;
+}
+
+/**
+ * Permute dimensions of a d6_array.
+ * 
+ * @param perm - ivector indicating permutation
+ * @param n_ijklmn -d6_array to permute
+ * 
+ * @return d6_array with permuted dimensions
+ */
+d6_array wts::permuteDims(ivector& i2p, d6_array& n_i){
+    int mxi = 6;
+    cout<<"starting permuteDims(d6_array&)"<<endl;
+    if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
+        std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
+        std::cout<<"i2p must have length "<<mxi<<"."<<endl;
+        std::cout<<"i2p = "<<i2p<<endl;
+        std::cout<<"Aborting..."<<endl;
+        std::exit(-1);
+    }
+    ivector bnds = getBounds(n_i);
+    ivector pbnds(1,2*mxi);
+    for (int i=1;i<=mxi;i++) {
+        pbnds(2*i2p(i)-1) = bnds(2*i-1);
+        pbnds(2*i2p(i))   = bnds(2*i);
+    }
+    d6_array n_p = dimD6array(pbnds); 
+    n_p.initialize();
+    
+    ivector i(1,mxi);//index vector for original array
+    ivector p(1,mxi);//permuted index vector {p[i2p[j]] = i[j]}
+    
+    int j;
+    j = 1;
+    for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+        p[i2p[j]] = i[j];
+        j=2;
+        for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+            p[i2p[j]] = i[j];
+            j=3;
+            for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                p[i2p[j]] = i[j];
+                j=4;
+                for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                    p[i2p[j]] = i[j];
+                    j=5;
+                    for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                        p[i2p[j]] = i[j];
+                        j=6;
+                        for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                            p[i2p[j]] = i[j];
+                            n_p(p[1],p[2],p[3],p[4],p[5],p[6]) = 
+                                n_i(i[1],i[2],i[3],i[4],i[5],i[6]);
+                        }
+                        j=5;
+                    }
+                    j=4;
+                }
+                j=3;
+            }
+            j=2;
+        }
+        j=1;
+    }
+    cout<<"finished permuteDims(d6_array&)"<<endl;
+    return n_p;
+}
+
+/**
+ * Permute dimensions of a d7_array.
+ * 
+ * @param perm - ivector indicating permutation
+ * @param n_ijklmn -d7_array to permute
+ * 
+ * @return d7_array with permuted dimensions
+ */
+d7_array wts::permuteDims(ivector& i2p, d7_array& n_i){
+    int mxi = 7;
+    cout<<"starting permuteDims(d7_array&)"<<endl;
+    if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
+        std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
+        std::cout<<"i2p must have length "<<mxi<<"."<<endl;
+        std::cout<<"i2p = "<<i2p<<endl;
+        std::cout<<"Aborting..."<<endl;
+        std::exit(-1);
+    }
+    ivector bnds = getBounds(n_i);
+    ivector pbnds(1,2*mxi);
+    for (int i=1;i<=mxi;i++) {
+        pbnds(2*i2p(i)-1) = bnds(2*i-1);
+        pbnds(2*i2p(i))   = bnds(2*i);
+    }
+//    d7_array n_p = dimD7array(pnds); //<-doesn't compile because d7 does not have a copy constructor
+    d7_array n_p(pbnds[1],pbnds[2],pbnds[3],pbnds[4],pbnds[5],pbnds[6],pbnds[7],pbnds[8],
+                 pbnds[9],pbnds[10],pbnds[11],pbnds[12],pbnds[13],pbnds[14]);
+    n_p.initialize();
+    
+    ivector i(1,mxi);//index vector for original array
+    ivector p(1,mxi);//permuted index vector {p[i2p[j]] = i[j]}
+    
+    int j;
+    j = 1;
+    for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+        p[i2p[j]] = i[j];
+        j=2;
+        for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+            p[i2p[j]] = i[j];
+            j=3;
+            for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                p[i2p[j]] = i[j];
+                j=4;
+                for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                    p[i2p[j]] = i[j];
+                    j=5;
+                    for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                        p[i2p[j]] = i[j];
+                        j=6;
+                        for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                            p[i2p[j]] = i[j];
+                            j=7;
+                            for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
+                                p[i2p[j]] = i[j];
+                                n_p(p[1],p[2],p[3],p[4],p[5],p[6],p[7]) = 
+                                    n_i(i[1],i[2],i[3],i[4],i[5],i[6],i[7]);
+                            }
+                            j=6;
+                        }
+                        j=5;
+                    }
+                    j=4;
+                }
+                j=3;
+            }
+            j=2;
+        }
+        j=1;
+    }
+    cout<<"finished permuteDims(d7_array&)"<<endl;
+    return n_p;
+}
+
 /*************************************************
 * name      : length                             *
 * purpose   : return number of elements in array *
