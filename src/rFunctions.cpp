@@ -526,7 +526,7 @@ void wts::writeToR(ostream& os, _CONST imatrix& xx, adstring colnames){
  * @param n2 - comma-delimited, single-quoted string of names for 2nd index
  */
 void wts::writeToR(ostream& os, _CONST imatrix& xx, adstring n1, adstring n2){
-    adstring dimnames="c("+n1+")"+cc+"c("+n2+")";
+    adstring dimnames=n1+cc+n2;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
 /********************************************************
@@ -605,21 +605,21 @@ void wts::writeToR(ostream& os, _CONST dmatrix& xx, adstring colnames){
  * @param n2 - comma-delimited, single-quoted string of names for 2nd index
  */
 void wts::writeToR(ostream& os, _CONST dmatrix& xx, adstring n1, adstring n2){
-    adstring dimnames="c("+n1+")"+cc+"c("+n2+")";
+    adstring dimnames=n1+cc+n2;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
-/****************************************************************
- * ADMB FUNCTION to write a d5_array to stream as an R structure.
- * 
- * @param os - stream for output file.
- * @param xx - data to be written.
- * @param n1 - ivector of index "names" for 1st (leftmost) index
- * @param n2 - comma-delimited, single-quoted string of names for 2nd index
- */
-void wts::writeToR(ostream& os, _CONST dmatrix& xx, _CONST ivector& n1, adstring n2){
-    adstring rows = wts::to_qcsv(n1);
-    wts::writeToR(os,xx,rows,n2);
-}
+///****************************************************************
+// * ADMB FUNCTION to write a dmatrix to stream as an R structure.
+// * 
+// * @param os - stream for output file.
+// * @param xx - data to be written.
+// * @param n1 - ivector of index "names" for 1st (leftmost) index
+// * @param n2 - comma-delimited, single-quoted string of names for 2nd index
+// */
+//void wts::writeToR(ostream& os, _CONST dmatrix& xx, _CONST ivector& n1, adstring n2){
+//    adstring rows = wts::to_qcsv(n1);
+//    wts::writeToR(os,xx,rows,n2);
+//}
 /****************************************************************
  * ADMB FUNCTION to write a d3_array to stream as an R structure.
  * 
@@ -630,7 +630,7 @@ void wts::writeToR(ostream& os, _CONST dmatrix& xx, _CONST ivector& n1, adstring
  * @param n3 - comma-delimited, single-quoted string of names for 3rd index
  */
 void wts::writeToR(ostream& os, _CONST d3_array& xx, adstring n1, adstring n2, adstring n3){
-    adstring dimnames="c("+n1+")"+cc+"c("+n2+")"+cc+"c("+n3+")";
+    adstring dimnames=n1+cc+n2+cc+n3;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
 /****************************************************************
@@ -644,7 +644,7 @@ void wts::writeToR(ostream& os, _CONST d3_array& xx, adstring n1, adstring n2, a
  * @param n4 - comma-delimited, single-quoted string of names for 4th index
   */
 void wts::writeToR(ostream& os, _CONST d4_array& xx, adstring n1, adstring n2, adstring n3, adstring n4){
-    adstring dimnames="c("+n1+")"+cc+"c("+n2+")"+cc+"c("+n3+")"+cc+"c("+n4+")";
+    adstring dimnames=n1+cc+n2+cc+n3+cc+n4;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
 /****************************************************************
@@ -659,7 +659,7 @@ void wts::writeToR(ostream& os, _CONST d4_array& xx, adstring n1, adstring n2, a
  * @param n5 - comma-delimited, single-quoted string of names for 5th index
  */
 void wts::writeToR(ostream& os, _CONST d5_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5){
-    adstring dimnames="c("+n1+")"+cc+"c("+n2+")"+cc+"c("+n3+")"+cc+"c("+n4+")"+cc+"c("+n5+")";
+    adstring dimnames=n1+cc+n2+cc+n3+cc+n4+cc+n5;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
 /****************************************************************
@@ -675,7 +675,7 @@ void wts::writeToR(ostream& os, _CONST d5_array& xx, adstring n1, adstring n2, a
  * @param n6 - comma-delimited, single-quoted string of names for 6th index
  */
 void wts::writeToR(ostream& os, _CONST d6_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5, adstring n6){
-    adstring dimnames="c("+n1+")"+cc+"c("+n2+")"+cc+"c("+n3+")"+cc+"c("+n4+")"+cc+"c("+n5+")"+cc+"c("+n6+")";
+    adstring dimnames=n1+cc+n2+cc+n3+cc+n4+cc+n5+cc+n6;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
 /****************************************************************
@@ -692,6 +692,6 @@ void wts::writeToR(ostream& os, _CONST d6_array& xx, adstring n1, adstring n2, a
  * @param n7 - comma-delimited, single-quoted string of names for 7th index
  */
 void wts::writeToR(ostream& os, _CONST d7_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5, adstring n6, adstring n7){
-    adstring dimnames="c("+n1+")"+cc+"c("+n2+")"+cc+"c("+n3+")"+cc+"c("+n4+")"+cc+"c("+n5+")"+cc+"c("+n6+")"+cc+"c("+n7+")";
+    adstring dimnames=n1+cc+n2+cc+n3+cc+n4+cc+n5+cc+n6+cc+n7;
     wts::Rpr::writeToR(os,xx,dimnames);
 }

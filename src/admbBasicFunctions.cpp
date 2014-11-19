@@ -5,6 +5,77 @@
 using namespace std;
 
 int debugADMBFunctions= 0;
+    
+/**
+ * Returns an ivector representing the results of x[i] == y for
+ * each element of x.
+ * 
+ * @param x - dvector to test
+ * @param y - double
+ * @return - ivector with same indices as x 
+ */
+ivector wts::isEQ(const dvector & x, double y){
+    ivector r(x.indexmin(),x.indexmax());
+    for (int i=x.indexmin();i<=x.indexmax();i++) r(i) = (x(i)==y);
+    return r;
+}
+
+/**
+ * Returns an ivector representing the results of x[i] < y for
+ * each element of x.
+ * 
+ * @param x - dvector to test
+ * @param y - double
+ * @return - ivector with same indices as x 
+ */
+ivector wts::isLT(const dvector & x, double y){
+    ivector r(x.indexmin(),x.indexmax());
+    for (int i=x.indexmin();i<=x.indexmax();i++) r(i) = (x(i)<y);
+    return r;
+}
+
+/**
+ * Returns an ivector representing the results of x[i] <= y for
+ * each element of x.
+ * 
+ * @param x - dvector to test
+ * @param y - double
+ * @return - ivector with same indices as x 
+ */
+ivector wts::isLE(const dvector & x, double y){
+    ivector r(x.indexmin(),x.indexmax());
+    for (int i=x.indexmin();i<=x.indexmax();i++) r(i) = (x(i)<=y);
+    return r;
+}
+
+/**
+ * Returns an ivector representing the results of x[i] > y for
+ * each element of x.
+ * 
+ * @param x - dvector to test
+ * @param y - double
+ * @return - ivector with same indices as x 
+ */
+ivector wts::isGT(const dvector & x, double y){
+    ivector r(x.indexmin(),x.indexmax());
+    for (int i=x.indexmin();i<=x.indexmax();i++) r(i) = (x(i)>y);
+    return r;
+}
+
+/**
+ * Returns an ivector representing the results of x[i] >= y for
+ * each element of x.
+ * 
+ * @param x - dvector to test
+ * @param y - double
+ * @return - ivector with same indices as x 
+ */
+ivector wts::isGE(const dvector & x, double y){
+    ivector r(x.indexmin(),x.indexmax());
+    for (int i=x.indexmin();i<=x.indexmax();i++) r(i) = (x(i)>=y);
+    return r;
+}
+
 /**
  * Returns the max of two (double) numbers.
  * 
@@ -431,7 +502,7 @@ dmatrix wts::permuteDims(ivector& i2p, dmatrix& n_i){
  */
 d3_array wts::permuteDims(ivector& i2p, d3_array& n_i){
     int mxi = 3;
-    cout<<"starting permuteDims(d3_array&)"<<endl;
+//    cout<<"starting permuteDims(d3_array&)"<<endl;
     if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
         std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
         std::cout<<"i2p must have length "<<mxi<<"."<<endl;
@@ -468,7 +539,7 @@ d3_array wts::permuteDims(ivector& i2p, d3_array& n_i){
         }
         j=1;
     }
-    cout<<"finished permuteDims(d3_array&)"<<endl;
+//    cout<<"finished permuteDims(d3_array&)"<<endl;
     return n_p;
 }
 
@@ -482,7 +553,7 @@ d3_array wts::permuteDims(ivector& i2p, d3_array& n_i){
  */
 d4_array wts::permuteDims(ivector& i2p, d4_array& n_i){
     int mxi = 4;
-    cout<<"starting permuteDims(d4_array&)"<<endl;
+//    cout<<"starting permuteDims(d4_array&)"<<endl;
     if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
         std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
         std::cout<<"i2p must have length "<<mxi<<"."<<endl;
@@ -524,7 +595,7 @@ d4_array wts::permuteDims(ivector& i2p, d4_array& n_i){
         }
         j=1;
     }
-    cout<<"finished permuteDims(d4_array&)"<<endl;
+//    cout<<"finished permuteDims(d4_array&)"<<endl;
     return n_p;
 }
 
@@ -537,7 +608,7 @@ d4_array wts::permuteDims(ivector& i2p, d4_array& n_i){
  * @return d5_array with permuted dimensions
  */
 d5_array wts::permuteDims(ivector& i2p, d5_array& n_i){
-    cout<<"starting permuteDims(d5_array&)"<<endl;
+//    cout<<"starting permuteDims(d5_array&)"<<endl;
     int mxi = 5;
     if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
         std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
@@ -552,11 +623,11 @@ d5_array wts::permuteDims(ivector& i2p, d5_array& n_i){
         pbnds(2*i2p(i)-1) = bnds(2*i-1);
         pbnds(2*i2p(i))   = bnds(2*i);
     }
-    cout<<"bnds  = "<<bnds<<endl;
-    cout<<"pbnds = "<<pbnds<<endl;
+//    cout<<"bnds  = "<<bnds<<endl;
+//    cout<<"pbnds = "<<pbnds<<endl;
     d5_array n_p = dimD5array(pbnds); 
     n_p.initialize();
-    cout<<"bounds(n_p) = "<<getBounds(n_p)<<endl;
+//    cout<<"bounds(n_p) = "<<getBounds(n_p)<<endl;
     
     ivector i(1,mxi);//index vector for original array
     ivector p(1,mxi);//permuted index vector {p[i2p[j]] = i[j]}
@@ -577,11 +648,11 @@ d5_array wts::permuteDims(ivector& i2p, d5_array& n_i){
                     j=5;
                     for (i[j]=bnds(2*j-1);i[j]<=bnds(2*j);i[j]++){
                         p[i2p[j]] = i[j];
-                        cout<<endl<<"i = "<<i<<endl<<"p = "<<p<<endl;
-                        cout<<"n_i[i] = "<<n_i(i[1],i[2],i[3],i[4],i[5])<<endl;
+//                        cout<<endl<<"i = "<<i<<endl<<"p = "<<p<<endl;
+//                        cout<<"n_i[i] = "<<n_i(i[1],i[2],i[3],i[4],i[5])<<endl;
                         n_p(p[1],p[2],p[3],p[4],p[5]) = 
                             n_i(i[1],i[2],i[3],i[4],i[5]);
-                        cout<<"n_p[p] = "<<n_p(p[1],p[2],p[3],p[4],p[5])<<endl;
+//                        cout<<"n_p[p] = "<<n_p(p[1],p[2],p[3],p[4],p[5])<<endl;
                     }
                     j=4;
                 }
@@ -591,7 +662,7 @@ d5_array wts::permuteDims(ivector& i2p, d5_array& n_i){
         }
         j=1;
     }
-    cout<<"finished permuteDims(d5_array&)"<<endl;
+//    cout<<"finished permuteDims(d5_array&)"<<endl;
     return n_p;
 }
 
@@ -605,7 +676,7 @@ d5_array wts::permuteDims(ivector& i2p, d5_array& n_i){
  */
 d6_array wts::permuteDims(ivector& i2p, d6_array& n_i){
     int mxi = 6;
-    cout<<"starting permuteDims(d6_array&)"<<endl;
+//    cout<<"starting permuteDims(d6_array&)"<<endl;
     if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
         std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
         std::cout<<"i2p must have length "<<mxi<<"."<<endl;
@@ -657,7 +728,7 @@ d6_array wts::permuteDims(ivector& i2p, d6_array& n_i){
         }
         j=1;
     }
-    cout<<"finished permuteDims(d6_array&)"<<endl;
+//    cout<<"finished permuteDims(d6_array&)"<<endl;
     return n_p;
 }
 
@@ -671,7 +742,7 @@ d6_array wts::permuteDims(ivector& i2p, d6_array& n_i){
  */
 d7_array wts::permuteDims(ivector& i2p, d7_array& n_i){
     int mxi = 7;
-    cout<<"starting permuteDims(d7_array&)"<<endl;
+//    cout<<"starting permuteDims(d7_array&)"<<endl;
     if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
         std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
         std::cout<<"i2p must have length "<<mxi<<"."<<endl;
@@ -730,7 +801,7 @@ d7_array wts::permuteDims(ivector& i2p, d7_array& n_i){
         }
         j=1;
     }
-    cout<<"finished permuteDims(d7_array&)"<<endl;
+//    cout<<"finished permuteDims(d7_array&)"<<endl;
     return n_p;
 }
 

@@ -108,7 +108,7 @@ namespace wts{
          * ADMB FUNCTION to write a d7_array as part of an R array structure
          * @param os - stream for output file.
          * @param xx - d7_array to be written.
-         * @return - dims for completing the writing the d5_array as an array structure
+         * @return - dims for completing the writing the d7_array as an array structure
          */
         adstring writeDataToR(ostream& os, _CONST d7_array& xx);
 
@@ -196,14 +196,14 @@ namespace wts{
      * @param n2 - comma-delimited, single-quoted string of names for 2nd index
      */
     void writeToR(ostream& os, _CONST dmatrix& xx, adstring n1, adstring n2);
-    //===========================================================================================
-    // ADMB FUNCTION to write a matrix as part of an R list
-    // ----------Arguments----------
-    // os  stream for output file.
-    // xx  matrix of data to be written.
-    // n1  ivector to use as names for 1st (leftmost; row) index
-    // n2  comma-delimited, single-quoted string of names for 2nd (column) index
-    void writeToR(ostream& os, _CONST dmatrix& xx, _CONST ivector& n1, adstring n2);
+//    //===========================================================================================
+//    // ADMB FUNCTION to write a matrix as part of an R list
+//    // ----------Arguments----------
+//    // os  stream for output file.
+//    // xx  matrix of data to be written.
+//    // n1  ivector to use as names for 1st (leftmost; row) index
+//    // n2  comma-delimited, single-quoted string of names for 2nd (column) index
+//    void writeToR(ostream& os, _CONST dmatrix& xx, _CONST ivector& n1, adstring n2);
     //===========================================================================================
     // ADMB FUNCTION to write a d3_array as part of an R list
     // ----------Arguments----------

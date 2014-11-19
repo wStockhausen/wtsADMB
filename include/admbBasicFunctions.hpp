@@ -6,7 +6,57 @@
 
     extern int debugADMBFunctions;
 namespace wts{
-
+    
+    /**
+     * Returns an ivector representing the results of x[i] == y for
+     * each element of x.
+     * 
+     * @param x - dvector to test
+     * @param y - double
+     * @return - ivector with same indices as x 
+     */
+    ivector isEQ(const dvector & x, double y);
+    
+    /**
+     * Returns an ivector representing the results of x[i] < y for
+     * each element of x.
+     * 
+     * @param x - dvector to test
+     * @param y - double
+     * @return - ivector with same indices as x 
+     */
+    ivector isLT(const dvector & x, double y);
+    
+    /**
+     * Returns an ivector representing the results of x[i] <= y for
+     * each element of x.
+     * 
+     * @param x - dvector to test
+     * @param y - double
+     * @return - ivector with same indices as x 
+     */
+    ivector isLE(const dvector & x, double y);
+    
+    /**
+     * Returns an ivector representing the results of x[i] > y for
+     * each element of x.
+     * 
+     * @param x - dvector to test
+     * @param y - double
+     * @return - ivector with same indices as x 
+     */
+    ivector isGT(const dvector & x, double y);
+    
+    /**
+     * Returns an ivector representing the results of x[i] >= y for
+     * each element of x.
+     * 
+     * @param x - dvector to test
+     * @param y - double
+     * @return - ivector with same indices as x 
+     */
+    ivector isGE(const dvector & x, double y);
+    
     /**
      * Returns the max of two (double) numbers.
      * 
