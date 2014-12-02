@@ -487,7 +487,7 @@ void wts::writeToR(ostream& os, _CONST ivector& xx){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
-    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),"<<endl<<tb<<tb;
+    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
     os<<"names="<<mn<<":"<<mx<<",dim=c("<<mx-mn+1<<"))";
 }
 
@@ -538,7 +538,7 @@ void wts::writeToR(ostream& os, _CONST dvector& xx){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
-    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),"<<endl<<tb<<tb;
+    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
     os<<"names="<<mn<<":"<<mx<<",dim=c("<<mx-mn+1<<"))";
 }
 
@@ -553,7 +553,7 @@ void wts::writeToR(ostream& os, _CONST dvector& xx, adstring names){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
-    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),"<<endl<<tb<<tb;
+    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
     os<<"names=c("<<names<<"),dim=c("<<mx-mn+1<<"))";
 }
 /********************************************************
@@ -566,7 +566,7 @@ void wts::writeToR(ostream& os, _CONST dvector& xx, adstring_array names){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
-    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),"<<endl<<tb<<tb;
+    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
     os<<"names=c('"; for (int i=mn;i<mx;i++) os<<names(i)<<"','"; os<<names(mx)<<"'))";
 }
 
@@ -608,18 +608,6 @@ void wts::writeToR(ostream& os, _CONST dmatrix& xx, adstring n1, adstring n2){
     adstring dimnames=n1+cc+n2;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
-///****************************************************************
-// * ADMB FUNCTION to write a dmatrix to stream as an R structure.
-// * 
-// * @param os - stream for output file.
-// * @param xx - data to be written.
-// * @param n1 - ivector of index "names" for 1st (leftmost) index
-// * @param n2 - comma-delimited, single-quoted string of names for 2nd index
-// */
-//void wts::writeToR(ostream& os, _CONST dmatrix& xx, _CONST ivector& n1, adstring n2){
-//    adstring rows = wts::to_qcsv(n1);
-//    wts::writeToR(os,xx,rows,n2);
-//}
 /****************************************************************
  * ADMB FUNCTION to write a d3_array to stream as an R structure.
  * 

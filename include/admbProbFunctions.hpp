@@ -1,9 +1,9 @@
-/* 
- * File:   admbProbFunctions.hpp
- * Author: WilliamStockhausen
- *
- * Created on November 26, 2013, 2:53 PM
- */
+    /** 
+     * File:   admbProbFunctions.hpp
+     * Author: William Stockhausen
+     *
+     * Created on November 26, 2013, 2:53 PM
+     */
 
 #ifndef ADMBPROBFUNCTIONS_HPP
 #define	ADMBPROBFUNCTIONS_HPP
@@ -116,6 +116,17 @@ namespace wts{
     *       ub:  upper bound                                        *
     ****************************************************************/
     double drawSampleUniform(random_number_generator& rng, _CONST double lb, _CONST double ub);
+
+    /**
+     * Function to generate a stochastic version of a multinomial probability distribution.
+     * Modified from ADMB version to take a reference to a random_number_generator.
+     * 
+     * @param p   - original multinomial distribution
+     * @param ss  - sample size
+     * @param rng - reference to a random_number_generator
+     * @return - stochastic estimate of distribution
+     */
+    dvector rmvlogistic(const dvector& p, const double& ss, const random_number_generator& rng);
     
     dvariable logSquareWave(_CONST prevariable& x,double min,double max,double m=100.0);
 

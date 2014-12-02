@@ -19,6 +19,64 @@ ivector wts::isEQ(const dvector & x, double y){
     for (int i=x.indexmin();i<=x.indexmax();i++) r(i) = (x(i)==y);
     return r;
 }
+    
+    /**
+     * Returns an ivector representing the indices of x
+     * where x[i] == y is true.
+     * 
+     * @param x - dvector to test
+     * @param y - double
+     * @return - ivector with indices of x where x[i] == y
+     */
+ivector wts::whichIsEQ(const dvector & x, double y){
+    ivector r = wts::isEQ(x,y);
+    int sr = sum(r);
+    ivector ii;
+    if (sr){
+        ii.allocate(1,sum(r));
+        int ctr = 0;
+        for (int i=x.indexmin();i<=x.indexmax();i++) {
+            if (r(i)) ii(++ctr)=i;
+        }
+    }
+    return ii;
+}
+    
+/**
+ * Returns an ivector representing the results of x[i] != y for
+ * each element of x.
+ * 
+ * @param x - dvector to test
+ * @param y - double
+ * @return - ivector with same indices as x 
+ */
+ivector wts::isNE(const dvector & x, double y){
+    ivector r(x.indexmin(),x.indexmax());
+    for (int i=x.indexmin();i<=x.indexmax();i++) r(i) = (x(i)!=y);
+    return r;
+}
+    
+/**
+ * Returns an ivector representing the indices of x
+ * where x[i] != y is true.
+ * 
+ * @param x - dvector to test
+ * @param y - double
+ * @return - ivector with indices of x where x[i] != y
+ */
+ivector wts::whichIsNE(const dvector & x, double y){
+    ivector r = wts::isNE(x,y);
+    int sr = sum(r);
+    ivector ii;
+    if (sr){
+        ii.allocate(1,sum(r));
+        int ctr = 0;
+        for (int i=x.indexmin();i<=x.indexmax();i++) {
+            if (r(i)) ii(++ctr)=i;
+        }
+    }
+    return ii;
+}
 
 /**
  * Returns an ivector representing the results of x[i] < y for

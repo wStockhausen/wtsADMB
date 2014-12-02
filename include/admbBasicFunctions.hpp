@@ -18,6 +18,36 @@ namespace wts{
     ivector isEQ(const dvector & x, double y);
     
     /**
+     * Returns an ivector representing the indices of x
+     * where x[i] == y is true.
+     * 
+     * @param x - dvector to test
+     * @param y - double
+     * @return - ivector with indices of x where x[i] == y
+     */
+    ivector whichIsEQ(const dvector & x, double y);
+    
+    /**
+     * Returns an ivector representing the results of x[i] != y for
+     * each element of x.
+     * 
+     * @param x - dvector to test
+     * @param y - double
+     * @return - ivector with same indices as x 
+     */
+    ivector isNE(const dvector & x, double y);
+    
+    /**
+     * Returns an ivector representing the indices of x
+     * where x[i] != y is true.
+     * 
+     * @param x - dvector to test
+     * @param y - double
+     * @return - ivector with indices of x where x[i] != y
+     */
+    ivector whichIsNE(const dvector & x, double y);
+    
+    /**
      * Returns an ivector representing the results of x[i] < y for
      * each element of x.
      * 

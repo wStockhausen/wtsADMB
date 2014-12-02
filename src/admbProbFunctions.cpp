@@ -299,6 +299,35 @@ double wts::drawSampleUniform(random_number_generator& rng, _CONST double lb, _C
     return lb+randn(rng)*(ub-lb);
 }
 
+/**
+ * Function to generate a stochastic version of a multinomial probability distribution.
+ * Modified from ADMB version to take a reference to a random_number_generator.
+ * 
+ * @param p   - original multinomial distribution
+ * @param ss  - sample size
+ * @param rng - reference to a random_number_generator
+ * @return - stochastic estimate of distribution
+ */
+dvector wts::rmvlogistic(const dvector& p, const double& ss, const random_number_generator& rng) {
+    int a=p.indexmin();
+    int A=p.indexmax();
+    dvector y(a,A); y.initialize();
+    double tau2 = 1.0/sqrt(ss);
+    ivector i = wts::whichIsNE(p, 0.0);
+    if (i.allocated()){
+        dvector epsilon(i.indexmin(),i.indexmax());
+        dvector x(i.indexmin(),i.indexmax());
+        epsilon.fill_randn(rng);
+        for (int ii=i.indexmin();ii<=i.indexmax();ii++) x(ii)= log(p(i(ii)))+tau2*epsilon(ii);
+        x -= mean(x);
+        x = exp(x)/sum(exp(x));
+        for (int ii=1;ii<=i.indexmax();ii++) {
+            y(i(ii)) = x(ii);
+        }
+    }
+    return y;
+}
+
 /********************************************
 * name      : logPDF_?????                  *
 * purpose   : compute ln(pdf(x)) for x      *
