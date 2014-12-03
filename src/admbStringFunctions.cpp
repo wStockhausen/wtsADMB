@@ -2,6 +2,11 @@
 #include <admodel.h>
 #include "wtsConsts.hpp"
 #include "admbStringFunctions.hpp"
+using namespace std;
+/**
+ * Changes:
+ * 2014-12-03: 1. Changed to using std namespace
+*/
 
 /****************************************************************
  * convert vectors to quoted csv string

@@ -3,6 +3,11 @@
 #include "wtsConsts.hpp"
 #include "admbBasicFunctions.hpp"
 #include "admbProbFunctions.hpp"
+using namespace std;
+/**
+ * Changes:
+ * 2014-12-03: 1. Changed to using std namespace
+*/
 //-------------------------------------------------------------
 
 /****************************************************************
@@ -233,20 +238,20 @@ dvar_vector wts::log_gamma_density(_CONST dvar_vector& xv,_CONST double& r,_CONS
 }
 //-------------------------------------------------------------
 dvar_vector wts::log_gamma_density(_CONST dvar_vector& xv,_CONST dvariable& r,_CONST dvariable& mu){
-    std::cout<<"Starting log_gamma_density(dvar_vector&, dvariable&, dvariable&)"<<std::endl;
+    cout<<"Starting log_gamma_density(dvar_vector&, dvariable&, dvariable&)"<<endl;
     RETURN_ARRAYS_INCREMENT();
     int mn = xv.indexmin();
     int mx = xv.indexmax();
     dvar_vector d(mn,mx);
     dvariable xp;
     for (int i=mn;i<=mx;i++) {
-        std::cout<<xv(i)<<tb<<r<<tb<<mu<<tb;
+        cout<<xv(i)<<tb<<r<<tb<<mu<<tb;
         xp = xv(i)+(1.0e-10);
         d(i) = log_gamma_density(xp,r,mu);
-        std::cout<<d(i)<<std::endl;
+        cout<<d(i)<<endl;
     }
     RETURN_ARRAYS_DECREMENT();
-    std::cout<<"Finished log_gamma_density(dvar_vector&, dvariable&, dvariable&)"<<std::endl;
+    cout<<"Finished log_gamma_density(dvar_vector&, dvariable&, dvariable&)"<<endl;
     return d;
 }
 /****************************************************************

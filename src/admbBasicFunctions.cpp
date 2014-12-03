@@ -562,11 +562,11 @@ d3_array wts::permuteDims(ivector& i2p, d3_array& n_i){
     int mxi = 3;
 //    cout<<"starting permuteDims(d3_array&)"<<endl;
     if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
-        std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
-        std::cout<<"i2p must have length "<<mxi<<"."<<endl;
-        std::cout<<"i2p = "<<i2p<<endl;
-        std::cout<<"Aborting..."<<endl;
-        std::exit(-1);
+        cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
+        cout<<"i2p must have length "<<mxi<<"."<<endl;
+        cout<<"i2p = "<<i2p<<endl;
+        cout<<"Aborting..."<<endl;
+        exit(-1);
     }
     ivector bnds = getBounds(n_i);
     ivector pbnds(1,2*mxi);
@@ -613,11 +613,11 @@ d4_array wts::permuteDims(ivector& i2p, d4_array& n_i){
     int mxi = 4;
 //    cout<<"starting permuteDims(d4_array&)"<<endl;
     if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
-        std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
-        std::cout<<"i2p must have length "<<mxi<<"."<<endl;
-        std::cout<<"i2p = "<<i2p<<endl;
-        std::cout<<"Aborting..."<<endl;
-        std::exit(-1);
+        cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
+        cout<<"i2p must have length "<<mxi<<"."<<endl;
+        cout<<"i2p = "<<i2p<<endl;
+        cout<<"Aborting..."<<endl;
+        exit(-1);
     }
     ivector bnds = getBounds(n_i);
     ivector pbnds(1,2*mxi);
@@ -669,11 +669,11 @@ d5_array wts::permuteDims(ivector& i2p, d5_array& n_i){
 //    cout<<"starting permuteDims(d5_array&)"<<endl;
     int mxi = 5;
     if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
-        std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
-        std::cout<<"i2p must have length "<<mxi<<"."<<endl;
-        std::cout<<"i2p = "<<i2p<<endl;
-        std::cout<<"Aborting..."<<endl;
-        std::exit(-1);
+        cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
+        cout<<"i2p must have length "<<mxi<<"."<<endl;
+        cout<<"i2p = "<<i2p<<endl;
+        cout<<"Aborting..."<<endl;
+        exit(-1);
     }
     ivector bnds = getBounds(n_i);
     ivector pbnds(1,2*mxi);
@@ -736,11 +736,11 @@ d6_array wts::permuteDims(ivector& i2p, d6_array& n_i){
     int mxi = 6;
 //    cout<<"starting permuteDims(d6_array&)"<<endl;
     if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
-        std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
-        std::cout<<"i2p must have length "<<mxi<<"."<<endl;
-        std::cout<<"i2p = "<<i2p<<endl;
-        std::cout<<"Aborting..."<<endl;
-        std::exit(-1);
+        cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
+        cout<<"i2p must have length "<<mxi<<"."<<endl;
+        cout<<"i2p = "<<i2p<<endl;
+        cout<<"Aborting..."<<endl;
+        exit(-1);
     }
     ivector bnds = getBounds(n_i);
     ivector pbnds(1,2*mxi);
@@ -802,11 +802,11 @@ d7_array wts::permuteDims(ivector& i2p, d7_array& n_i){
     int mxi = 7;
 //    cout<<"starting permuteDims(d7_array&)"<<endl;
     if ((i2p.indexmax()-i2p.indexmin()+1)!=mxi){
-        std::cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
-        std::cout<<"i2p must have length "<<mxi<<"."<<endl;
-        std::cout<<"i2p = "<<i2p<<endl;
-        std::cout<<"Aborting..."<<endl;
-        std::exit(-1);
+        cout<<"Error in d"<<mxi<<"_array permuteDims()"<<endl;
+        cout<<"i2p must have length "<<mxi<<"."<<endl;
+        cout<<"i2p = "<<i2p<<endl;
+        cout<<"Aborting..."<<endl;
+        exit(-1);
     }
     ivector bnds = getBounds(n_i);
     ivector pbnds(1,2*mxi);

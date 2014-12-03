@@ -2,11 +2,13 @@
 #include "wtsConsts.hpp"
 #include "admbBasicFunctions.hpp"
 #include "admbParamFunctions.hpp"
+using namespace std;
 /**
  * Changes:
  * 2014-12-02: 1. Changed void jitterParameter(...) functions to return appropriate value
  *                  (double or dvector) because its not yet possible to set parameter values
  *                  outside tpl code.
+ * 2014-12-03: 1. Changed to using std namespace
 */
 
 /**
@@ -17,7 +19,7 @@
  * @param toR - flag (0/1) to write info in R format
  * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
  */
-void wts::writeParameter(std::ostream& os, param_init_number& p, int toR, int willBeActive){                        //wts: new
+void wts::writeParameter(ostream& os, param_init_number& p, int toR, int willBeActive){                        //wts: new
     if (!willBeActive||(willBeActive&&(p.get_phase_start()>0))){
         if (toR){
             os<<p.get_name()<<"=list("<<"type='param_init_number'"<<cc
@@ -25,7 +27,7 @@ void wts::writeParameter(std::ostream& os, param_init_number& p, int toR, int wi
                                 <<"value="<<value(p)
                                 <<"),";
         } else {
-            os<<1<<cc<<p.get_phase_start()<<cc<<1<<cc<<1<<cc<<"-Inf"<<cc<<"Inf"<<cc<<p<<cc<<p.get_name()<<cc<<"'param_init_number'"<<std::endl;
+            os<<1<<cc<<p.get_phase_start()<<cc<<1<<cc<<1<<cc<<"-Inf"<<cc<<"Inf"<<cc<<p<<cc<<p.get_name()<<cc<<"'param_init_number'"<<endl;
         }
     }
 }
@@ -38,7 +40,7 @@ void wts::writeParameter(std::ostream& os, param_init_number& p, int toR, int wi
  * @param toR - flag (0/1) to write info in R format
  * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
  */
-void wts::writeParameter(std::ostream& os, param_init_bounded_number& p, int toR, int willBeActive){
+void wts::writeParameter(ostream& os, param_init_bounded_number& p, int toR, int willBeActive){
     if (!willBeActive||(willBeActive&&(p.get_phase_start()>0))){
         if (toR){
             os<<p.get_name()<<"=list("<<"type='param_init_bounded_number'"<<cc
@@ -47,7 +49,7 @@ void wts::writeParameter(std::ostream& os, param_init_bounded_number& p, int toR
                                 <<"value="<<value(p)
                                 <<"),";
         } else {
-            os<<1<<cc<<p.get_phase_start()<<cc<<1<<cc<<1<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p<<cc<<p.get_name()<<cc<<"'param_init_bounded_number'"<<std::endl;
+            os<<1<<cc<<p.get_phase_start()<<cc<<1<<cc<<1<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p<<cc<<p.get_name()<<cc<<"'param_init_bounded_number'"<<endl;
         }
     }
     
@@ -61,7 +63,7 @@ void wts::writeParameter(std::ostream& os, param_init_bounded_number& p, int toR
  * @param toR - flag (0/1) to write info in R format
  * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
  */
-void wts::writeParameter(std::ostream& os, param_init_vector& p, int toR, int willBeActive){
+void wts::writeParameter(ostream& os, param_init_vector& p, int toR, int willBeActive){
     int mn = p.indexmin();
     int mx = p.indexmax();
     if (!willBeActive||(willBeActive&&(p.get_phase_start()>0))){
@@ -72,7 +74,7 @@ void wts::writeParameter(std::ostream& os, param_init_vector& p, int toR, int wi
                                 <<"value=c("; {for (int i=mn;i<mx;i++) os<<value(p(i))<<cc;} os<<value(p(mx))<<")";
             os<<"),";
         } else {        
-            for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<"-Inf"<<cc<<"Inf"<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_vector'"<<std::endl;
+            for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<"-Inf"<<cc<<"Inf"<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_vector'"<<endl;
         }
     }
 }
@@ -85,7 +87,7 @@ void wts::writeParameter(std::ostream& os, param_init_vector& p, int toR, int wi
  * @param toR - flag (0/1) to write info in R format
  * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
  */
-void wts::writeParameter(std::ostream& os, param_init_bounded_vector& p, int toR, int willBeActive){
+void wts::writeParameter(ostream& os, param_init_bounded_vector& p, int toR, int willBeActive){
     int mn = p.indexmin();
     int mx = p.indexmax();
     if (!willBeActive||(willBeActive&&(p.get_phase_start()>0))){
@@ -97,7 +99,7 @@ void wts::writeParameter(std::ostream& os, param_init_bounded_vector& p, int toR
                                 <<"value=c("; {for (int i=mn;i<mx;i++) os<<value(p(i))<<cc;} os<<value(p(mx))<<")";
            os<<"),";
         } else {
-            for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_bounded_vector'"<<std::endl;
+            for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_bounded_vector'"<<endl;
         }
     }
 }
@@ -110,7 +112,7 @@ void wts::writeParameter(std::ostream& os, param_init_bounded_vector& p, int toR
  * @param toR - flag (0/1) to write info in R format
  * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
  */
-void wts::writeParameter(std::ostream& os, param_init_bounded_dev_vector& p, int toR, int willBeActive){
+void wts::writeParameter(ostream& os, param_init_bounded_dev_vector& p, int toR, int willBeActive){
     int mn = p.indexmin();
     int mx = p.indexmax();
     if (!willBeActive||(willBeActive&&(p.get_phase_start()>0))){
@@ -122,7 +124,7 @@ void wts::writeParameter(std::ostream& os, param_init_bounded_dev_vector& p, int
                                 <<"value=c("; {for (int i=mn;i<mx;i++) os<<value(p(i))<<cc;} os<<value(p(mx))<<")";
            os<<"),";
         } else {
-            for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_bounded_dev_vector'"<<std::endl;
+            for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_bounded_dev_vector'"<<endl;
         }
     }
 }
@@ -163,16 +165,16 @@ double wts::jitterParameter(param_init_number& p, double fac, random_number_gene
  */
 double wts::jitterParameter(param_init_bounded_number& p, double fac, random_number_generator& rng){
     double v = value(p);
-    std::cout<<"Starting wts::jitterParameter(param_init_bounded_number& p, double fac, random_number_generator& rng)"<<std::endl;
-    std::cout<<"name = "<<p.get_name()<<tb<<"phase =  "<<p.get_phase_start()<<std::endl;
+    cout<<"Starting wts::jitterParameter(param_init_bounded_number& p, double fac, random_number_generator& rng)"<<endl;
+    cout<<"name = "<<p.get_name()<<tb<<"phase =  "<<p.get_phase_start()<<endl;
     if (p.get_phase_start()>0){//arithmetic jitter
 //        cout<<"bounded number:"<<endl;
         double d = p.get_maxb()-p.get_minb();
         double r = rng.better_rand();
         double vp = p.get_minb()+0.5*d+wts::min(1.0,fac)*(r-0.5)*d;
 //        p.set_initial_value(vp);<-doesn't work
-        std::cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<std::endl;
-        std::cout<<"orig = "<<v<<cc<<"new  = "<<p<<cc<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<std::endl;
+        cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<endl;
+        cout<<"orig = "<<v<<cc<<"new  = "<<p<<cc<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<endl;
         return(vp);
     }
     return(v);
@@ -200,9 +202,9 @@ dvector wts::jitterParameter(param_init_bounded_vector& p, double fac, random_nu
             v(i) = vp;
 //            cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<endl;
         }
-//        std::cout<<"orig = "<<p<<std::endl;
-//        std::cout<<"new  = "<<v<<std::endl;
-//        std::cout<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<std::endl;
+//        cout<<"orig = "<<p<<endl;
+//        cout<<"new  = "<<v<<endl;
+//        cout<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<endl;
     }
     return(v);
 }
@@ -229,9 +231,9 @@ dvector wts::jitterParameter(param_init_bounded_dev_vector& p, double fac, rando
             v(i) = vp;
 //            cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<endl;
         }
-//        std::cout<<"orig = "<<p<<std::endl;
-//        std::cout<<"new  = "<<v<<std::endl;
-//        std::cout<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<std::endl;
+//        cout<<"orig = "<<p<<endl;
+//        cout<<"new  = "<<v<<endl;
+//        cout<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<endl;
     }
     return(v-mean(v));//make sure vector is a devs vector
 }
