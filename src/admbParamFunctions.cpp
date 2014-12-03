@@ -2,6 +2,12 @@
 #include "wtsConsts.hpp"
 #include "admbBasicFunctions.hpp"
 #include "admbParamFunctions.hpp"
+/**
+ * Changes:
+ * 2014-12-02: 1. Changed void jitterParameter(...) functions to return appropriate value
+ *                  (double or dvector) because its not yet possible to set parameter values
+ *                  outside tpl code.
+*/
 
 /**
  * Write parameter information to an output stream.
@@ -123,83 +129,109 @@ void wts::writeParameter(std::ostream& os, param_init_bounded_dev_vector& p, int
 
 /**
  * Jitter the initial parameter (p) value based on the jitter factor (fac).
+ * Jittering occurs only if the estimation phase is > 0.
  * 
  * @param p   - the parameter to jitter
  * @param fac - the jitter factor (0-1)
  * @param rng - random number generator object
+ * 
+ * @return - value for jittered parameter. Must be assigned to p in the tpl code.
  */
-void wts::jitterParameter(param_init_number& p, double fac, random_number_generator& rng){ 
+double wts::jitterParameter(param_init_number& p, double fac, random_number_generator& rng){ 
+    double v = value(p);
     if (p.get_phase_start()>0){//arithmetic jitter
 //        cout<<"number:"<<endl;
-        double v = value(p);
         double r = rng.better_rand();
         double vp = v+wts::min(1.0,fac)*2.0*(r-0.5);
-        p.set_initial_value(vp);
+//        p.set_initial_value(vp);<-doesn't work
 //        cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<endl;
 //        cout<<"orig = "<<v<<cc<<"new  = "<<p<<endl;
+        return(vp);
     }
+    return(v);
 }
 
 /**
  * Jitter the initial parameter (p) value based on the jitter factor (fac).
+ * Jittering occurs only if the estimation phase is > 0.
  * 
  * @param p   - the parameter to jitter
  * @param fac - the jitter factor (0-1)
-* @param rng - random number generator object
+ * @param rng - random number generator object
+ * 
+ * @return - value for jittered parameter. Must be assigned to p in the tpl code.
  */
-void wts::jitterParameter(param_init_bounded_number& p, double fac, random_number_generator& rng){
+double wts::jitterParameter(param_init_bounded_number& p, double fac, random_number_generator& rng){
+    double v = value(p);
+    std::cout<<"Starting wts::jitterParameter(param_init_bounded_number& p, double fac, random_number_generator& rng)"<<std::endl;
+    std::cout<<"name = "<<p.get_name()<<tb<<"phase =  "<<p.get_phase_start()<<std::endl;
     if (p.get_phase_start()>0){//arithmetic jitter
 //        cout<<"bounded number:"<<endl;
-        double v = value(p);
         double d = p.get_maxb()-p.get_minb();
         double r = rng.better_rand();
         double vp = p.get_minb()+0.5*d+wts::min(1.0,fac)*(r-0.5)*d;
-        p.set_initial_value(vp);
-//        cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<endl;
-//        cout<<"orig = "<<v<<cc<<"new  = "<<p<<cc<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<endl;
+//        p.set_initial_value(vp);<-doesn't work
+        std::cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<std::endl;
+        std::cout<<"orig = "<<v<<cc<<"new  = "<<p<<cc<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<std::endl;
+        return(vp);
     }
+    return(v);
 }
 
 /**
  * Jitter the initial parameter vector (p) values based on the jitter factor (fac).
+ * Jittering occurs only if the estimation phase is > 0.
  * 
  * @param p   - the parameter vector to jitter
  * @param fac - the jitter factor (0-1)
  * @param rng - random number generator object
+ * 
+ * @return - values for jittered parameter vector. Must be assigned to p in the tpl code.
  */
-void wts::jitterParameter(param_init_bounded_vector& p, double fac, random_number_generator& rng){
+dvector wts::jitterParameter(param_init_bounded_vector& p, double fac, random_number_generator& rng){
+    dvector v = value(p);
     if (p.get_phase_start()>0){//arithmetic jitter
 //        cout<<"vector:"<<endl;
-        dvector v = value(p);
         double d = p.get_maxb()-p.get_minb();
         for (int i=p.indexmin();i<=p.indexmax();i++){
             double r = rng.better_rand();
             double vp = p.get_minb()+0.5*d+wts::min(1.0,fac)*(r-0.5)*d;
-            p(i) = vp;
+//            p(i) = vp;<-doesn't work
+            v(i) = vp;
 //            cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<endl;
-//            cout<<"orig = "<<v[i]<<cc<<"new  = "<<p[i]<<cc<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<endl;
         }
+//        std::cout<<"orig = "<<p<<std::endl;
+//        std::cout<<"new  = "<<v<<std::endl;
+//        std::cout<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<std::endl;
     }
+    return(v);
 }
 
 /**
  * Jitter the initial parameter vector (p) values based on the jitter factor (fac).
+ * Jittering occurs only if the estimation phase is > 0.
  * 
- * @param p   - the parameter vector to jitter
+ * @param p   - the devs parameter vector to jitter
  * @param fac - the jitter factor (0-1)
  * @param rng - random number generator object
+ * 
+ * @return - values for jittered parameter vector. Must be assigned to p in the tpl code.
  */
-void wts::jitterParameter(param_init_bounded_dev_vector& p, double fac, random_number_generator& rng){
+dvector wts::jitterParameter(param_init_bounded_dev_vector& p, double fac, random_number_generator& rng){
+    dvector v = value(p);
     if (p.get_phase_start()>0){//arithmetic jitter
 //        cout<<"devs vector:"<<endl;
-        dvector v = value(p);
         double d = p.get_maxb()-p.get_minb();
         for (int i=p.indexmin();i<=p.indexmax();i++){
             double r = rng.better_rand();
             double vp = p.get_minb()+0.5*d+wts::min(1.0,fac)*(r-0.5)*d;
-            p(i) = vp;
+//            p(i) = vp;<-doesn't work
+            v(i) = vp;
 //            cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<endl;
-//            cout<<"orig = "<<v[i]<<cc<<"new  = "<<p[i]<<cc<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<endl;
         }
+//        std::cout<<"orig = "<<p<<std::endl;
+//        std::cout<<"new  = "<<v<<std::endl;
+//        std::cout<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<std::endl;
     }
+    return(v-mean(v));//make sure vector is a devs vector
 }
