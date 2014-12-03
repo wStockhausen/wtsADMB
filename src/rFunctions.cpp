@@ -7,6 +7,11 @@
 #include "admbBasicFunctions.hpp"
 #include "admbStringFunctions.hpp"
 #include "rFunctions.hpp"
+using namespace std;
+/**
+ * Changes:
+ * 2014-12-03: 1. Changed to using std namespace
+*/
 
 /***********************************************************
  * ADMB FUNCTION to write a matrix as part of an array structure.
