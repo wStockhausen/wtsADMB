@@ -16,7 +16,7 @@ using namespace std;
  * @param v
  * @return 
  */
-adstring wts::to_qcsv(_CONST adstring_array& v){
+adstring wts::to_qcsv(const adstring_array& v){
     int mn = v.indexmin();
     int mx = v.indexmax();
     adstring s = qt+v(mn)+qt;
@@ -28,7 +28,7 @@ adstring wts::to_qcsv(_CONST adstring_array& v){
  * @param v
  * @return 
  */
-adstring wts::to_qcsv(_CONST ivector& v){
+adstring wts::to_qcsv(const ivector& v){
     int mn = v.indexmin();
     int mx = v.indexmax();
     adstring s = qt+str(v(mn))+qt;
@@ -40,7 +40,7 @@ adstring wts::to_qcsv(_CONST ivector& v){
  * @param v
  * @return 
  */
-adstring wts::to_qcsv(_CONST dvector& v){
+adstring wts::to_qcsv(const dvector& v){
     int mn = v.indexmin();
     int mx = v.indexmax();
     adstring s = qt+str(v(mn))+qt;
@@ -196,7 +196,7 @@ void wts::adstring_matrix::allocate(int rwmn, int rwmx, ivector& clmns, ivector&
     }
 }
 
-adstring& wts::adstring_matrix::operator() (_CONST int i, _CONST int j){
+adstring& wts::adstring_matrix::operator() (const int i, const int j){
     if (ppAAs){
         if ((idxmn<=i)&&(i-idxmn<nAAs)&&(ppAAs[i-idxmn])){
             if ((clmns(i)<=j)&&(j<=clmxs(i))){
@@ -217,7 +217,7 @@ adstring& wts::adstring_matrix::operator() (_CONST int i, _CONST int j){
     return *ptr;
 }
 
-adstring_array& wts::adstring_matrix::operator() (_CONST int i){
+adstring_array& wts::adstring_matrix::operator() (const int i){
     if (ppAAs){
         if ((idxmn<=i)&&(i-idxmn<nAAs)&&(ppAAs[i-idxmn])) {
             return *(ppAAs[i-idxmn]);
@@ -233,7 +233,7 @@ adstring_array& wts::adstring_matrix::operator() (_CONST int i){
     return *ptr;
 }
 
-adstring_array& wts::adstring_matrix::operator[] (_CONST int i){
+adstring_array& wts::adstring_matrix::operator[] (const int i){
     if (ppAAs){
         if ((idxmn<=i)&&(i-idxmn<nAAs)&&(ppAAs[i-idxmn])) {
             return *(ppAAs[i-idxmn]);
@@ -274,7 +274,7 @@ void wts::adstring_matrix::write(ostream & os){
 *               lhs < rhs for input adstrings lhs, rhs          *
 ****************************************************************/
 bool wts::CompareAdstrings::debug = false;
-bool wts::CompareAdstrings::operator() (_CONST adstring& lhs, _CONST adstring& rhs) _CONST {
+bool wts::CompareAdstrings::operator() (const adstring& lhs, const adstring& rhs) const {
     if (debug) cout<<"CompareAdstrings::('"<<lhs<<"','"<<rhs<<"'): "<<&lhs<<"; "<<&rhs<<endl;
     int nl = lhs.size(); int nr = rhs.size();
     int nz = nr;//compare characters over min string size (assume rhs is shorter)

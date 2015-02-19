@@ -19,7 +19,7 @@ using namespace std;
  * @param xx - matrix of data to be written.
  * @return - dims for writing the matrix to an array structure.
  */
-adstring wts::Rpr::writeDataToR(ostream& os, _CONST imatrix& xx){
+adstring wts::Rpr::writeDataToR(ostream& os, const imatrix& xx){
     ivector bds = wts::getBounds(xx);
     int ctr = 1;
     for (int j=bds(3);j<bds(4);j++) {
@@ -43,7 +43,7 @@ adstring wts::Rpr::writeDataToR(ostream& os, _CONST imatrix& xx){
  * @param xx - matrix of data to be written.
  * @param dimnames - adstring with dimnames.
  */
-void wts::Rpr::writeToR(ostream& os, _CONST imatrix& xx, adstring dimnames){
+void wts::Rpr::writeToR(ostream& os, const imatrix& xx, adstring dimnames){
     os<<"structure(c(";
     adstring dims = Rpr::writeDataToR(os,xx);
     os<<"),"<<endl<<tb<<tb;    
@@ -57,7 +57,7 @@ void wts::Rpr::writeToR(ostream& os, _CONST imatrix& xx, adstring dimnames){
  * @param xx - matrix of data to be written.
  * @return - dims for writing the matrix to an array structure.
  */
-adstring wts::Rpr::writeDataToR(ostream& os, _CONST dmatrix& xx){
+adstring wts::Rpr::writeDataToR(ostream& os, const dmatrix& xx){
     ivector bds = wts::getBounds(xx);
     int ctr = 1;
     for (int j=bds(3);j<bds(4);j++) {
@@ -82,7 +82,7 @@ adstring wts::Rpr::writeDataToR(ostream& os, _CONST dmatrix& xx){
  * @param xx - matrix of data to be written.
  * @param dimnames - adstring with dimnames.
  */
-void wts::Rpr::writeToR(ostream& os, _CONST dmatrix& xx, adstring dimnames){
+void wts::Rpr::writeToR(ostream& os, const dmatrix& xx, adstring dimnames){
     os<<"structure(c(";
     adstring dims = Rpr::writeDataToR(os,xx);
     os<<"),"<<endl<<tb<<tb;    
@@ -97,7 +97,7 @@ void wts::Rpr::writeToR(ostream& os, _CONST dmatrix& xx, adstring dimnames){
  * @param xx - d3_array to be written.
  * @return - dims for completing the writing the d3_array as an array structure
  */
-adstring wts::Rpr::writeDataToR(ostream& os, _CONST d3_array& xx){
+adstring wts::Rpr::writeDataToR(ostream& os, const d3_array& xx){
     ivector bds = wts::getBounds(xx);
     int ctr = 1;
     for (int k=bds(5);k<bds(6);k++) {
@@ -132,7 +132,7 @@ adstring wts::Rpr::writeDataToR(ostream& os, _CONST d3_array& xx){
  * @param xx - d3_array to be written.
  * @param dimnames - adstring with dimnames.
  */
-void wts::Rpr::writeToR(ostream& os, _CONST d3_array& xx, adstring dimnames){
+void wts::Rpr::writeToR(ostream& os, const d3_array& xx, adstring dimnames){
     os<<"structure(c(";
     adstring dims = wts::Rpr::writeDataToR(os,xx);
     os<<"),"<<endl<<tb<<tb;    
@@ -147,7 +147,7 @@ void wts::Rpr::writeToR(ostream& os, _CONST d3_array& xx, adstring dimnames){
  * @param xx - d4_array to be written.
  * @return - dims for completing the writing the d4_array as an array structure
  */
-adstring wts::Rpr::writeDataToR(ostream& os, _CONST d4_array& xx){
+adstring wts::Rpr::writeDataToR(ostream& os, const d4_array& xx){
     ivector bds = wts::getBounds(xx);
     int ctr = 1;
     for (int l=bds(7);l<bds(8);l++) {
@@ -193,7 +193,7 @@ adstring wts::Rpr::writeDataToR(ostream& os, _CONST d4_array& xx){
  * @param xx - d4_array to be written.
  * @param dimnames - adstring with dimnames.
  */
-void wts::Rpr::writeToR(ostream& os, _CONST d4_array& xx, adstring dimnames){
+void wts::Rpr::writeToR(ostream& os, const d4_array& xx, adstring dimnames){
     os<<"structure(c(";
     adstring dims = Rpr::writeDataToR(os,xx);
     os<<"),"<<endl<<tb<<tb;    
@@ -208,7 +208,7 @@ void wts::Rpr::writeToR(ostream& os, _CONST d4_array& xx, adstring dimnames){
  * @param xx - d5_array to be written.
  * @return - dims for completing the writing the d5_array as an array structure
  */
-adstring wts::Rpr::writeDataToR(ostream& os, _CONST d5_array& xx){
+adstring wts::Rpr::writeDataToR(ostream& os, const d5_array& xx){
     ivector bds = wts::getBounds(xx);
     int ctr = 1;
     for (int m=bds(9);m<bds(10);m++) {
@@ -267,7 +267,7 @@ adstring wts::Rpr::writeDataToR(ostream& os, _CONST d5_array& xx){
  * @param xx - d5_array to be written.
  * @param dimnames - adstring with dimnames.
  */
-void wts::Rpr::writeToR(ostream& os, _CONST d5_array& xx, adstring dimnames){
+void wts::Rpr::writeToR(ostream& os, const d5_array& xx, adstring dimnames){
     os<<"structure(c(";
     adstring dims = Rpr::writeDataToR(os,xx);
     os<<"),"<<endl<<tb<<tb;    
@@ -282,7 +282,7 @@ void wts::Rpr::writeToR(ostream& os, _CONST d5_array& xx, adstring dimnames){
  * @param xx - d6_array to be written.
  * @return - dims for completing the writing the d6_array as an array structure
  */
-adstring wts::Rpr::writeDataToR(ostream& os, _CONST d6_array& xx){
+adstring wts::Rpr::writeDataToR(ostream& os, const d6_array& xx){
     ivector bds = wts::getBounds(xx);
     int ctr = 1;
     for (int n=bds(11);n<bds(12);n++) {
@@ -356,7 +356,7 @@ adstring wts::Rpr::writeDataToR(ostream& os, _CONST d6_array& xx){
  * @param xx - d6_array to be written.
  * @param dimnames - adstring with dimnames.
  */
-void wts::Rpr::writeToR(ostream& os, _CONST d6_array& xx, adstring dimnames){
+void wts::Rpr::writeToR(ostream& os, const d6_array& xx, adstring dimnames){
     os<<"structure(c(";
     adstring dims = Rpr::writeDataToR(os,xx);
     os<<"),"<<endl<<tb<<tb;    
@@ -371,7 +371,7 @@ void wts::Rpr::writeToR(ostream& os, _CONST d6_array& xx, adstring dimnames){
  * @param xx - d7_array to be written.
  * @return - dims to complete writing the d7_array as an array structure
  */
-adstring wts::Rpr::writeDataToR(ostream& os, _CONST d7_array& xx){
+adstring wts::Rpr::writeDataToR(ostream& os, const d7_array& xx){
     ivector bds = wts::getBounds(xx);
     int ctr = 1;
     for (int o=bds(13);o<bds(14);o++) {
@@ -462,7 +462,7 @@ adstring wts::Rpr::writeDataToR(ostream& os, _CONST d7_array& xx){
  * @param xx - d7_array to be written.
  * @param dimnames - adstring with dimnames.
  */
-void wts::Rpr::writeToR(ostream& os, _CONST d7_array& xx, adstring dimnames){
+void wts::Rpr::writeToR(ostream& os, const d7_array& xx, adstring dimnames){
     os<<"structure(c(";
     adstring dims = Rpr::writeDataToR(os,xx);
     os<<"),"<<endl<<tb<<tb;    
@@ -475,7 +475,7 @@ void wts::Rpr::writeToR(ostream& os, _CONST d7_array& xx, adstring dimnames){
  * @param os - stream for output file.
  * @param xx - adstring_array to be written.
  */
-void wts::writeToR(ostream& os, _CONST adstring_array& xx){
+void wts::writeToR(ostream& os, const adstring_array& xx){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
@@ -488,7 +488,7 @@ void wts::writeToR(ostream& os, _CONST adstring_array& xx){
  * @param os - stream for output file.
  * @param xx - ivector to be written.
  */
-void wts::writeToR(ostream& os, _CONST ivector& xx){
+void wts::writeToR(ostream& os, const ivector& xx){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
@@ -501,7 +501,7 @@ void wts::writeToR(ostream& os, _CONST ivector& xx){
  * @param os - stream for output file.
  * @param xx - matrix of data to be written.
  */
-void wts::writeToR(ostream& os, _CONST imatrix& xx){
+void wts::writeToR(ostream& os, const imatrix& xx){
     int mnI = xx.indexmin();
     int mxI = xx.indexmax();
     int mnJ = xx(mnI).indexmin();
@@ -516,7 +516,7 @@ void wts::writeToR(ostream& os, _CONST imatrix& xx){
  * @param xx - matrix of data to be written.
  * @param colnames - comma-delimited, single-quoted string of column names
  */
-void wts::writeToR(ostream& os, _CONST imatrix& xx, adstring colnames){
+void wts::writeToR(ostream& os, const imatrix& xx, adstring colnames){
     int mnI = xx.indexmin();
     int mxI = xx.indexmax();
     adstring dimnames=str(mnI)+":"+str(mxI)+cc+"c("+colnames+")";
@@ -530,7 +530,7 @@ void wts::writeToR(ostream& os, _CONST imatrix& xx, adstring colnames){
  * @param n1 - comma-delimited, single-quoted string of names for 1st (leftmost) index
  * @param n2 - comma-delimited, single-quoted string of names for 2nd index
  */
-void wts::writeToR(ostream& os, _CONST imatrix& xx, adstring n1, adstring n2){
+void wts::writeToR(ostream& os, const imatrix& xx, adstring n1, adstring n2){
     adstring dimnames=n1+cc+n2;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
@@ -539,7 +539,7 @@ void wts::writeToR(ostream& os, _CONST imatrix& xx, adstring n1, adstring n2){
  * @param os - stream for output file.
  * @param xx - dvector to be written.
  */
-void wts::writeToR(ostream& os, _CONST dvector& xx){
+void wts::writeToR(ostream& os, const dvector& xx){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
@@ -554,7 +554,7 @@ void wts::writeToR(ostream& os, _CONST dvector& xx){
  * @param names - adstring to be written as names for R structure 
  *                (comma-delimited, quoted if necessary)
  */
-void wts::writeToR(ostream& os, _CONST dvector& xx, adstring names){
+void wts::writeToR(ostream& os, const dvector& xx, adstring names){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
@@ -567,7 +567,7 @@ void wts::writeToR(ostream& os, _CONST dvector& xx, adstring names){
  * @param xx    - dvector to be written.
  * @param names - adstring_array to be written as names for R structure 
  */
-void wts::writeToR(ostream& os, _CONST dvector& xx, adstring_array names){
+void wts::writeToR(ostream& os, const dvector& xx, adstring_array names){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
@@ -580,7 +580,7 @@ void wts::writeToR(ostream& os, _CONST dvector& xx, adstring_array names){
  * @param os - stream for output file.
  * @param xx - matrix of data to be written.
  */
-void wts::writeToR(ostream& os, _CONST dmatrix& xx){
+void wts::writeToR(ostream& os, const dmatrix& xx){
     int mnI = xx.indexmin();
     int mxI = xx.indexmax();
     int mnJ = xx(mnI).indexmin();
@@ -595,7 +595,7 @@ void wts::writeToR(ostream& os, _CONST dmatrix& xx){
  * @param xx - matrix of data to be written.
  * @param colnames - comma-delimited, single-quoted string of column names
  */
-void wts::writeToR(ostream& os, _CONST dmatrix& xx, adstring colnames){
+void wts::writeToR(ostream& os, const dmatrix& xx, adstring colnames){
     int mnI = xx.indexmin();
     int mxI = xx.indexmax();
     adstring dimnames=str(mnI)+":"+str(mxI)+cc+"c("+colnames+")";
@@ -609,7 +609,7 @@ void wts::writeToR(ostream& os, _CONST dmatrix& xx, adstring colnames){
  * @param n1 - comma-delimited, single-quoted string of names for 1st (leftmost) index
  * @param n2 - comma-delimited, single-quoted string of names for 2nd index
  */
-void wts::writeToR(ostream& os, _CONST dmatrix& xx, adstring n1, adstring n2){
+void wts::writeToR(ostream& os, const dmatrix& xx, adstring n1, adstring n2){
     adstring dimnames=n1+cc+n2;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
@@ -622,7 +622,7 @@ void wts::writeToR(ostream& os, _CONST dmatrix& xx, adstring n1, adstring n2){
  * @param n2 - comma-delimited, single-quoted string of names for 2nd index
  * @param n3 - comma-delimited, single-quoted string of names for 3rd index
  */
-void wts::writeToR(ostream& os, _CONST d3_array& xx, adstring n1, adstring n2, adstring n3){
+void wts::writeToR(ostream& os, const d3_array& xx, adstring n1, adstring n2, adstring n3){
     adstring dimnames=n1+cc+n2+cc+n3;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
@@ -636,7 +636,7 @@ void wts::writeToR(ostream& os, _CONST d3_array& xx, adstring n1, adstring n2, a
  * @param n3 - comma-delimited, single-quoted string of names for 3rd index
  * @param n4 - comma-delimited, single-quoted string of names for 4th index
   */
-void wts::writeToR(ostream& os, _CONST d4_array& xx, adstring n1, adstring n2, adstring n3, adstring n4){
+void wts::writeToR(ostream& os, const d4_array& xx, adstring n1, adstring n2, adstring n3, adstring n4){
     adstring dimnames=n1+cc+n2+cc+n3+cc+n4;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
@@ -651,7 +651,7 @@ void wts::writeToR(ostream& os, _CONST d4_array& xx, adstring n1, adstring n2, a
  * @param n4 - comma-delimited, single-quoted string of names for 4th index
  * @param n5 - comma-delimited, single-quoted string of names for 5th index
  */
-void wts::writeToR(ostream& os, _CONST d5_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5){
+void wts::writeToR(ostream& os, const d5_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5){
     adstring dimnames=n1+cc+n2+cc+n3+cc+n4+cc+n5;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
@@ -667,7 +667,7 @@ void wts::writeToR(ostream& os, _CONST d5_array& xx, adstring n1, adstring n2, a
  * @param n5 - comma-delimited, single-quoted string of names for 5th index
  * @param n6 - comma-delimited, single-quoted string of names for 6th index
  */
-void wts::writeToR(ostream& os, _CONST d6_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5, adstring n6){
+void wts::writeToR(ostream& os, const d6_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5, adstring n6){
     adstring dimnames=n1+cc+n2+cc+n3+cc+n4+cc+n5+cc+n6;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
@@ -684,7 +684,7 @@ void wts::writeToR(ostream& os, _CONST d6_array& xx, adstring n1, adstring n2, a
  * @param n6 - comma-delimited, single-quoted string of names for 6th index
  * @param n7 - comma-delimited, single-quoted string of names for 7th index
  */
-void wts::writeToR(ostream& os, _CONST d7_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5, adstring n6, adstring n7){
+void wts::writeToR(ostream& os, const d7_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5, adstring n6, adstring n7){
     adstring dimnames=n1+cc+n2+cc+n3+cc+n4+cc+n5+cc+n6+cc+n7;
     wts::Rpr::writeToR(os,xx,dimnames);
 }

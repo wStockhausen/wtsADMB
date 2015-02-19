@@ -114,7 +114,7 @@ namespace wts{
      * 
      * @return - the corresponding ivector
      */
-    ivector to_ivector(_CONST dvector& v);
+    ivector to_ivector(const dvector& v);
     /**
      * Creates a deep copy of a vector. Simple assignment (dvector a=b;) generally
      * creates a shallow copy, so changing a(i) also changes b(i), which may
@@ -124,7 +124,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    dvector  copy(_CONST dvector& v);
+    dvector  copy(const dvector& v);
     /**
      * Creates a deep copy of a matrix. Simple assignment (dmatrix a=b;) generally
      * creates a shallow copy, so changing a(i,j) also changes b(i,j), which may
@@ -134,7 +134,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    dmatrix  copy(_CONST dmatrix& v);
+    dmatrix  copy(const dmatrix& v);
     /**
      * Creates a deep copy of an array. Simple assignment (d3_array a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -144,7 +144,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    d3_array copy(_CONST d3_array& v);
+    d3_array copy(const d3_array& v);
     /**
      * Creates a deep copy of an array. Simple assignment (d4_array a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -154,7 +154,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    d4_array copy(_CONST d4_array& v);
+    d4_array copy(const d4_array& v);
     /**
      * Creates a deep copy of an array. Simple assignment (d5_array a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -164,7 +164,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    d5_array copy(_CONST d5_array& v);
+    d5_array copy(const d5_array& v);
     /**
      * Creates a deep copy of an array. Simple assignment (d6_array a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -174,7 +174,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    d6_array copy(_CONST d6_array& v);
+    d6_array copy(const d6_array& v);
     /**
      * Creates a deep copy of an array. Simple assignment (d7_array a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -184,7 +184,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    d7_array copy(_CONST d7_array& v);
+    d7_array copy(const d7_array& v);
     /**
      * Creates a deep copy of a vector. Simple assignment (dvar_vector a=b;) generally
      * creates a shallow copy, so changing a(i) also changes b(i), which may
@@ -194,7 +194,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    dvar_vector copy(_CONST dvar_vector& v);
+    dvar_vector copy(const dvar_vector& v);
     /**
      * Creates a deep copy of a matrix. Simple assignment (dvar_matrix a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -204,7 +204,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    dvar_matrix copy(_CONST dvar_matrix& v);
+    dvar_matrix copy(const dvar_matrix& v);
     /**
      * Creates a deep copy of an array. Simple assignment (dvar3_array a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -214,7 +214,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    dvar3_array copy(_CONST dvar3_array& v);
+    dvar3_array copy(const dvar3_array& v);
     /**
      * Creates a deep copy of an array. Simple assignment (dvar4_array a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -224,7 +224,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    dvar4_array copy(_CONST dvar4_array& v);
+    dvar4_array copy(const dvar4_array& v);
     /**
      * Creates a deep copy of an array. Simple assignment (dvar5_array a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -234,7 +234,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    dvar5_array copy(_CONST dvar5_array& v);
+    dvar5_array copy(const dvar5_array& v);
     /**
      * Creates a deep copy of an array. Simple assignment (dvar6_array a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -244,7 +244,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    dvar6_array copy(_CONST dvar6_array& v);
+    dvar6_array copy(const dvar6_array& v);
     /**
      * Creates a deep copy of an array. Simple assignment (dvar7_array a=b;) generally
      * creates a shallow copy, so changing a(i,...) also changes b(i,...), which may
@@ -254,7 +254,7 @@ namespace wts{
      * 
      * @return - the deep copy
      */
-    dvar7_array copy(_CONST dvar7_array& v);
+    dvar7_array copy(const dvar7_array& v);
 
     /****************************************************************
     * name      : IdentityMatrix                                    *
@@ -267,29 +267,29 @@ namespace wts{
     * name      : testEquals                                        *
     * purpose   : test equality                                     *
     ****************************************************************/
-    int testEquals(_CONST ivector& i1, _CONST ivector& i2);
+    int testEquals(const ivector& i1, const ivector& i2);
 
     /*************************************************
     * name      : getBounds                          *
     * purpose   : return min, max indices for array  *
     *************************************************/
-    ivector getBounds(_CONST  prevariable& o);
-    ivector getBounds(_CONST  ivector& o);
-    ivector getBounds(_CONST  imatrix& o);
-    ivector getBounds(_CONST  dvector& o);
-    ivector getBounds(_CONST  dmatrix& o);
-    ivector getBounds(_CONST  d3_array& o);
-    ivector getBounds(_CONST  d4_array& o);
-    ivector getBounds(_CONST  d5_array& o);
-    ivector getBounds(_CONST  d6_array& o);
-    ivector getBounds(_CONST  d7_array& o);
-    ivector getBounds(_CONST  dvar_vector& o);
-    ivector getBounds(_CONST  dvar_matrix& o);
-    ivector getBounds(_CONST  dvar3_array& o);
-    ivector getBounds(_CONST  dvar4_array& o);
-    ivector getBounds(_CONST  dvar5_array& o);
-    ivector getBounds(_CONST  dvar6_array& o);
-    ivector getBounds(_CONST  dvar7_array& o);
+    ivector getBounds(const  prevariable& o);
+    ivector getBounds(const  ivector& o);
+    ivector getBounds(const  imatrix& o);
+    ivector getBounds(const  dvector& o);
+    ivector getBounds(const  dmatrix& o);
+    ivector getBounds(const  d3_array& o);
+    ivector getBounds(const  d4_array& o);
+    ivector getBounds(const  d5_array& o);
+    ivector getBounds(const  d6_array& o);
+    ivector getBounds(const  d7_array& o);
+    ivector getBounds(const  dvar_vector& o);
+    ivector getBounds(const  dvar_matrix& o);
+    ivector getBounds(const  dvar3_array& o);
+    ivector getBounds(const  dvar4_array& o);
+    ivector getBounds(const  dvar5_array& o);
+    ivector getBounds(const  dvar6_array& o);
+    ivector getBounds(const  dvar7_array& o);
     
     /**
      * Create, dimension and initialize a dmatrix using
@@ -409,29 +409,29 @@ namespace wts{
     * name      : getIndexVector                     *
     * purpose   : get vector of indices for vector   *
     *************************************************/
-    ivector getIndexVector(_CONST dvector& o);
-    ivector getIndexVector(_CONST dvar_vector& o);
+    ivector getIndexVector(const dvector& o);
+    ivector getIndexVector(const dvar_vector& o);
 
     /*************************************************
     * name      : length                             *
     * purpose   : return number of elements in array *
     *************************************************/
-    int length(_CONST  ivector& o);
-    int length(_CONST  imatrix& o);
-    int length(_CONST  dvector& o);
-    int length(_CONST  dmatrix& o);
-    int length(_CONST  dvar_vector& o);
-    int length(_CONST  dvar_matrix& o);
+    int length(const  ivector& o);
+    int length(const  imatrix& o);
+    int length(const  dvector& o);
+    int length(const  dmatrix& o);
+    int length(const  dvar_vector& o);
+    int length(const  dvar_matrix& o);
 
     /*************************************************
     * name      : value                              *
-    * purpose   : return _CONSTant version of array   *
+    * purpose   : return constant version of array   *
     *************************************************/
     //-------------------------------------------------------------
-    d4_array value(_CONST  dvar4_array& o);
-    d5_array value(_CONST  dvar5_array& o);
-    d6_array value(_CONST  dvar6_array& o);
-    d7_array value(_CONST  dvar7_array& o);
+    d4_array value(const  dvar4_array& o);
+    d5_array value(const  dvar5_array& o);
+    d6_array value(const  dvar6_array& o);
+    d7_array value(const  dvar7_array& o);
 
     //delta function    
     int deltafcn(int i, int j);
@@ -440,8 +440,8 @@ namespace wts{
      * Test if at least one of a set of parameters is          *
      * being estimated in the current phase.                   *
     ***********************************************************/
-    bool isActive(_CONST param_init_number& p);
-    bool isActive(_CONST param_init_vector& p);
+    bool isActive(const param_init_number& p);
+    bool isActive(const param_init_vector& p);
     bool isActive(param_init_number_vector& p);
     bool isActive(param_init_vector_vector& p);
 
@@ -449,7 +449,22 @@ namespace wts{
     * name      : variance                      *
     * purpose   : compute variance of object    *
     ********************************************/
-    double variance(_CONST dvector & v);
-    dvariable variance(_CONST dvar_vector & v);
+    double variance(const dvector & v);
+    dvariable variance(const dvar_vector & v);
+    
+    /**
+     * Create a diagonal matrix from a vector.
+     * 
+     * @param v - vector defining the diagonal
+     * @return - a dmatrix with row/column indices equal to those of v
+     */
+    dmatrix diag(const dvector& v);
+    /**
+     * Create a diagonal matrix from a vector.
+     * 
+     * @param v - vector defining the diagonal
+     * @return - a dvar_matrix with row/column indices equal to those of v
+     */
+    dvar_matrix diag(const dvar_vector& v);
 } //namespace wts
 #endif

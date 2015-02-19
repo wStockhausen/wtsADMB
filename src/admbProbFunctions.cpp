@@ -19,7 +19,7 @@ using namespace std;
 *       lb : lower bound                                        *
 *       ub : upper bound                                        *
 ****************************************************************/
-double wts::cdf_normal(_CONST double& mu,_CONST double& sd,_CONST double& lb,_CONST double& ub){
+double wts::cdf_normal(const double& mu,const double& sd,const double& lb,const double& ub){
 //      if (debug20) cout<<endl<<"Compute cdf_normal"<<endl;
     double nf = 0.0;
     if (sd>0) {
@@ -32,7 +32,7 @@ double wts::cdf_normal(_CONST double& mu,_CONST double& sd,_CONST double& lb,_CO
     return nf;
 }
 //-------------------------------------------------------------
-dvariable wts::cdf_normal(_CONST dvariable& mu,_CONST double& sd,_CONST double& lb,_CONST double& ub){
+dvariable wts::cdf_normal(const dvariable& mu,const double& sd,const double& lb,const double& ub){
     RETURN_ARRAYS_INCREMENT();
 //      if (debug20) cout<<endl<<"Compute cdf_normal"<<endl;
     dvariable nf = 0.0;
@@ -47,7 +47,7 @@ dvariable wts::cdf_normal(_CONST dvariable& mu,_CONST double& sd,_CONST double& 
     return nf;
 }
 //-------------------------------------------------------------
-dvariable wts::cdf_normal(_CONST dvariable& mu,_CONST dvariable& sd,_CONST double& lb,_CONST double& ub){
+dvariable wts::cdf_normal(const dvariable& mu,const dvariable& sd,const double& lb,const double& ub){
     RETURN_ARRAYS_INCREMENT();
 //        if (debug20) cout<<endl<<"Compute cdf_normal"<<endl;
     dvariable nf = 0.0;
@@ -69,12 +69,12 @@ dvariable wts::cdf_normal(_CONST dvariable& mu,_CONST dvariable& sd,_CONST doubl
 *       z: normalized random deviate (z=(x-mu)/sdv)             *
 ****************************************************************/
 //-------------------------------------------------------------
-double    wts::log_normal_density(_CONST double& z){
+double    wts::log_normal_density(const double& z){
     double d = -0.5*(log(2.0*PI)+square(z));
     return d;
 }
 //-------------------------------------------------------------
-dvariable wts::log_normal_density(_CONST prevariable& z){
+dvariable wts::log_normal_density(const prevariable& z){
     RETURN_ARRAYS_INCREMENT();
     dvariable d = -0.5*(log(2.0*PI)+square(z));
     RETURN_ARRAYS_DECREMENT();
@@ -82,7 +82,7 @@ dvariable wts::log_normal_density(_CONST prevariable& z){
 }
 
 //-------------------------------------------------------------
-dvector wts::log_normal_density(_CONST dvector& z){
+dvector wts::log_normal_density(const dvector& z){
     RETURN_ARRAYS_INCREMENT();
     dvector d = -0.5*(log(2.0*PI)+elem_prod(z,z));
     RETURN_ARRAYS_DECREMENT();
@@ -90,7 +90,7 @@ dvector wts::log_normal_density(_CONST dvector& z){
 }
 
 //-------------------------------------------------------------
-dvar_vector wts::log_normal_density(_CONST dvar_vector& z){
+dvar_vector wts::log_normal_density(const dvar_vector& z){
     RETURN_ARRAYS_INCREMENT();
     dvar_vector d = -0.5*(log(2.0*PI)+elem_prod(z,z));
     RETURN_ARRAYS_DECREMENT();
@@ -106,12 +106,12 @@ dvar_vector wts::log_normal_density(_CONST dvar_vector& z){
 *       sdv: standard deviation                                 *
 ****************************************************************/
 //-------------------------------------------------------------
-double    wts::log_normal_density(_CONST double& x,_CONST double& mu,_CONST double& sdv){
+double    wts::log_normal_density(const double& x,const double& mu,const double& sdv){
     double z = (x-mu)/sdv;
     return log_normal_density(z);
 }
 //-------------------------------------------------------------
-dvariable wts::log_normal_density(_CONST prevariable& x,_CONST double& mu,_CONST double& sdv){
+dvariable wts::log_normal_density(const prevariable& x,const double& mu,const double& sdv){
     RETURN_ARRAYS_INCREMENT();
     dvariable z = (x-mu)/sdv;
     dvariable d = log_normal_density(z);
@@ -119,7 +119,7 @@ dvariable wts::log_normal_density(_CONST prevariable& x,_CONST double& mu,_CONST
     return d;
 }
 //-------------------------------------------------------------
-dvariable wts::log_normal_density(_CONST double& x,_CONST prevariable& mu,_CONST prevariable& sdv){
+dvariable wts::log_normal_density(const double& x,const prevariable& mu,const prevariable& sdv){
     RETURN_ARRAYS_INCREMENT();
     dvariable z = (x-mu)/sdv;
     dvariable d = log_normal_density(z);
@@ -127,7 +127,7 @@ dvariable wts::log_normal_density(_CONST double& x,_CONST prevariable& mu,_CONST
     return d;
 }
 //-------------------------------------------------------------
-dvariable wts::log_normal_density(_CONST prevariable& x,_CONST prevariable& mu,_CONST prevariable& sdv){
+dvariable wts::log_normal_density(const prevariable& x,const prevariable& mu,const prevariable& sdv){
     RETURN_ARRAYS_INCREMENT();
     dvariable z = (x-mu)/sdv;
     dvariable d = log_normal_density(z);
@@ -135,12 +135,12 @@ dvariable wts::log_normal_density(_CONST prevariable& x,_CONST prevariable& mu,_
     return d;
 }
 //-------------------------------------------------------------
-dvector wts::log_normal_density(_CONST dvector& x,_CONST double& mu,_CONST double& sdv){
+dvector wts::log_normal_density(const dvector& x,const double& mu,const double& sdv){
     dvector z = (x-mu)/sdv;
     return log_normal_density(z);
 }
 //-------------------------------------------------------------
-dvar_vector wts::log_normal_density(_CONST dvar_vector& x,_CONST double& mu,_CONST double& sdv){
+dvar_vector wts::log_normal_density(const dvar_vector& x,const double& mu,const double& sdv){
     RETURN_ARRAYS_INCREMENT();
     dvar_vector z = (x-mu)/sdv;
     dvar_vector d = log_normal_density(z);
@@ -157,13 +157,13 @@ dvar_vector wts::log_normal_density(_CONST dvar_vector& x,_CONST double& mu,_CON
 *       cv: arithmetic-scale cv (stdev(X)/mean(X))              *
 ****************************************************************/
 //-------------------------------------------------------------
-double wts::log_lognormal_density(_CONST double& x,_CONST double& med,_CONST double& cv){
+double wts::log_lognormal_density(const double& x,const double& med,const double& cv){
     double sdv = sqrt(log(1.0+square(cv)));
     double d = -0.5*log(2.0*PI*square(x*sdv))-0.5*square((log(x)-log(med))/sdv);
     return d;
 }
 //-------------------------------------------------------------
-dvariable wts::log_lognormal_density(_CONST prevariable& x,_CONST double& med,_CONST double& cv){
+dvariable wts::log_lognormal_density(const prevariable& x,const double& med,const double& cv){
     RETURN_ARRAYS_INCREMENT();
     double sdv = sqrt(log(1.0+square(cv)));
     dvariable d = -0.5*log(2.0*PI*square(x*sdv))-0.5*square((log(x)-log(med))/sdv);
@@ -171,7 +171,7 @@ dvariable wts::log_lognormal_density(_CONST prevariable& x,_CONST double& med,_C
     return d;
 }
 //-------------------------------------------------------------
-dvariable wts::log_lognormal_density(_CONST double& x,_CONST prevariable& med,_CONST prevariable& cv){
+dvariable wts::log_lognormal_density(const double& x,const prevariable& med,const prevariable& cv){
     RETURN_ARRAYS_INCREMENT();
     dvariable sdv = sqrt(log(1.0+square(cv)));
     dvariable d = -0.5*log(2.0*PI*square(x*sdv))-0.5*square((log(x)-log(med))/sdv);
@@ -179,7 +179,7 @@ dvariable wts::log_lognormal_density(_CONST double& x,_CONST prevariable& med,_C
     return d;
 }
 //-------------------------------------------------------------
-dvariable wts::log_lognormal_density(_CONST prevariable& x,_CONST prevariable& med,_CONST prevariable& cv){
+dvariable wts::log_lognormal_density(const prevariable& x,const prevariable& med,const prevariable& cv){
     RETURN_ARRAYS_INCREMENT();
     dvariable sdv = sqrt(log(1.0+square(cv)));
     dvariable d = -0.5*log(2.0*PI*square(x*sdv))-0.5*square((log(x)-log(med))/sdv);
@@ -187,14 +187,14 @@ dvariable wts::log_lognormal_density(_CONST prevariable& x,_CONST prevariable& m
     return d;
 }
 //-------------------------------------------------------------
-dvector wts::log_lognormal_density(_CONST dvector& x,_CONST double& med,_CONST double& cv){
+dvector wts::log_lognormal_density(const dvector& x,const double& med,const double& cv){
     double  sdv = sqrt(log(1.0+square(cv)));
     dvector z = (log(x)-log(med))/sdv;
     dvector d = -0.5*log(2.0*PI)-log(x*sdv)-0.5*elem_prod(z,z);
     return d;
 }
 //-------------------------------------------------------------
-dvar_vector wts::log_lognormal_density(_CONST dvar_vector& x,_CONST double& med,_CONST double& cv){
+dvar_vector wts::log_lognormal_density(const dvar_vector& x,const double& med,const double& cv){
     RETURN_ARRAYS_INCREMENT();
     double sdv = sqrt(log(1.0+square(cv)));
     dvar_vector z = (log(x)-log(med))/sdv;
@@ -215,7 +215,7 @@ dvar_vector wts::log_lognormal_density(_CONST dvar_vector& x,_CONST double& med,
 *       mu: rate (inverse scale) parameter                              *
 ************************************************************************/
 //-------------------------------------------------------------
-dvector wts::log_gamma_density(_CONST dvector& xv,_CONST double& r,_CONST double& mu){
+dvector wts::log_gamma_density(const dvector& xv,const double& r,const double& mu){
     int mn = xv.indexmin();
     int mx = xv.indexmax();
     dvector d(mn,mx);
@@ -225,7 +225,7 @@ dvector wts::log_gamma_density(_CONST dvector& xv,_CONST double& r,_CONST double
     return d;
 }
 //-------------------------------------------------------------
-dvar_vector wts::log_gamma_density(_CONST dvar_vector& xv,_CONST double& r,_CONST double& mu){
+dvar_vector wts::log_gamma_density(const dvar_vector& xv,const double& r,const double& mu){
     RETURN_ARRAYS_INCREMENT();
     int mn = xv.indexmin();
     int mx = xv.indexmax();
@@ -237,7 +237,7 @@ dvar_vector wts::log_gamma_density(_CONST dvar_vector& xv,_CONST double& r,_CONS
     return d;
 }
 //-------------------------------------------------------------
-dvar_vector wts::log_gamma_density(_CONST dvar_vector& xv,_CONST dvariable& r,_CONST dvariable& mu){
+dvar_vector wts::log_gamma_density(const dvar_vector& xv,const dvariable& r,const dvariable& mu){
     cout<<"Starting log_gamma_density(dvar_vector&, dvariable&, dvariable&)"<<endl;
     RETURN_ARRAYS_INCREMENT();
     int mn = xv.indexmin();
@@ -261,7 +261,7 @@ dvar_vector wts::log_gamma_density(_CONST dvar_vector& xv,_CONST dvariable& r,_C
 *       md : location parameter (arithmetic median)             *
 *       cv:  coefficient of variation     (sd/mean)             *
 ****************************************************************/
-double wts::drawSampleLognormal(random_number_generator& rng, _CONST double md, _CONST double cv) {
+double wts::drawSampleLognormal(random_number_generator& rng, const double md, const double cv) {
     return md*mfexp(randn(rng)*sqrt(log(1+cv*cv)));
 }
 /****************************************************************
@@ -271,7 +271,7 @@ double wts::drawSampleLognormal(random_number_generator& rng, _CONST double md, 
 *       mu : location parameter (??)                            *
 *       tau:  ??                                                *
 ****************************************************************/
-double wts::drawSampleNegBinomial(random_number_generator& rng, _CONST double mu, _CONST double tau) {
+double wts::drawSampleNegBinomial(random_number_generator& rng, const double mu, const double tau) {
     return randnegbinomial(mu,tau,rng);
 }
 /****************************************************************
@@ -281,7 +281,7 @@ double wts::drawSampleNegBinomial(random_number_generator& rng, _CONST double mu
 *       mu : location parameter (mean)                          *
 *       sd:  standard deviation                                 *
 ****************************************************************/
-double wts::drawSampleNormal(random_number_generator& rng, _CONST double mu, _CONST double sd) {
+double wts::drawSampleNormal(random_number_generator& rng, const double mu, const double sd) {
     return mu+randn(rng)*sd;
 }
 /****************************************************************
@@ -290,7 +290,7 @@ double wts::drawSampleNormal(random_number_generator& rng, _CONST double mu, _CO
 *   parameters:                                                 *
 *       lam: rate parameter                                     *
 ****************************************************************/
-double wts::drawSamplePoisson(random_number_generator& rng, _CONST double mu, _CONST double sd) {
+double wts::drawSamplePoisson(random_number_generator& rng, const double mu, const double sd) {
     return mu+randn(rng)*sd;
 }
 /****************************************************************
@@ -300,7 +300,7 @@ double wts::drawSamplePoisson(random_number_generator& rng, _CONST double mu, _C
 *       lb : lower bound                                        *
 *       ub:  upper bound                                        *
 ****************************************************************/
-double wts::drawSampleUniform(random_number_generator& rng, _CONST double lb, _CONST double ub) {
+double wts::drawSampleUniform(random_number_generator& rng, const double lb, const double ub) {
     return lb+randn(rng)*(ub-lb);
 }
 
@@ -344,7 +344,7 @@ dvector wts::rmvlogistic(const dvector& p, const double& ss, const random_number
 *   returns 0 as log of value for                     *
 *   improper constant pdf(x) = 1.                     *
 *----------------------------------------------------*/
-dvariable wts::logPDF_constant(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_constant(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable val=0.0;
     RETURN_ARRAYS_DECREMENT();
@@ -374,7 +374,7 @@ dvariable wts::logPDF_constant(_CONST prevariable& x,_CONST dvar_vector& params,
 *   params = x0, gamma (location, scale)             *
 *   consts = none                                    *
 *---------------------------------------------------*/
-dvariable wts::logPDF_cauchy(_CONST prevariable& x,_CONST dvar_vector& params, _CONST dvector& consts){
+dvariable wts::logPDF_cauchy(const prevariable& x,const dvar_vector& params, const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable x0     = params(1);//location param
     dvariable gamma  = params(2);//scale param (>0)
@@ -387,7 +387,7 @@ dvariable wts::logPDF_cauchy(_CONST prevariable& x,_CONST dvar_vector& params, _
 *   params = nu (dof)                        *
 *   consts = <empty>                         *
 *-------------------------------------------*/
-dvariable wts::logPDF_chisquare(_CONST prevariable& x,_CONST dvar_vector& params,_CONST  dvector& consts){
+dvariable wts::logPDF_chisquare(const prevariable& x,const dvar_vector& params,const  dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     /*---------------------------------------------------*
     * if X~Chisquare(nu) then X~Gamma(r=nu/2,mu=1/2)     *
@@ -404,7 +404,7 @@ dvariable wts::logPDF_chisquare(_CONST prevariable& x,_CONST dvar_vector& params
 *   params = nu (dof)                        *
 *   consts = <empty>                         *
 *-------------------------------------------*/
-dvar_vector wts::logPDF_chisquare(_CONST dvar_vector& x,_CONST dvar_vector& params,_CONST  dvector& consts){
+dvar_vector wts::logPDF_chisquare(const dvar_vector& x,const dvar_vector& params,const  dvector& consts){
     RETURN_ARRAYS_INCREMENT();
 //    cout<<"Starting logPDF_chisquare(dvar_vector&, dvar_vector, dvector&)"<<endl;
     /*---------------------------------------------------*
@@ -426,7 +426,7 @@ dvar_vector wts::logPDF_chisquare(_CONST dvar_vector& x,_CONST dvar_vector& para
 *   params = <empty>                                 *
 *   consts = nu (dof)                                *
 *---------------------------------------------------*/
-dvariable wts::logPDF_chisqdevs(_CONST prevariable& x,_CONST dvar_vector& params,_CONST  dvector& consts){
+dvariable wts::logPDF_chisqdevs(const prevariable& x,const dvar_vector& params,const  dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable r  = consts(1)/2.0; //k in wikipedia article on gamma pdf
     dvariable mu = 0.5;           //1/theta in wikipedia article on gamma pdf
@@ -439,7 +439,7 @@ dvariable wts::logPDF_chisqdevs(_CONST prevariable& x,_CONST dvar_vector& params
 *   params = stdev                                   *
 *   consts = <empty>                                 *
 *---------------------------------------------------*/
-dvariable wts::logPDF_chisqdevs(_CONST dvar_vector& x,_CONST dvar_vector& params,_CONST  dvector& consts){
+dvariable wts::logPDF_chisqdevs(const dvar_vector& x,const dvar_vector& params,const  dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable X2 = norm2(x)/square(params(1));
     dvariable r  = (length(x)-1)/2.0; //k in wikipedia article on gamma pdf
@@ -455,14 +455,14 @@ dvariable wts::logPDF_chisqdevs(_CONST dvar_vector& x,_CONST dvar_vector& params
 *   params = lambda (scale)                          *
 *   consts = none                                    *
 *----------------------------------------------------*/
-dvariable wts::logPDF_exponential(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_exponential(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable lambda = params(1);//scale param
     dvariable logPDF = -log(lambda)-lambda*x;
     RETURN_ARRAYS_DECREMENT();
     return logPDF;
 }
-dvar_vector wts::logPDF_exponential(_CONST dvar_vector& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvar_vector wts::logPDF_exponential(const dvar_vector& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable lambda = params(1);//scale param
     dvar_vector logPDF = -log(lambda)-lambda*x;
@@ -485,7 +485,7 @@ dvar_vector wts::logPDF_exponential(_CONST dvar_vector& x,_CONST dvar_vector& pa
 *   params = <empty>                                                    *
 *   consts = r,mu (shape, rate)                                         *
 *-----------------------------------------------------------------------*/
-dvariable wts::logPDF_gamma(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_gamma(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable logPDF;
     if (params.indexmax()==2) {
@@ -500,7 +500,7 @@ dvariable wts::logPDF_gamma(_CONST prevariable& x,_CONST dvar_vector& params,_CO
     RETURN_ARRAYS_DECREMENT();
     return logPDF;
 }
-dvar_vector wts::logPDF_gamma(_CONST dvar_vector& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvar_vector wts::logPDF_gamma(const dvar_vector& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvar_vector logPDF(x.indexmin(),x.indexmax());
     if (params.indexmax()==2) {
@@ -520,7 +520,7 @@ dvar_vector wts::logPDF_gamma(_CONST dvar_vector& x,_CONST dvar_vector& params,_
 *   params = nu (dof)                            *
 *   consts = <empty>                             *
 *------------------------------------------------*/
-dvariable wts::logPDF_invchisquare(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_invchisquare(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     //if X~InvChisquare(r) then 1/X~Chisquare(r)
     dvariable y = 1/x; //y is chisquare-distributed
@@ -533,7 +533,7 @@ dvariable wts::logPDF_invchisquare(_CONST prevariable& x,_CONST dvar_vector& par
 *   params = r,mu (shape, rate)                *
 *   consts = <empty>                           *
 *----------------------------------------------*/
-dvariable wts::logPDF_invgamma(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_invgamma(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     //if X~InvGamma(r,mu) then 1/X~Gamma(r,1/mu)
     dvariable y     = 1/x;         //gamma-distributed
@@ -549,7 +549,7 @@ dvariable wts::logPDF_invgamma(_CONST prevariable& x,_CONST dvar_vector& params,
 *   params = mu, lambda (location, shape)            *
 *   consts = none                                    *
 *----------------------------------------------------*/
-dvariable wts::logPDF_invgaussian(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_invgaussian(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable mu     = params(1);//location param
     dvariable lambda = params(2);//shape param
@@ -563,7 +563,7 @@ dvariable wts::logPDF_invgaussian(_CONST prevariable& x,_CONST dvar_vector& para
 *   params = mu, cv (median, cv)                            *
 *   consts = none                                           *
 *-----------------------------------------------------------*/
-dvariable wts::logPDF_lognormal(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_lognormal(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable mu     = params(1);                 //median
     dvariable var    = log(1.0+square(params(2)));//log-scale variance
@@ -579,7 +579,7 @@ dvariable wts::logPDF_lognormal(_CONST prevariable& x,_CONST dvar_vector& params
 *   params = mu, cv (median, cv)                            *
 *   consts = none                                           *
 *-----------------------------------------------------------*/
-dvariable wts::logPDF_logscale_normal(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_logscale_normal(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable mu     = params(1);                 //median
     dvariable var    = log(1.0+square(params(2)));//log-scale variance
@@ -594,7 +594,7 @@ dvariable wts::logPDF_logscale_normal(_CONST prevariable& x,_CONST dvar_vector& 
 *   params = mu, sigma (mean, stdev)                          *
 *   consts = none                                             *
 *-------------------------------------------------------------*/
-dvariable wts::logPDF_normal(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_normal(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable mu     = params(1);//location param
     dvariable sigma  = params(2);//scale param
@@ -616,7 +616,7 @@ dvariable wts::logPDF_normal(_CONST prevariable& x,_CONST dvar_vector& params,_C
  * 
  * @return dvar_vector with elements running x.indexmin() to x.indexmax()-1.
  */
-dvar_vector wts::logPDF_1stdiff_normal(_CONST dvar_vector& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvar_vector wts::logPDF_1stdiff_normal(const dvar_vector& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable mu     = params(1);//location param
     dvariable sigma  = params(2);//scale param
@@ -642,7 +642,7 @@ dvar_vector wts::logPDF_1stdiff_normal(_CONST dvar_vector& x,_CONST dvar_vector&
 *   params = <empty>                                   *
 *   consts = nu (dof), s                               *
 *-----------------------------------------------------*/
-dvariable wts::logPDF_scaled_invchisquare(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_scaled_invchisquare(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable logPDF;
     dvariable y = 1/x;
@@ -672,7 +672,7 @@ dvariable wts::logPDF_scaled_invchisquare(_CONST prevariable& x,_CONST dvar_vect
 *   params = <empty>                                   *
 *   consts = nu (dof), CV(s) = sqrt(exp(s^2)-1)        *
 *-----------------------------------------------------*/
-dvariable wts::logPDF_scaledCV_invchisquare(_CONST prevariable& cv,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_scaledCV_invchisquare(const prevariable& cv,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable logPDF;
     dvariable x = log(1.0+square(cv));
@@ -695,7 +695,7 @@ dvariable wts::logPDF_scaledCV_invchisquare(_CONST prevariable& cv,_CONST dvar_v
 *   params = nu (dof)                                   *
 *   consts = none                                       *
 *-------------------------------------------------------*/
-dvariable wts::logPDF_t(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_t(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable nu     = params(1);//location param
     dvariable logPDF = gammln((nu+1.0)/2.0)-gammln(nu/2.0)-0.5*log(nu*PI)+
@@ -704,7 +704,7 @@ dvariable wts::logPDF_t(_CONST prevariable& x,_CONST dvar_vector& params,_CONST 
     return logPDF;
 }
 
-dvariable wts::logSquareWave(_CONST prevariable& x,double min,double max,double m){
+dvariable wts::logSquareWave(const prevariable& x,double min,double max,double m){
     RETURN_ARRAYS_INCREMENT();
     dvariable logSW  = -m*(log(1+mfexp(-(x-min)))+log(1+mfexp(-(max-x))));
     RETURN_ARRAYS_DECREMENT();
@@ -721,7 +721,7 @@ dvariable wts::logSquareWave(_CONST prevariable& x,double min,double max,double 
 *NOTE: This gives the same value as logPDF_normal since f is a *
 *      constant and immaterial to derivative calcs.            *
 *-------------------------------------------------------------*/
-dvariable wts::logPDF_truncated_normal(_CONST prevariable& x,_CONST dvar_vector& params,_CONST dvector& consts){
+dvariable wts::logPDF_truncated_normal(const prevariable& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable mu     = params(1);//location param
     dvariable sigma  = params(2);//scale param
@@ -764,7 +764,7 @@ dvariable wts::logPDF_truncated_normal(_CONST prevariable& x,_CONST dvar_vector&
 *     1 x0     : location parameter (real)                     *
 *     2 gamma  : scale parameter (>0)                          *
 *-------------------------------------------------------------*/
-double wts::samplePDF_cauchy(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_cauchy(random_number_generator& rng,const dvector& params,const dvector& consts){
     double p  = randu(rng);
     double x0 = params(1);
     double gm = params(2);
@@ -777,7 +777,7 @@ double wts::samplePDF_cauchy(random_number_generator& rng,_CONST dvector& params
 *   params:                                                    *
 *     1 k     : degrees of freedom (integer)                   *
 *-------------------------------------------------------------*/
-double wts::samplePDF_chisquare(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_chisquare(random_number_generator& rng,const dvector& params,const dvector& consts){
     int k = (int)params(1);
     dvector p(1,k);
     p.fill_randn(rng);
@@ -790,7 +790,7 @@ double wts::samplePDF_chisquare(random_number_generator& rng,_CONST dvector& par
 *   params:                                                    *
 *     1 lambda : rate parameter (real)                         *
 *-------------------------------------------------------------*/
-double wts::samplePDF_exponential(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_exponential(random_number_generator& rng,const dvector& params,const dvector& consts){
     double p  = randu(rng);
     double lm = params(1);
     double val = -log(p)/lm;
@@ -803,7 +803,7 @@ double wts::samplePDF_exponential(random_number_generator& rng,_CONST dvector& p
 *     1 r     : shape parameter (>0)                           *
 *     2 mu    : rate (inverse scale) parameter (>0)            *
 *-------------------------------------------------------------*/
-double wts::samplePDF_gamma(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_gamma(random_number_generator& rng,const dvector& params,const dvector& consts){
     double p  = randu(rng);
     double r  = params(1);
     double mu = params(2);
@@ -816,7 +816,7 @@ double wts::samplePDF_gamma(random_number_generator& rng,_CONST dvector& params,
 *   params:                                                      *
 *     1 k     : degrees of freedom (integer)                     *
 *---------------------------------------------------------------*/
-double wts::samplePDF_invchisquare(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_invchisquare(random_number_generator& rng,const dvector& params,const dvector& consts){
     int k = (int)params(1);
     dvector p(1,k);
     p.fill_randn(rng);
@@ -830,7 +830,7 @@ double wts::samplePDF_invchisquare(random_number_generator& rng,_CONST dvector& 
 *     1 r     : shape parameter (>0)                           *
 *     2 mu    : rate parameter (>0)                            *
 *-------------------------------------------------------------*/
-double wts::samplePDF_invgamma(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_invgamma(random_number_generator& rng,const dvector& params,const dvector& consts){
     dvector gparams(1,2);
     gparams(1) = params(1);    //r
     gparams(2) = 1.0/params(2);//1/mu
@@ -844,7 +844,7 @@ double wts::samplePDF_invgamma(random_number_generator& rng,_CONST dvector& para
 *     1 mu     : location parameter (mean; >0)                   *
 *     2 lambda : shape parameter (>0)                            *
 *----------------------------------------------------------------*/
-double wts::samplePDF_invgaussian(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_invgaussian(random_number_generator& rng,const dvector& params,const dvector& consts){
     double val = 0.0;
     double n = randn(rng);
     double z = randu(rng);
@@ -861,7 +861,7 @@ double wts::samplePDF_invgaussian(random_number_generator& rng,_CONST dvector& p
 *     1 med : location parameter (median)                      *
 *     2 cv  : standard deviation                               *
 *-------------------------------------------------------------*/
-double wts::samplePDF_lognormal(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_lognormal(random_number_generator& rng,const dvector& params,const dvector& consts){
     double med = params(1);
     double sdv = sqrt(log(1+square(params(2))));
     double val =  med*exp(randn(rng)*sdv);
@@ -886,7 +886,7 @@ double wts::samplePDF_lognormal(random_number_generator& rng,_CONST dvector& par
  * 
  * @return dvector of sample values
  */
-dvector wts::samplePDF_1stdiff_normal(int n, random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+dvector wts::samplePDF_1stdiff_normal(int n, random_number_generator& rng,const dvector& params,const dvector& consts){
     double mu = params(1);
     double sd = params(2);
     dvector vals(1,n); vals.initialize();
@@ -899,7 +899,7 @@ dvector wts::samplePDF_1stdiff_normal(int n, random_number_generator& rng,_CONST
 *     1 mu : location parameter (mean)                          *
 *     2 sd:  standard deviation                                 *
 *--------------------------------------------------------------*/
-double wts::samplePDF_normal(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_normal(random_number_generator& rng,const dvector& params,const dvector& consts){
     double mu = params(1);
     double sd = params(2);
     return mu+randn(rng)*sd;
@@ -917,7 +917,7 @@ double wts::samplePDF_normal(random_number_generator& rng,_CONST dvector& params
 *   params = <empty>                                   *
 *   consts = nu (dof), s                               *
 *-----------------------------------------------------*/
-double wts::samplePDF_scaled_invchisquare(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_scaled_invchisquare(random_number_generator& rng,const dvector& params,const dvector& consts){
     double p  = randu(rng);
     double r  = params(1)/2;                  //shape factor (=beta in Bayesian Data Analysis, p 575)
     double mu = params(1)/2*square(params(2));//rate (inverse scale) factor (=beta in Bayesian Data Analysis, p 575)
@@ -943,7 +943,7 @@ double wts::samplePDF_scaled_invchisquare(random_number_generator& rng,_CONST dv
 *   params = <empty>                                   *
 *   consts = nu (dof), CV = sqrt(exp(s^2)-1)           *
 *-----------------------------------------------------*/
-double wts::samplePDF_scaledCV_invchisquare(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_scaledCV_invchisquare(random_number_generator& rng,const dvector& params,const dvector& consts){
     double p  = randu(rng);
     double r  = params(1)/2;                         //shape factor (=beta in Bayesian Data Analysis, p 575)
     double mu = params(1)/2*log(1+square(params(2)));//rate (inverse scale) factor (=beta in Bayesian Data Analysis, p 575)
@@ -957,7 +957,7 @@ double wts::samplePDF_scaledCV_invchisquare(random_number_generator& rng,_CONST 
 *   params:                                                     *
 *     1 nu : degrees of freedom                                 *
 *--------------------------------------------------------------*/
-double wts::samplePDF_t(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_t(random_number_generator& rng,const dvector& params,const dvector& consts){
     double nu = params(1);
     double z = randn(rng);
     double v = samplePDF_chisquare(rng,params,consts);
@@ -976,7 +976,7 @@ double wts::samplePDF_t(random_number_generator& rng,_CONST dvector& params,_CON
 *     1 min : min value                                         *
 *     2 max : max value                                         *
 *---------------------------------------------------------------*/
-double wts::samplePDF_truncated_normal(random_number_generator& rng,_CONST dvector& params,_CONST dvector& consts){
+double wts::samplePDF_truncated_normal(random_number_generator& rng,const dvector& params,const dvector& consts){
     double val = params(1)+randn(rng)*params(2);
     while ((val<=consts(1))||(val>=consts(2))) {
         val = params(1)+randn(rng)*params(2);

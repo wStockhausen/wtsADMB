@@ -20,7 +20,7 @@ namespace wts{
      * @param v - adstring_array to convert to quoted csv string
      * @return  - the quoted csv string 
      */
-    adstring to_qcsv(_CONST adstring_array& v);
+    adstring to_qcsv(const adstring_array& v);
     
     /**
      * Convert ivector to string of quoted, comma-separated values. Individual
@@ -29,7 +29,7 @@ namespace wts{
      * @param v - vector to convert to quoted csv string
      * @return  - the quoted csv string 
      */
-    adstring to_qcsv(_CONST ivector& v);
+    adstring to_qcsv(const ivector& v);
     
     /**
      * Convert dvector to string of quoted, comma-separated values. Individual
@@ -38,7 +38,7 @@ namespace wts{
      * @param v - vector to convert to quoted csv string
      * @return  - the quoted csv string 
      */
-    adstring to_qcsv(_CONST dvector& v);
+    adstring to_qcsv(const dvector& v);
     
     /**
      * Find index in adstring_array matching a test string.
@@ -80,9 +80,9 @@ namespace wts{
             void allocate(int rwmn, int rwmx, int clmn, ivector& clmxs);
             void allocate(int rwmn, int rwmx, ivector& clmns, ivector& clmxs);
             void deallocate(void);
-            adstring& operator() (_CONST int i, _CONST int j);
-            adstring_array& operator() (_CONST int i);
-            adstring_array& operator[] (_CONST int i);
+            adstring& operator() (const int i, const int j);
+            adstring_array& operator() (const int i);
+            adstring_array& operator[] (const int i);
             int indexmin(){return idxmn;}
             int indexmax(){return idxmn+nAAs-1;}
             int size(){return nAAs;}
@@ -101,7 +101,7 @@ namespace wts{
     class CompareAdstrings {
         public:
             static bool debug;
-            bool operator() (_CONST adstring& lhs, _CONST adstring& rhs) const;
+            bool operator() (const adstring& lhs, const adstring& rhs) const;
     };
 }
 
