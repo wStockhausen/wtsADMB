@@ -14,6 +14,33 @@ using namespace std;
 
 namespace wts{
     /**
+     * Convert adstring_array to string of unquoted, comma-separated values. Individual
+     * array elements are  NOT quoted.
+     * 
+     * @param v - adstring_array to convert to csv string
+     * @return  - the csv string 
+     */
+    adstring to_csv(const adstring_array& v);
+    
+    /**
+     * Convert ivector to string of unquoted, comma-separated values. Individual
+     * elements are  NOT quoted.
+     * 
+     * @param v - vector to convert to csv string
+     * @return  - the csv string 
+     */
+    adstring to_csv(const ivector& v);
+    
+    /**
+     * Convert dvector to string of unquoted, comma-separated values. Individual
+     * elements are NOT quoted.
+     * 
+     * @param v - vector to convert to csv string
+     * @return  - the csv string 
+     */
+    adstring to_csv(const dvector& v);
+    
+    /**
      * Convert adstring_array to string of quoted, comma-separated values. Individual
      * array elements are single-quoted.
      * 

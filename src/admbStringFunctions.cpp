@@ -6,7 +6,48 @@ using namespace std;
 /**
  * Changes:
  * 2014-12-03: 1. Changed to using std namespace
+ * 2015-02-27: 1. Added to_csv(...) functions to provide strings with unquoted elements
 */
+
+/****************************************************************
+ * convert vectors to unquoted csv string
+ ***************************************************************/
+/**
+ * Convert adstring_array to string of unquoted, comma-separated values
+ * @param v
+ * @return 
+ */
+adstring wts::to_csv(const adstring_array& v){
+    int mn = v.indexmin();
+    int mx = v.indexmax();
+    adstring s = v(mn);
+    for (int i=mn;i<mx;i++) s = s+cc+v(i+1);
+    return s;
+}
+/**
+ * Convert ivector to string of unquoted, comma-separated values
+ * @param v
+ * @return 
+ */
+adstring wts::to_csv(const ivector& v){
+    int mn = v.indexmin();
+    int mx = v.indexmax();
+    adstring s = str(v(mn));
+    for (int i=mn;i<mx;i++) s = s+cc+str(v(i+1));
+    return s;
+}
+/**
+ * Convert dvector to string of unquoted, comma-separated values
+ * @param v
+ * @return 
+ */
+adstring wts::to_csv(const dvector& v){
+    int mn = v.indexmin();
+    int mx = v.indexmax();
+    adstring s = qt+str(v(mn))+qt;
+    for (int i=mn;i<mx;i++) s = s+cc+str(v(i+1));
+    return s;
+}
 
 /****************************************************************
  * convert vectors to quoted csv string
