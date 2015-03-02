@@ -428,6 +428,9 @@ namespace wts{
     * purpose   : return constant version of array   *
     *************************************************/
     //-------------------------------------------------------------
+//    dvector  value(const  dvar_vector& o);
+//    dmatrix  value(const  dvar_matrix& o);
+//    d3_array value(const  dvar3_array& o);
     d4_array value(const  dvar4_array& o);
     d5_array value(const  dvar5_array& o);
     d6_array value(const  dvar6_array& o);

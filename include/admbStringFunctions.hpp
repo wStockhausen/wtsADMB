@@ -14,6 +14,14 @@ using namespace std;
 
 namespace wts{
     /**
+     * Function to format a double using 'g'-type fprmatting in sprintf().
+     * 
+     * @param d - double value
+     * @return g-formatted adstring representation of d
+     */
+    adstring strg(double d);
+    
+    /**
      * Convert adstring_array to string of unquoted, comma-separated values. Individual
      * array elements are  NOT quoted.
      * 
@@ -36,9 +44,10 @@ namespace wts{
      * elements are NOT quoted.
      * 
      * @param v - vector to convert to csv string
+     * @param g - flag to use sprintf "g" format for output (if 1) or admb standard (if 0)
      * @return  - the csv string 
      */
-    adstring to_csv(const dvector& v);
+    adstring to_csv(const dvector& v, int g=1);
     
     /**
      * Convert adstring_array to string of quoted, comma-separated values. Individual
@@ -63,9 +72,10 @@ namespace wts{
      * array elements are single-quoted.
      * 
      * @param v - vector to convert to quoted csv string
+     * @param g - flag to use sprintf "g" format for output (if 1) or admb standard (if 0)
      * @return  - the quoted csv string 
      */
-    adstring to_qcsv(const dvector& v);
+    adstring to_qcsv(const dvector& v, int g=1);
     
     /**
      * Find index in adstring_array matching a test string.

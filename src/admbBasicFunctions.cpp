@@ -913,11 +913,46 @@ int wts::length(const dvar_matrix& o){
 }
 //-------------------------------------------------------------
 
+///**
+// * Returns the value of a dvar_vector as a dvector.
+// * 
+// * @param o - the dvar_vector
+// * @return - a dvector
+// */
+//dvector wts::value(const dvar_vector& o){
+//    if (debugADMBFunctions>0) cout<<"start value(dvar_vector)"<<endl;
+//    if (debugADMBFunctions>0) cout<<"end value(dvar_vector)"<<endl;
+//    return(::value(o));
+//}
+///**
+// * Returns the value of a dvar_matrix as a dmatrix.
+// * 
+// * @param o - the dvar_matrix
+// * @return - a dmatrix
+// */
+//dmatrix wts::value(const dvar_matrix& o){
+//    if (debugADMBFunctions>0) cout<<"start value(dvar_matrix)"<<endl;
+//    if (debugADMBFunctions>0) cout<<"end value(dvar_matrix)"<<endl;
+//    return(::value(o));
+//}
+///**
+// * Returns the value of a dvar3_array as a d3_array.
+// * 
+// * @param o - the dvar3_array
+// * @return - a d3_array
+// */
+//d3_array wts::value(const dvar3_array& o){
+//    if (debugADMBFunctions>0) cout<<"start value(dvar3_array)"<<endl;
+//    if (debugADMBFunctions>0) cout<<"end value(dvar3_array)"<<endl;
+//    return(::value(o));
+//}
 
-/*************************************************
-* name      : value                              *
-* purpose   : return constant version of array   *
-*************************************************/
+/**
+ * Returns the value of a dvar4_array as a d4_array.
+ * 
+ * @param o - the dvar4_array
+ * @return - a d4_array
+ */
 d4_array wts::value(const dvar4_array& o){
     if (debugADMBFunctions>0) cout<<"start value(dvar4_array)"<<endl;
     ivector b = getBounds(o);
@@ -926,7 +961,12 @@ d4_array wts::value(const dvar4_array& o){
     if (debugADMBFunctions>0) cout<<"   end value(dvar4_array)"<<endl;
     return(a);
 }
-//-------------------------------------------------------------
+/**
+ * Returns the value of a dvar3_array as a d5_array.
+ * 
+ * @param o - the dvar5_array
+ * @return - a d5_array
+ */
 d5_array wts::value(const dvar5_array& o){
     if (debugADMBFunctions>0) cout<<"start value(dvar5_array)"<<endl;
     ivector b = getBounds(o);
@@ -935,7 +975,12 @@ d5_array wts::value(const dvar5_array& o){
     if (debugADMBFunctions>0) cout<<"   end value(dvar5_array)"<<endl;
     return(a);
 }
-//-------------------------------------------------------------
+/**
+ * Returns the value of a dvar6_array as a d6_array.
+ * 
+ * @param o - the dvar6_array
+ * @return - a d6_array
+ */
 d6_array wts::value(const dvar6_array& o){
     if (debugADMBFunctions>0) cout<<"start value(dvar6_array)"<<endl;
     ivector b = getBounds(o);
@@ -944,7 +989,12 @@ d6_array wts::value(const dvar6_array& o){
     if (debugADMBFunctions>0) cout<<"   end value(dvar6_array)"<<endl;
     return(a);
 }
-//-------------------------------------------------------------
+/**
+ * Returns the value of a dvar3_array as a d7_array.
+ * 
+ * @param o - the dvar7_array
+ * @return - a d7_array
+ */
 d7_array wts::value(const dvar7_array& o){
     if (debugADMBFunctions>0) cout<<"start value(dvar7_array)"<<endl;
     ivector b = getBounds(o);

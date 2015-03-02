@@ -7,8 +7,22 @@ using namespace std;
  * Changes:
  * 2014-12-03: 1. Changed to using std namespace
  * 2015-02-27: 1. Added to_csv(...) functions to provide strings with unquoted elements
+ * 2015-03-01: 1. Added strg(double) function 
 */
 
+    /**
+     * Function to format a double using 'g'-type fprmatting in sprintf().
+     * 
+     * @param d
+     * @return g-formatted adstring representation of d
+     */
+    adstring wts::strg(double d){
+        char  buffer[50];
+        sprintf(buffer,"%g",d);
+        adstring tmp(buffer);
+        return tmp;
+    }
+    
 /****************************************************************
  * convert vectors to unquoted csv string
  ***************************************************************/
@@ -38,14 +52,21 @@ adstring wts::to_csv(const ivector& v){
 }
 /**
  * Convert dvector to string of unquoted, comma-separated values
- * @param v
+ * @param v - dvector to format as csv string
+ * @param g - flag to use sprintf "g" format for output (if 1) or admb standard (if 0)
  * @return 
  */
-adstring wts::to_csv(const dvector& v){
+adstring wts::to_csv(const dvector& v, int g){
     int mn = v.indexmin();
     int mx = v.indexmax();
-    adstring s = qt+str(v(mn))+qt;
-    for (int i=mn;i<mx;i++) s = s+cc+str(v(i+1));
+    adstring s;
+    if (g){
+        s = strg(v(mn));
+        for (int i=mn;i<mx;i++) s = s+cc+strg(v(i+1));
+    } else {
+        s = str(v(mn));
+        for (int i=mn;i<mx;i++) s = s+cc+str(v(i+1));
+    }
     return s;
 }
 
@@ -78,14 +99,21 @@ adstring wts::to_qcsv(const ivector& v){
 }
 /**
  * Convert dvector to string of quoted, comma-separated values
- * @param v
+ * @param v - dvector to format as quoted csv string
+ * @param g - flag to use sprintf "g" format for output (if 1) or admb standard (if 0)
  * @return 
  */
-adstring wts::to_qcsv(const dvector& v){
+adstring wts::to_qcsv(const dvector& v, int g){
     int mn = v.indexmin();
     int mx = v.indexmax();
-    adstring s = qt+str(v(mn))+qt;
-    for (int i=mn;i<mx;i++) s = s+cc+qt+str(v(i+1))+qt;
+    adstring s;
+    if (g){
+        s = qt+strg(v(mn))+qt;
+        for (int i=mn;i<mx;i++) s = s+cc+qt+strg(v(i+1))+qt;
+    } else {
+        s = qt+str(v(mn))+qt;
+        for (int i=mn;i<mx;i++) s = s+cc+qt+str(v(i+1))+qt;
+    }
     return s;
 }
 
