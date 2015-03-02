@@ -13,6 +13,16 @@
 using namespace std;
 
 namespace wts{
+    
+    /**
+     * Create an adstring by replacing all instances of s in adstring a with r. 
+     * @param s
+     * @param r
+     * @param a
+     * @return 
+     */
+    adstring replace(char s, char r, const adstring& a);
+    
     /**
      * Function to format a double using 'g'-type fprmatting in sprintf().
      * 

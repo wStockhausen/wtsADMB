@@ -8,20 +8,39 @@ using namespace std;
  * 2014-12-03: 1. Changed to using std namespace
  * 2015-02-27: 1. Added to_csv(...) functions to provide strings with unquoted elements
  * 2015-03-01: 1. Added strg(double) function 
+ * 2015-03-02: 1. Added replace(...) function 
 */
-
-    /**
-     * Function to format a double using 'g'-type fprmatting in sprintf().
-     * 
-     * @param d
-     * @return g-formatted adstring representation of d
-     */
-    adstring wts::strg(double d){
-        char  buffer[50];
-        sprintf(buffer,"%g",d);
-        adstring tmp(buffer);
-        return tmp;
+    
+/**
+ * Create an adstring by replacing all instances of s in adstring a with r. 
+ * 
+ * @param s
+ * @param r
+ * @param a
+ * @return 
+ */
+adstring wts::replace(char s, char r, const adstring& a){
+    adstring tmp; tmp = a;
+    int p = tmp.pos(s);
+    while (p>0){
+        tmp[p] = r;
+        p = tmp.pos(s);
     }
+    return tmp;
+}
+
+/**
+ * Function to format a double using 'g'-type fprmatting in sprintf().
+ * 
+ * @param d
+ * @return g-formatted adstring representation of d
+ */
+adstring wts::strg(double d){
+    char  buffer[50];
+    sprintf(buffer,"%g",d);
+    adstring tmp(buffer);
+    return tmp;
+}
     
 /****************************************************************
  * convert vectors to unquoted csv string
