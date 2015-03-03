@@ -16,40 +16,40 @@ namespace wts {
     /********************************************
     * standardized double functions             *
     ********************************************/
-    double none    (double x, _CONST dvector& consts);
-    double acos    (double x, _CONST dvector& consts);
-    double asin    (double x, _CONST dvector& consts);
-    double atan    (double x, _CONST dvector& consts);
-    double cos     (double x, _CONST dvector& consts);
-    double exp     (double x, _CONST dvector& consts);
-    double expneg  (double x, _CONST dvector& consts);
-    double log     (double x, _CONST dvector& consts);
-    double logneg  (double x, _CONST dvector& consts);
-    double logistic(double x, _CONST dvector& consts);
-    double logit   (double x, _CONST dvector& consts);
-    double sin     (double x, _CONST dvector& consts);
-    double sqrt    (double x, _CONST dvector& consts);
-    double square  (double x, _CONST dvector& consts);
-    double tan     (double x, _CONST dvector& consts);
+    double none    (double x, const dvector& consts);
+    double acos    (double x, const dvector& consts);
+    double asin    (double x, const dvector& consts);
+    double atan    (double x, const dvector& consts);
+    double cos     (double x, const dvector& consts);
+    double exp     (double x, const dvector& consts);
+    double expneg  (double x, const dvector& consts);
+    double log     (double x, const dvector& consts);
+    double logneg  (double x, const dvector& consts);
+    double logistic(double x, const dvector& consts);
+    double logit   (double x, const dvector& consts);
+    double sin     (double x, const dvector& consts);
+    double sqrt    (double x, const dvector& consts);
+    double square  (double x, const dvector& consts);
+    double tan     (double x, const dvector& consts);
 
     /********************************************
     * standardized prevariable functions        *
     ********************************************/
-    dvariable none    (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable acos    (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable asin    (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable atan    (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable cos     (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable exp     (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable expneg  (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable log     (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable logneg  (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable logistic(_CONST prevariable& x, _CONST dvector& consts);
-    dvariable logit   (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable sin     (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable sqrt    (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable square  (_CONST prevariable& x, _CONST dvector& consts);
-    dvariable tan     (_CONST prevariable& x, _CONST dvector& consts);
+    dvariable none    (const prevariable& x, const dvector& consts);
+    dvariable acos    (const prevariable& x, const dvector& consts);
+    dvariable asin    (const prevariable& x, const dvector& consts);
+    dvariable atan    (const prevariable& x, const dvector& consts);
+    dvariable cos     (const prevariable& x, const dvector& consts);
+    dvariable exp     (const prevariable& x, const dvector& consts);
+    dvariable expneg  (const prevariable& x, const dvector& consts);
+    dvariable log     (const prevariable& x, const dvector& consts);
+    dvariable logneg  (const prevariable& x, const dvector& consts);
+    dvariable logistic(const prevariable& x, const dvector& consts);
+    dvariable logit   (const prevariable& x, const dvector& consts);
+    dvariable sin     (const prevariable& x, const dvector& consts);
+    dvariable sqrt    (const prevariable& x, const dvector& consts);
+    dvariable square  (const prevariable& x, const dvector& consts);
+    dvariable tan     (const prevariable& x, const dvector& consts);
 
 }
 

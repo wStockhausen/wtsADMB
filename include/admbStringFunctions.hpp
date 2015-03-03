@@ -13,6 +13,52 @@
 using namespace std;
 
 namespace wts{
+    
+    /**
+     * Create an adstring by replacing all instances of s in adstring a with r. 
+     * @param s
+     * @param r
+     * @param a
+     * @return 
+     */
+    adstring replace(char s, char r, const adstring& a);
+    
+    /**
+     * Function to format a double using 'g'-type fprmatting in sprintf().
+     * 
+     * @param d - double value
+     * @return g-formatted adstring representation of d
+     */
+    adstring strg(double d);
+    
+    /**
+     * Convert adstring_array to string of unquoted, comma-separated values. Individual
+     * array elements are  NOT quoted.
+     * 
+     * @param v - adstring_array to convert to csv string
+     * @return  - the csv string 
+     */
+    adstring to_csv(const adstring_array& v);
+    
+    /**
+     * Convert ivector to string of unquoted, comma-separated values. Individual
+     * elements are  NOT quoted.
+     * 
+     * @param v - vector to convert to csv string
+     * @return  - the csv string 
+     */
+    adstring to_csv(const ivector& v);
+    
+    /**
+     * Convert dvector to string of unquoted, comma-separated values. Individual
+     * elements are NOT quoted.
+     * 
+     * @param v - vector to convert to csv string
+     * @param g - flag to use sprintf "g" format for output (if 1) or admb standard (if 0)
+     * @return  - the csv string 
+     */
+    adstring to_csv(const dvector& v, int g=1);
+    
     /**
      * Convert adstring_array to string of quoted, comma-separated values. Individual
      * array elements are single-quoted.
@@ -20,7 +66,7 @@ namespace wts{
      * @param v - adstring_array to convert to quoted csv string
      * @return  - the quoted csv string 
      */
-    adstring to_qcsv(_CONST adstring_array& v);
+    adstring to_qcsv(const adstring_array& v);
     
     /**
      * Convert ivector to string of quoted, comma-separated values. Individual
@@ -29,16 +75,17 @@ namespace wts{
      * @param v - vector to convert to quoted csv string
      * @return  - the quoted csv string 
      */
-    adstring to_qcsv(_CONST ivector& v);
+    adstring to_qcsv(const ivector& v);
     
     /**
      * Convert dvector to string of quoted, comma-separated values. Individual
      * array elements are single-quoted.
      * 
      * @param v - vector to convert to quoted csv string
+     * @param g - flag to use sprintf "g" format for output (if 1) or admb standard (if 0)
      * @return  - the quoted csv string 
      */
-    adstring to_qcsv(_CONST dvector& v);
+    adstring to_qcsv(const dvector& v, int g=1);
     
     /**
      * Find index in adstring_array matching a test string.
@@ -80,9 +127,9 @@ namespace wts{
             void allocate(int rwmn, int rwmx, int clmn, ivector& clmxs);
             void allocate(int rwmn, int rwmx, ivector& clmns, ivector& clmxs);
             void deallocate(void);
-            adstring& operator() (_CONST int i, _CONST int j);
-            adstring_array& operator() (_CONST int i);
-            adstring_array& operator[] (_CONST int i);
+            adstring& operator() (const int i, const int j);
+            adstring_array& operator() (const int i);
+            adstring_array& operator[] (const int i);
             int indexmin(){return idxmn;}
             int indexmax(){return idxmn+nAAs-1;}
             int size(){return nAAs;}
@@ -101,7 +148,7 @@ namespace wts{
     class CompareAdstrings {
         public:
             static bool debug;
-            bool operator() (_CONST adstring& lhs, _CONST adstring& rhs) const;
+            bool operator() (const adstring& lhs, const adstring& rhs) const;
     };
 }
 

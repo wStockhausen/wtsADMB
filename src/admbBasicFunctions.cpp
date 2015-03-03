@@ -167,7 +167,7 @@ double wts::min(double x1,double x2){
  * 
  * @return - the corresponding ivector
  */
-ivector wts::to_ivector(_CONST dvector& v){
+ivector wts::to_ivector(const dvector& v){
     ivector iv(v.indexmin(),v.indexmax());
     for (int i=v.indexmin();i<=v.indexmax();i++) iv(i) = floor(v(i));
     return iv;
@@ -177,56 +177,56 @@ ivector wts::to_ivector(_CONST dvector& v){
 * purpose   : create a deep copy of a variable                  *
 *NOTE: Does not work for ragged arrays                          *
 ****************************************************************/
-dvector wts::copy(_CONST dvector& v){
+dvector wts::copy(const dvector& v){
     ivector bnds = getBounds(v);
     dvector c(bnds(1),bnds(2));
     c = v;
     return c;
 }
 //-------------------------------------------------------------
-dmatrix wts::copy(_CONST dmatrix& v){
+dmatrix wts::copy(const dmatrix& v){
     ivector bnds = getBounds(v);
     dmatrix c(bnds(1),bnds(2),bnds(3),bnds(4));
     c = v;
     return c;
 }
 //-------------------------------------------------------------
-d3_array wts::copy(_CONST d3_array& v){
+d3_array wts::copy(const d3_array& v){
     ivector bnds = getBounds(v);
     d3_array c(bnds(1),bnds(2),bnds(3),bnds(4),bnds(5),bnds(6));
     c = v;
     return c;
 }
 //-------------------------------------------------------------
-d4_array wts::copy(_CONST d4_array& v){
+d4_array wts::copy(const d4_array& v){
     ivector bnds = getBounds(v);
     d4_array c(bnds(1),bnds(2),bnds(3),bnds(4),bnds(5),bnds(6),bnds(7),bnds(8));
     c = v;
     return c;
 }
 //-------------------------------------------------------------
-d5_array wts::copy(_CONST d5_array& v){
+d5_array wts::copy(const d5_array& v){
     ivector bnds = getBounds(v);
     d5_array c(bnds(1),bnds(2),bnds(3),bnds(4),bnds(5),bnds(6),bnds(7),bnds(8),bnds(9),bnds(10));
     c = v;
     return c;
 }
 //-------------------------------------------------------------
-d6_array wts::copy(_CONST d6_array& v){
+d6_array wts::copy(const d6_array& v){
     ivector bnds = getBounds(v);
     d6_array c(bnds(1),bnds(2),bnds(3),bnds(4),bnds(5),bnds(6),bnds(7),bnds(8),bnds(9),bnds(10),bnds(11),bnds(12));
     c = v;
     return c;
 }
 //-------------------------------------------------------------
-d7_array wts::copy(_CONST d7_array& v){
+d7_array wts::copy(const d7_array& v){
     ivector bnds = getBounds(v);
     d7_array c(bnds(1),bnds(2),bnds(3),bnds(4),bnds(5),bnds(6),bnds(7),bnds(8),bnds(9),bnds(10),bnds(11),bnds(12),bnds(13),bnds(14));
     c = v;
     return c;
 }
 //-------------------------------------------------------------
-dvar_vector wts::copy(_CONST dvar_vector& v){
+dvar_vector wts::copy(const dvar_vector& v){
     RETURN_ARRAYS_INCREMENT();
     ivector bnds = getBounds(v);
     dvar_vector c(bnds(1),bnds(2));
@@ -235,7 +235,7 @@ dvar_vector wts::copy(_CONST dvar_vector& v){
     return c;
 }
 //-------------------------------------------------------------
-dvar_matrix wts::copy(_CONST dvar_matrix& v){
+dvar_matrix wts::copy(const dvar_matrix& v){
     RETURN_ARRAYS_INCREMENT();
     ivector bnds = getBounds(v);
     dvar_matrix c(bnds(1),bnds(2),bnds(3),bnds(4));
@@ -244,7 +244,7 @@ dvar_matrix wts::copy(_CONST dvar_matrix& v){
     return c;
 }
 //-------------------------------------------------------------
-dvar3_array wts::copy(_CONST dvar3_array& v){
+dvar3_array wts::copy(const dvar3_array& v){
     RETURN_ARRAYS_INCREMENT();
     ivector bnds = getBounds(v);
     dvar3_array c(bnds(1),bnds(2),bnds(3),bnds(4),bnds(5),bnds(6));
@@ -253,7 +253,7 @@ dvar3_array wts::copy(_CONST dvar3_array& v){
     return c;
 }
 //-------------------------------------------------------------
-dvar4_array wts::copy(_CONST dvar4_array& v){
+dvar4_array wts::copy(const dvar4_array& v){
     RETURN_ARRAYS_INCREMENT();
     ivector bnds = getBounds(v);
     dvar4_array c(bnds(1),bnds(2),bnds(3),bnds(4),bnds(5),bnds(6),bnds(7),bnds(8));
@@ -262,7 +262,7 @@ dvar4_array wts::copy(_CONST dvar4_array& v){
     return c;
 }
 //-------------------------------------------------------------
-dvar5_array wts::copy(_CONST dvar5_array& v){
+dvar5_array wts::copy(const dvar5_array& v){
     RETURN_ARRAYS_INCREMENT();
     ivector bnds = getBounds(v);
     dvar5_array c(bnds(1),bnds(2),bnds(3),bnds(4),bnds(5),bnds(6),bnds(7),bnds(8),bnds(9),bnds(10));
@@ -271,7 +271,7 @@ dvar5_array wts::copy(_CONST dvar5_array& v){
     return c;
 }
 //-------------------------------------------------------------
-dvar6_array wts::copy(_CONST dvar6_array& v){
+dvar6_array wts::copy(const dvar6_array& v){
     RETURN_ARRAYS_INCREMENT();
     ivector bnds = getBounds(v);
     dvar6_array c(bnds(1),bnds(2),bnds(3),bnds(4),bnds(5),bnds(6),bnds(7),bnds(8),bnds(9),bnds(10),bnds(11),bnds(12));
@@ -280,7 +280,7 @@ dvar6_array wts::copy(_CONST dvar6_array& v){
     return c;
 }
 //-------------------------------------------------------------
-dvar7_array wts::copy(_CONST dvar7_array& v){
+dvar7_array wts::copy(const dvar7_array& v){
     RETURN_ARRAYS_INCREMENT();
     ivector bnds = getBounds(v);
     dvar7_array c(bnds(1),bnds(2),bnds(3),bnds(4),bnds(5),bnds(6),bnds(7),bnds(8),bnds(9),bnds(10),bnds(11),bnds(12),bnds(13),bnds(14));
@@ -304,7 +304,7 @@ dmatrix wts::IdentityMatrix(int mn,int mx){
 * name      : testEquals                                        *
 * purpose   : test equality                                     *
 ****************************************************************/
-int wts::testEquals(_CONST ivector& i1, _CONST ivector& i2){
+int wts::testEquals(const ivector& i1, const ivector& i2){
     int mn = i1.indexmin();
     if (mn!=i2.indexmin()) return 0;
     int mx = i1.indexmax();
@@ -320,7 +320,7 @@ int wts::testEquals(_CONST ivector& i1, _CONST ivector& i2){
 * name      : getBounds                          *
 * purpose   : return min, max indices for array  *
 *************************************************/
-ivector wts::getBounds(_CONST prevariable& o){
+ivector wts::getBounds(const prevariable& o){
     ivector b(1,1);
     b(1) = 0;
     return(b);
@@ -329,14 +329,14 @@ ivector wts::getBounds(_CONST prevariable& o){
 * name      : getBounds                          *
 * purpose   : return min, max indices for array  *
 *************************************************/
-ivector wts::getBounds(_CONST ivector& o){
+ivector wts::getBounds(const ivector& o){
     ivector b(1,2);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST imatrix& o){
+ivector wts::getBounds(const imatrix& o){
     ivector b(1,4);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -344,14 +344,14 @@ ivector wts::getBounds(_CONST imatrix& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST dvector& o){
+ivector wts::getBounds(const dvector& o){
     ivector b(1,2);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST dmatrix& o){
+ivector wts::getBounds(const dmatrix& o){
     ivector b(1,4);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -359,7 +359,7 @@ ivector wts::getBounds(_CONST dmatrix& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST d3_array& o){
+ivector wts::getBounds(const d3_array& o){
     ivector b(1,6);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -367,7 +367,7 @@ ivector wts::getBounds(_CONST d3_array& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST d4_array& o){
+ivector wts::getBounds(const d4_array& o){
     ivector b(1,8);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -375,7 +375,7 @@ ivector wts::getBounds(_CONST d4_array& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST d5_array& o){
+ivector wts::getBounds(const d5_array& o){
     ivector b(1,10);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -383,7 +383,7 @@ ivector wts::getBounds(_CONST d5_array& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST d6_array& o){
+ivector wts::getBounds(const d6_array& o){
     ivector b(1,12);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -391,7 +391,7 @@ ivector wts::getBounds(_CONST d6_array& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST d7_array& o){
+ivector wts::getBounds(const d7_array& o){
     ivector b(1,14);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -399,7 +399,7 @@ ivector wts::getBounds(_CONST d7_array& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST dvar_vector& o){
+ivector wts::getBounds(const dvar_vector& o){
     if (debugADMBFunctions>0) cout<<"start getBounds(dvar_vector)"<<endl;
     ivector b(1,2);
     b(1) = o.indexmin();
@@ -409,7 +409,7 @@ ivector wts::getBounds(_CONST dvar_vector& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST dvar_matrix& o){
+ivector wts::getBounds(const dvar_matrix& o){
     if (debugADMBFunctions>0) cout<<"start getBounds(dvar_matrix)"<<endl;
     ivector b(1,4);
     b(1) = o.indexmin();
@@ -420,7 +420,7 @@ ivector wts::getBounds(_CONST dvar_matrix& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST dvar3_array& o){
+ivector wts::getBounds(const dvar3_array& o){
     if (debugADMBFunctions>0) cout<<"start getBounds(dvar3_array)"<<endl;
     ivector b(1,6);
     b(1) = o.indexmin();
@@ -431,7 +431,7 @@ ivector wts::getBounds(_CONST dvar3_array& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST dvar4_array& o){
+ivector wts::getBounds(const dvar4_array& o){
     ivector b(1,8);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -439,7 +439,7 @@ ivector wts::getBounds(_CONST dvar4_array& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST dvar5_array& o){
+ivector wts::getBounds(const dvar5_array& o){
     ivector b(1,10);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -447,7 +447,7 @@ ivector wts::getBounds(_CONST dvar5_array& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST dvar6_array& o){
+ivector wts::getBounds(const dvar6_array& o){
     ivector b(1,12);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -455,7 +455,7 @@ ivector wts::getBounds(_CONST dvar6_array& o){
     return(b);
 }
 //-------------------------------------------------------------
-ivector wts::getBounds(_CONST dvar7_array& o){
+ivector wts::getBounds(const dvar7_array& o){
     ivector b(1,14);
     b(1) = o.indexmin();
     b(2) = o.indexmax();
@@ -867,14 +867,14 @@ d7_array wts::permuteDims(ivector& i2p, d7_array& n_i){
 * name      : length                             *
 * purpose   : return number of elements in array *
 *************************************************/
-int wts::length(_CONST ivector& o){
+int wts::length(const ivector& o){
     ivector b(1,2);
     b = getBounds(o);
     int i = b(2)-b(1)+1;
     return(i);
 }
 //-------------------------------------------------------------
-int wts::length(_CONST imatrix& o){
+int wts::length(const imatrix& o){
     ivector b(1,2);
     b = getBounds(o);
     int i = 1;
@@ -882,14 +882,14 @@ int wts::length(_CONST imatrix& o){
     return(i);
 }
 //-------------------------------------------------------------
-int wts::length(_CONST dvector& o){
+int wts::length(const dvector& o){
     ivector b(1,2);
     b = getBounds(o);
     int i = b(2)-b(1)+1;
     return(i);
 }
 //-------------------------------------------------------------
-int wts::length(_CONST dmatrix& o){
+int wts::length(const dmatrix& o){
     ivector b(1,2);
     b = getBounds(o);
     int i = 1;
@@ -897,14 +897,14 @@ int wts::length(_CONST dmatrix& o){
     return(i);
 }
 //-------------------------------------------------------------
-int wts::length(_CONST dvar_vector& o){
+int wts::length(const dvar_vector& o){
     ivector b(1,2);
     b = getBounds(o);
     int i = b(2)-b(1)+1;
     return(i);
 }
 //-------------------------------------------------------------
-int wts::length(_CONST dvar_matrix& o){
+int wts::length(const dvar_matrix& o){
     ivector b(1,2);
     b = getBounds(o);
     int i = 1;
@@ -913,12 +913,47 @@ int wts::length(_CONST dvar_matrix& o){
 }
 //-------------------------------------------------------------
 
+///**
+// * Returns the value of a dvar_vector as a dvector.
+// * 
+// * @param o - the dvar_vector
+// * @return - a dvector
+// */
+//dvector wts::value(const dvar_vector& o){
+//    if (debugADMBFunctions>0) cout<<"start value(dvar_vector)"<<endl;
+//    if (debugADMBFunctions>0) cout<<"end value(dvar_vector)"<<endl;
+//    return(::value(o));
+//}
+///**
+// * Returns the value of a dvar_matrix as a dmatrix.
+// * 
+// * @param o - the dvar_matrix
+// * @return - a dmatrix
+// */
+//dmatrix wts::value(const dvar_matrix& o){
+//    if (debugADMBFunctions>0) cout<<"start value(dvar_matrix)"<<endl;
+//    if (debugADMBFunctions>0) cout<<"end value(dvar_matrix)"<<endl;
+//    return(::value(o));
+//}
+///**
+// * Returns the value of a dvar3_array as a d3_array.
+// * 
+// * @param o - the dvar3_array
+// * @return - a d3_array
+// */
+//d3_array wts::value(const dvar3_array& o){
+//    if (debugADMBFunctions>0) cout<<"start value(dvar3_array)"<<endl;
+//    if (debugADMBFunctions>0) cout<<"end value(dvar3_array)"<<endl;
+//    return(::value(o));
+//}
 
-/*************************************************
-* name      : value                              *
-* purpose   : return constant version of array   *
-*************************************************/
-d4_array wts::value(_CONST dvar4_array& o){
+/**
+ * Returns the value of a dvar4_array as a d4_array.
+ * 
+ * @param o - the dvar4_array
+ * @return - a d4_array
+ */
+d4_array wts::value(const dvar4_array& o){
     if (debugADMBFunctions>0) cout<<"start value(dvar4_array)"<<endl;
     ivector b = getBounds(o);
     d4_array a(b(1),b(2),b(3),b(4),b(5),b(6),b(7),b(8));
@@ -926,8 +961,13 @@ d4_array wts::value(_CONST dvar4_array& o){
     if (debugADMBFunctions>0) cout<<"   end value(dvar4_array)"<<endl;
     return(a);
 }
-//-------------------------------------------------------------
-d5_array wts::value(_CONST dvar5_array& o){
+/**
+ * Returns the value of a dvar3_array as a d5_array.
+ * 
+ * @param o - the dvar5_array
+ * @return - a d5_array
+ */
+d5_array wts::value(const dvar5_array& o){
     if (debugADMBFunctions>0) cout<<"start value(dvar5_array)"<<endl;
     ivector b = getBounds(o);
     d5_array a(b(1),b(2),b(3),b(4),b(5),b(6),b(7),b(8),b(9),b(10));
@@ -935,8 +975,13 @@ d5_array wts::value(_CONST dvar5_array& o){
     if (debugADMBFunctions>0) cout<<"   end value(dvar5_array)"<<endl;
     return(a);
 }
-//-------------------------------------------------------------
-d6_array wts::value(_CONST dvar6_array& o){
+/**
+ * Returns the value of a dvar6_array as a d6_array.
+ * 
+ * @param o - the dvar6_array
+ * @return - a d6_array
+ */
+d6_array wts::value(const dvar6_array& o){
     if (debugADMBFunctions>0) cout<<"start value(dvar6_array)"<<endl;
     ivector b = getBounds(o);
     d6_array a(b(1),b(2),b(3),b(4),b(5),b(6),b(7),b(8),b(9),b(10),b(11),b(12));
@@ -944,8 +989,13 @@ d6_array wts::value(_CONST dvar6_array& o){
     if (debugADMBFunctions>0) cout<<"   end value(dvar6_array)"<<endl;
     return(a);
 }
-//-------------------------------------------------------------
-d7_array wts::value(_CONST dvar7_array& o){
+/**
+ * Returns the value of a dvar3_array as a d7_array.
+ * 
+ * @param o - the dvar7_array
+ * @return - a d7_array
+ */
+d7_array wts::value(const dvar7_array& o){
     if (debugADMBFunctions>0) cout<<"start value(dvar7_array)"<<endl;
     ivector b = getBounds(o);
     d7_array a(b(1),b(2),b(3),b(4),b(5),b(6),b(7),b(8),b(9),b(10),b(11),b(12),b(13),b(14));
@@ -959,7 +1009,7 @@ d7_array wts::value(_CONST dvar7_array& o){
 * name      : getIndexVector                     *
 * purpose   : get indices for vector             *
 *************************************************/
-ivector wts::getIndexVector(_CONST dvector& o) {
+ivector wts::getIndexVector(const dvector& o) {
     ivector bnds = getBounds(o);
     ivector indx(bnds(1),bnds(2));
     indx.fill_seqadd(bnds(1),1);
@@ -967,7 +1017,7 @@ ivector wts::getIndexVector(_CONST dvector& o) {
 }
 //-------------------------------------------------------------
 
-ivector wts::getIndexVector(_CONST dvar_vector& o) {
+ivector wts::getIndexVector(const dvar_vector& o) {
     ivector bnds = getBounds(o);
     ivector indx(bnds(1),bnds(2));
     indx.fill_seqadd(bnds(1),1);
@@ -981,8 +1031,8 @@ int wts::deltafcn(int i, int j){return (i==j);}
 /******************************************************
  * Tests if a parameter is currently being estimated. *
 ******************************************************/
-bool wts::isActive(_CONST param_init_number& p){return active(p);}
-bool wts::isActive(_CONST param_init_vector& p){return active(p);}
+bool wts::isActive(const param_init_number& p){return active(p);}
+bool wts::isActive(const param_init_vector& p){return active(p);}
 bool wts::isActive(param_init_number_vector& p){
     bool res = false;
     for (int i=p.indexmin();i<=p.indexmax();i++) res = res||active(p(i));
@@ -998,11 +1048,41 @@ bool wts::isActive(param_init_vector_vector& p){
 * name      : variance                      *
 * purpose   : compute variance of object    *
 ********************************************/
-double wts::variance(_CONST dvector & v) {
+double wts::variance(const dvector & v) {
     return norm2(v-mean(v))/double(length(v)-1);
 }
 //-------------------------------------------------------------
-dvariable wts::variance(_CONST dvar_vector & v) {
+dvariable wts::variance(const dvar_vector & v) {
     return norm2(v-mean(v))/double(length(v)-1);
 }
-    
+       
+/**
+ * Create a diagonal matrix from a vector.
+ * 
+ * @param v - vector defining the diagonal
+ * @return - a dmatrix with row/column indices equal to those of v
+ */
+dmatrix wts::diag(const dvector& v){
+    int mn = v.indexmin();
+    int mx = v.indexmax();
+    dmatrix m(mn,mx,mn,mx); 
+    m.initialize();
+    for (int i=mn;i<=mx;i++) m(i,i) = v(i);
+    return m;
+}
+/**
+ * Create a diagonal matrix from a vector.
+ * 
+ * @param v - vector defining the diagonal
+ * @return - a dvar_matrix with row/column indices equal to those of v
+ */
+dvar_matrix wts::diag(const dvar_vector& v){
+    RETURN_ARRAYS_INCREMENT();
+    int mn = v.indexmin();
+    int mx = v.indexmax();
+    dvar_matrix m(mn,mx,mn,mx); 
+    m.initialize();
+    for (int i=mn;i<=mx;i++) m(i,i) = v(i);
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}

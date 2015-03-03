@@ -6,7 +6,88 @@ using namespace std;
 /**
  * Changes:
  * 2014-12-03: 1. Changed to using std namespace
+ * 2015-02-27: 1. Added to_csv(...) functions to provide strings with unquoted elements
+ * 2015-03-01: 1. Added strg(double) function 
+ * 2015-03-02: 1. Added replace(...) function 
 */
+    
+/**
+ * Create an adstring by replacing all instances of s in adstring a with r. 
+ * 
+ * @param s
+ * @param r
+ * @param a
+ * @return 
+ */
+adstring wts::replace(char s, char r, const adstring& a){
+    adstring tmp; tmp = a;
+    int p = tmp.pos(s);
+    while (p>0){
+        tmp[p] = r;
+        p = tmp.pos(s);
+    }
+    return tmp;
+}
+
+/**
+ * Function to format a double using 'g'-type fprmatting in sprintf().
+ * 
+ * @param d
+ * @return g-formatted adstring representation of d
+ */
+adstring wts::strg(double d){
+    char  buffer[50];
+    sprintf(buffer,"%g",d);
+    adstring tmp(buffer);
+    return tmp;
+}
+    
+/****************************************************************
+ * convert vectors to unquoted csv string
+ ***************************************************************/
+/**
+ * Convert adstring_array to string of unquoted, comma-separated values
+ * @param v
+ * @return 
+ */
+adstring wts::to_csv(const adstring_array& v){
+    int mn = v.indexmin();
+    int mx = v.indexmax();
+    adstring s = v(mn);
+    for (int i=mn;i<mx;i++) s = s+cc+v(i+1);
+    return s;
+}
+/**
+ * Convert ivector to string of unquoted, comma-separated values
+ * @param v
+ * @return 
+ */
+adstring wts::to_csv(const ivector& v){
+    int mn = v.indexmin();
+    int mx = v.indexmax();
+    adstring s = str(v(mn));
+    for (int i=mn;i<mx;i++) s = s+cc+str(v(i+1));
+    return s;
+}
+/**
+ * Convert dvector to string of unquoted, comma-separated values
+ * @param v - dvector to format as csv string
+ * @param g - flag to use sprintf "g" format for output (if 1) or admb standard (if 0)
+ * @return 
+ */
+adstring wts::to_csv(const dvector& v, int g){
+    int mn = v.indexmin();
+    int mx = v.indexmax();
+    adstring s;
+    if (g){
+        s = strg(v(mn));
+        for (int i=mn;i<mx;i++) s = s+cc+strg(v(i+1));
+    } else {
+        s = str(v(mn));
+        for (int i=mn;i<mx;i++) s = s+cc+str(v(i+1));
+    }
+    return s;
+}
 
 /****************************************************************
  * convert vectors to quoted csv string
@@ -16,7 +97,7 @@ using namespace std;
  * @param v
  * @return 
  */
-adstring wts::to_qcsv(_CONST adstring_array& v){
+adstring wts::to_qcsv(const adstring_array& v){
     int mn = v.indexmin();
     int mx = v.indexmax();
     adstring s = qt+v(mn)+qt;
@@ -28,7 +109,7 @@ adstring wts::to_qcsv(_CONST adstring_array& v){
  * @param v
  * @return 
  */
-adstring wts::to_qcsv(_CONST ivector& v){
+adstring wts::to_qcsv(const ivector& v){
     int mn = v.indexmin();
     int mx = v.indexmax();
     adstring s = qt+str(v(mn))+qt;
@@ -37,14 +118,21 @@ adstring wts::to_qcsv(_CONST ivector& v){
 }
 /**
  * Convert dvector to string of quoted, comma-separated values
- * @param v
+ * @param v - dvector to format as quoted csv string
+ * @param g - flag to use sprintf "g" format for output (if 1) or admb standard (if 0)
  * @return 
  */
-adstring wts::to_qcsv(_CONST dvector& v){
+adstring wts::to_qcsv(const dvector& v, int g){
     int mn = v.indexmin();
     int mx = v.indexmax();
-    adstring s = qt+str(v(mn))+qt;
-    for (int i=mn;i<mx;i++) s = s+cc+qt+str(v(i+1))+qt;
+    adstring s;
+    if (g){
+        s = qt+strg(v(mn))+qt;
+        for (int i=mn;i<mx;i++) s = s+cc+qt+strg(v(i+1))+qt;
+    } else {
+        s = qt+str(v(mn))+qt;
+        for (int i=mn;i<mx;i++) s = s+cc+qt+str(v(i+1))+qt;
+    }
     return s;
 }
 
@@ -196,7 +284,7 @@ void wts::adstring_matrix::allocate(int rwmn, int rwmx, ivector& clmns, ivector&
     }
 }
 
-adstring& wts::adstring_matrix::operator() (_CONST int i, _CONST int j){
+adstring& wts::adstring_matrix::operator() (const int i, const int j){
     if (ppAAs){
         if ((idxmn<=i)&&(i-idxmn<nAAs)&&(ppAAs[i-idxmn])){
             if ((clmns(i)<=j)&&(j<=clmxs(i))){
@@ -217,7 +305,7 @@ adstring& wts::adstring_matrix::operator() (_CONST int i, _CONST int j){
     return *ptr;
 }
 
-adstring_array& wts::adstring_matrix::operator() (_CONST int i){
+adstring_array& wts::adstring_matrix::operator() (const int i){
     if (ppAAs){
         if ((idxmn<=i)&&(i-idxmn<nAAs)&&(ppAAs[i-idxmn])) {
             return *(ppAAs[i-idxmn]);
@@ -233,7 +321,7 @@ adstring_array& wts::adstring_matrix::operator() (_CONST int i){
     return *ptr;
 }
 
-adstring_array& wts::adstring_matrix::operator[] (_CONST int i){
+adstring_array& wts::adstring_matrix::operator[] (const int i){
     if (ppAAs){
         if ((idxmn<=i)&&(i-idxmn<nAAs)&&(ppAAs[i-idxmn])) {
             return *(ppAAs[i-idxmn]);
@@ -274,7 +362,7 @@ void wts::adstring_matrix::write(ostream & os){
 *               lhs < rhs for input adstrings lhs, rhs          *
 ****************************************************************/
 bool wts::CompareAdstrings::debug = false;
-bool wts::CompareAdstrings::operator() (_CONST adstring& lhs, _CONST adstring& rhs) _CONST {
+bool wts::CompareAdstrings::operator() (const adstring& lhs, const adstring& rhs) const {
     if (debug) cout<<"CompareAdstrings::('"<<lhs<<"','"<<rhs<<"'): "<<&lhs<<"; "<<&rhs<<endl;
     int nl = lhs.size(); int nr = rhs.size();
     int nz = nr;//compare characters over min string size (assume rhs is shorter)
