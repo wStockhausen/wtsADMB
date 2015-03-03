@@ -10,30 +10,44 @@ using namespace std;
 namespace wts{
     namespace Rpr{
         /**
-         * ADMB FUNCTION to write a matrix as part of an array structure.
+         * ADMB FUNCTION to write an imatrix as an array structure.
          * @param os - stream for output file.
-         * @param xx - matrix of data to be written.
+         * @param xx - imatrix of data to be written.
          * @return - dims for writing the matrix to an array structure.
          */
         adstring writeDataToR(ostream& os, const imatrix& xx);
         /**
-         * ADMB FUNCTION to write a matrix as part of an R list.
+         * ADMB FUNCTION to write an imatrix as an array structure with dimensions.
          * @param os - stream for output file.
          * @param xx - matrix of data to be written.
          * @param dimnames - adstring with dimnames.
          */
          void writeToR(ostream& os, const imatrix& xx, adstring dimnames);
         /**
-         * ADMB FUNCTION to write a matrix as part of an array structure.
+         * ADMB FUNCTION to write a dvector as an array structure.
          * @param os - stream for output file.
          * @param xx - matrix of data to be written.
-         * @return - dims for writing the matrix to an array structure.
+         * @return - dims for writing the dvector as an array structure.
+         */
+        adstring writeDataToR(ostream& os, const dvector& xx);
+        /**
+         * ADMB FUNCTION to write a dvector as an R array strucure.
+         * @param os - stream for output file.
+         * @param xx - matrix of data to be written.
+         * @param dimnames - adstring with dimnames.
+         */
+        void writeToR(ostream& os, const dvector& xx, adstring dimnames);
+        /**
+         * ADMB FUNCTION to write a dmatrix as an array structure.
+         * @param os - stream for output file.
+         * @param xx - dmatrix of data to be written.
+         * @return - dims for writing the dmatrix as an array structure.
          */
         adstring writeDataToR(ostream& os, const dmatrix& xx);
         /**
-         * ADMB FUNCTION to write a matrix as part of an R list.
+         * ADMB FUNCTION to write a dmatrix as an R array strucure.
          * @param os - stream for output file.
-         * @param xx - matrix of data to be written.
+         * @param xx - dmatrix of data to be written.
          * @param dimnames - adstring with dimnames.
          */
         void writeToR(ostream& os, const dmatrix& xx, adstring dimnames);

@@ -11,6 +11,7 @@ using namespace std;
 /**
  * Changes:
  * 2014-12-03: 1. Changed to using std namespace
+ * 2015-03-02: 1. Added wts::Rpr::writeToR(...) functions for dvector
 */
 
 /***********************************************************
@@ -52,10 +53,42 @@ void wts::Rpr::writeToR(ostream& os, const imatrix& xx, adstring dimnames){
 }
 
 /***********************************************************
- * ADMB FUNCTION to write a matrix as part of an array structure.
+ * ADMB FUNCTION to write a dmatrix as an R array structure.
  * @param os - stream for output file.
- * @param xx - matrix of data to be written.
- * @return - dims for writing the matrix to an array structure.
+ * @param xx - dmatrix of data to be written.
+ * @return - dims for writing the dmatrix to an R array structure.
+ */
+adstring wts::Rpr::writeDataToR(ostream& os, const dvector& xx){
+    ivector bds = wts::getBounds(xx);
+    int ctr = 1;
+    for (int i=bds(1);i<bds(2);i++)  {
+        os<<xx(i)<<cc;
+        if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+    }
+    os<<xx(bds(2));
+    adstring dim = str(bds(2)-bds(1)+1);
+    return dim;
+}
+
+/***********************************************************
+ * ADMB FUNCTION to write a dvector as an R array structure.
+ * @param os - stream for output file.
+ * @param xx - dvector of data to be written.
+ * @param dimnames - adstring with dimnames.
+ */
+void wts::Rpr::writeToR(ostream& os, const dvector& xx, adstring dimnames){
+    os<<"structure(c(";
+    adstring dims = Rpr::writeDataToR(os,xx);
+    os<<"),"<<endl<<tb<<tb;    
+    os<<"dimnames=list("<<dimnames<<"),";
+    os<<"dim=c("<<dims<<"))";
+}
+
+/***********************************************************
+ * ADMB FUNCTION to write a dmatrix as an R array structure.
+ * @param os - stream for output file.
+ * @param xx - dmatrix of data to be written.
+ * @return - dims for writing the dmatrix to an R array structure.
  */
 adstring wts::Rpr::writeDataToR(ostream& os, const dmatrix& xx){
     ivector bds = wts::getBounds(xx);
@@ -77,9 +110,9 @@ adstring wts::Rpr::writeDataToR(ostream& os, const dmatrix& xx){
 }
 
 /***********************************************************
- * ADMB FUNCTION to write a matrix as part of an R list.
+ * ADMB FUNCTION to write a dmatrix as an R array structure.
  * @param os - stream for output file.
- * @param xx - matrix of data to be written.
+ * @param xx - dmatrix of data to be written.
  * @param dimnames - adstring with dimnames.
  */
 void wts::Rpr::writeToR(ostream& os, const dmatrix& xx, adstring dimnames){
@@ -552,14 +585,22 @@ void wts::writeToR(ostream& os, const dvector& xx){
  * @param os    - stream for output file.
  * @param xx    - dvector to be written.
  * @param names - adstring to be written as names for R structure 
- *                (comma-delimited, quoted if necessary)
+ *                (comma-delimited, quoted if necessary). If names contains
+ *                an equal sign, it will be used to specify the dimnames
+ *                for the structure.
  */
 void wts::writeToR(ostream& os, const dvector& xx, adstring names){
-    int mn = xx.indexmin();
-    int mx = xx.indexmax();
-    os<<"structure(c(";
-    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
-    os<<"names=c("<<names<<"),dim=c("<<mx-mn+1<<"))";
+    if (names.pos("=")>0){
+        //names specifies dimnames as well as element names
+        wts::Rpr::writeToR(os,xx,names);
+    } else {
+        //names only specifies element names, not dimnames
+        int mn = xx.indexmin();
+        int mx = xx.indexmax();
+        os<<"structure(c(";
+        for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
+        os<<"names=c("<<names<<"),dim=c("<<mx-mn+1<<"))";
+    }
 }
 /********************************************************
  * ADMB FUNCTION to write a dvector to file as an R vector
