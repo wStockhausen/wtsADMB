@@ -17,6 +17,7 @@
 #include "admbProbFunctions.hpp"
 #include "admbStdFunctions.hpp"
 #include "admbStringFunctions.hpp"
+#include "admbFileFunctions.hpp"
 #include "rFunctions.hpp"
 
 #endif	/* WTSADMB_HPP */

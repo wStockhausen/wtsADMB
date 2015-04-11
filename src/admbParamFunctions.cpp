@@ -1,6 +1,7 @@
 #include <admodel.h>
 #include "wtsConsts.hpp"
 #include "admbBasicFunctions.hpp"
+#include "admbStringFunctions.hpp"
 #include "admbParamFunctions.hpp"
 using namespace std;
 /**
@@ -56,6 +57,22 @@ void wts::writeParameter(ostream& os, param_init_bounded_number& p, int toR, int
 }
 
 /**
+ * Write parameter number_vector information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter number_vector
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter number_vector is or will be active in some phase
+ */
+void wts::writeParameter(ostream& os, param_init_bounded_number_vector& p, int toR, int willBeActive){
+    int mn = p.indexmin();
+    int mx = p.indexmax();
+    for (int i=mn;i<=mx;i++){
+        wts::writeParameter(os,p[i],toR,willBeActive);
+    }
+}
+
+/**
  * Write parameter vector information to an output stream.
  * 
  * @param os - output stream to write to
@@ -101,6 +118,22 @@ void wts::writeParameter(ostream& os, param_init_bounded_vector& p, int toR, int
         } else {
             for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_bounded_vector'"<<endl;
         }
+    }
+}
+
+/**
+ * Write parameter vector_vector information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter vector_vector
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+ */
+void wts::writeParameter(ostream& os, param_init_bounded_vector_vector& p, int toR, int willBeActive){
+    int mn = p.indexmin();
+    int mx = p.indexmax();
+    for (int i=mn;i<=mx;i++){
+        wts::writeParameter(os,p[i],toR,willBeActive);
     }
 }
 
