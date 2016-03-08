@@ -8,8 +8,6 @@
 #ifndef ADMBFILEFUNCTIONS_HPP
 #define	ADMBFILEFUNCTIONS_HPP
 
-#include <admodel.h>
-
 using namespace std;
 
 namespace wts{
