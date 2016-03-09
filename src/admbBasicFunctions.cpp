@@ -1236,3 +1236,27 @@ dvar_matrix wts::diag(const dvar_vector& v){
     RETURN_ARRAYS_DECREMENT();
     return m;
 }
+/**
+ * Print a dmatrix.
+ * @param a - dmatrix to print
+ * @param cout - output stream to print to
+ * @param nt - number of tabs to insert
+ */
+void wts::print(dmatrix& a, std::ostream& cout, int nt){
+    for (int i=a.indexmin(); i<=a.indexmax(); i++){
+        for (int t=1;t<=nt;t++) cout<<tb<<i<<": ";
+        cout<<a(i)<<endl;
+    }
+}
+/**
+ * Print a d3_array.
+ * @param a - d3_array to print
+ * @param cout - output stream to print to
+ * @param nt - number of tabs to insert
+ */
+void wts::print(d3_array& a, std::ostream& cout, int nt){
+    for (int i=a.indexmin(); i<=a.indexmax(); i++){
+        for (int t=1;t<=nt;t++) cout<<tb<<i<<": "<<endl;
+        wts::print(a(i),cout,nt+1);
+    }
+}
