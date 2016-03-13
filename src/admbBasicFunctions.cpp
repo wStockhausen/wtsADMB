@@ -1244,7 +1244,7 @@ dvar_matrix wts::diag(const dvar_vector& v){
  */
 void wts::print(dmatrix& a, std::ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
-        for (int t=1;t<=nt;t++) cout<<tb<<i<<": ";
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": ";
         cout<<a(i)<<endl;
     }
 }
@@ -1256,7 +1256,7 @@ void wts::print(dmatrix& a, std::ostream& cout, int nt){
  */
 void wts::print(d3_array& a, std::ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
-        for (int t=1;t<=nt;t++) cout<<tb<<i<<": "<<endl;
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
         wts::print(a(i),cout,nt+1);
     }
 }
