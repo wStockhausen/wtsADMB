@@ -8,8 +8,6 @@
 #ifndef ADMBSTRINGFUNCTIONS_HPP
 #define	ADMBSTRINGFUNCTIONS_HPP
 
-#include <admodel.h>
-
 using namespace std;
 
 namespace wts{

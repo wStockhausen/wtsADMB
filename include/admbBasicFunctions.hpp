@@ -96,6 +96,51 @@ namespace wts{
      * @return - the max of x1, x2
      */
     double max(double x1,double x2);
+    
+    /**
+     * Returns the max of the array
+     * 
+     * @param a - d3_array
+     * 
+     * @return - the maximum value in the array
+     */
+    double max(d3_array& a);
+    
+    /**
+     * Returns the max of the array
+     * 
+     * @param a - d4_array
+     * 
+     * @return - the maximum value in the array
+     */
+    double max(d4_array& a);
+    
+    /**
+     * Returns the max of the array
+     * 
+     * @param a - d5_array
+     * 
+     * @return - the maximum value in the array
+     */
+    double max(d5_array& a);
+    
+    /**
+     * Returns the max of the array
+     * 
+     * @param a - d6_array
+     * 
+     * @return - the maximum value in the array
+     */
+    double max(d6_array& a);
+    
+    /**
+     * Returns the max of the array
+     * 
+     * @param a - d7_array
+     * 
+     * @return - the maximum value in the array
+     */
+    double max(d7_array& a);
 
     /**
      * Returns the min of two (double) numbers.
@@ -107,6 +152,51 @@ namespace wts{
      */
     double min(double x1,double x2);
     
+    /**
+     * Returns the min of the array
+     * 
+     * @param a - d3_array
+     * 
+     * @return - the maximum value in the array
+     */
+    double min(d3_array& a);
+    
+    /**
+     * Returns the min of the array
+     * 
+     * @param a - d4_array
+     * 
+     * @return - the maximum value in the array
+     */
+    double min(d4_array& a);
+    
+    /**
+     * Returns the min of the array
+     * 
+     * @param a - d5_array
+     * 
+     * @return - the maximum value in the array
+     */
+    double min(d5_array& a);
+    
+    /**
+     * Returns the min of the array
+     * 
+     * @param a - d6_array
+     * 
+     * @return - the maximum value in the array
+     */
+    double min(d6_array& a);
+    
+    /**
+     * Returns the min of the array
+     * 
+     * @param a - d7_array
+     * 
+     * @return - the maximum value in the array
+     */
+    double min(d7_array& a);
+
     /**
      * Converts a dvector (doubles) to an ivector (integers).
      * 
@@ -469,5 +559,19 @@ namespace wts{
      * @return - a dvar_matrix with row/column indices equal to those of v
      */
     dvar_matrix diag(const dvar_vector& v);
+    /**
+     * Print a dmatrix.
+     * @param a - dmatrix to print
+     * @param cout - output stream to print to
+     * @param nt - number of tabs to insert
+     */
+    void print(dmatrix& a, std::ostream& cout, int nt=0);
+    /**
+     * Print a d3_array.
+     * @param a - d3_array to print
+     * @param cout - output stream to print to
+     * @param nt - number of tabs to insert
+     */
+    void print(d3_array& a, std::ostream& cout, int nt=0);
 } //namespace wts
 #endif

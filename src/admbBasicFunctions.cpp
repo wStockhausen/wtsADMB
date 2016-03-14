@@ -146,6 +146,81 @@ double wts::max(double x1,double x2){
     if (x1<x2) return x2;
     return x1;
 }
+    
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - d3_array
+ * 
+ * @return - the maximum value in the array
+ */
+double wts::max(d3_array& a){
+    double m = -std::numeric_limits<double>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,max(a(i)));//admb max function for dmatrix
+    }
+    return m;
+}
+
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - d4_array
+ * 
+ * @return - the maximum value in the array
+ */
+double wts::max(d4_array& a){
+    double m = -std::numeric_limits<double>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,wts::max(a(i)));
+    }
+    return m;
+}
+
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - d5_array
+ * 
+ * @return - the maximum value in the array
+ */
+double wts::max(d5_array& a){
+    double m = -std::numeric_limits<double>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,wts::max(a(i)));
+    }
+    return m;
+}
+
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - d6_array
+ * 
+ * @return - the maximum value in the array
+ */
+double wts::max(d6_array& a){
+    double m = -std::numeric_limits<double>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,wts::max(a(i)));
+    }
+    return m;
+}
+
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - d7_array
+ * 
+ * @return - the maximum value in the array
+ */
+double wts::max(d7_array& a){
+    double m = -std::numeric_limits<double>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,wts::max(a(i)));
+    }
+    return m;
+}
 
 /**
  * Returns the min of two (double) numbers.
@@ -160,6 +235,81 @@ double wts::min(double x1,double x2){
     return x2;
 }
     
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - d3_array
+ * 
+ * @return - the minimum value in the array
+ */
+double wts::min(d3_array& a){
+    double m = -std::numeric_limits<double>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,min(a(i)));//admb min function for dmatrix
+    }
+    return m;
+}
+
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - d4_array
+ * 
+ * @return - the minimum value in the array
+ */
+double wts::min(d4_array& a){
+    double m = -std::numeric_limits<double>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,wts::min(a(i)));
+    }
+    return m;
+}
+
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - d5_array
+ * 
+ * @return - the minimum value in the array
+ */
+double wts::min(d5_array& a){
+    double m = -std::numeric_limits<double>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,wts::min(a(i)));
+    }
+    return m;
+}
+
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - d6_array
+ * 
+ * @return - the minimum value in the array
+ */
+double wts::min(d6_array& a){
+    double m = -std::numeric_limits<double>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,wts::min(a(i)));
+    }
+    return m;
+}
+
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - d7_array
+ * 
+ * @return - the minimum value in the array
+ */
+double wts::min(d7_array& a){
+    double m = -std::numeric_limits<double>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,wts::min(a(i)));
+    }
+    return m;
+}
+
 /**
  * Converts a dvector (doubles) to an ivector (integers).
  * 
@@ -1085,4 +1235,28 @@ dvar_matrix wts::diag(const dvar_vector& v){
     for (int i=mn;i<=mx;i++) m(i,i) = v(i);
     RETURN_ARRAYS_DECREMENT();
     return m;
+}
+/**
+ * Print a dmatrix.
+ * @param a - dmatrix to print
+ * @param cout - output stream to print to
+ * @param nt - number of tabs to insert
+ */
+void wts::print(dmatrix& a, std::ostream& cout, int nt){
+    for (int i=a.indexmin(); i<=a.indexmax(); i++){
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": ";
+        cout<<a(i)<<endl;
+    }
+}
+/**
+ * Print a d3_array.
+ * @param a - d3_array to print
+ * @param cout - output stream to print to
+ * @param nt - number of tabs to insert
+ */
+void wts::print(d3_array& a, std::ostream& cout, int nt){
+    for (int i=a.indexmin(); i<=a.indexmax(); i++){
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        wts::print(a(i),cout,nt+1);
+    }
 }

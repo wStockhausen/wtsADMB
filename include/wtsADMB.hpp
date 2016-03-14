@@ -6,6 +6,8 @@
  *
  * Created on February 12, 2014, 10:09 AM
  * 
+ * Version: 2016.03.07
+ * 
  */
 
 #ifndef WTSADMB_HPP
@@ -17,6 +19,7 @@
 #include "admbProbFunctions.hpp"
 #include "admbStdFunctions.hpp"
 #include "admbStringFunctions.hpp"
+#include "admbFileFunctions.hpp"
 #include "rFunctions.hpp"
 
 #endif	/* WTSADMB_HPP */

@@ -7,6 +7,8 @@
  * 2014-12-02: 1. Changed void jitterParameter(...) functions to return appropriate value
  *                  (double or dvector) because its not yet possible to set parameter values
  *                  outside tpl code.
+ * 2015-03-24:  1. Added writeParameter functions for param_init_bounded_number_vector and 
+ *                  param_init_bounded_vector_vector classes
  */
 
 #ifndef ADMBPARAMFUNCTIONS_HPP
@@ -34,6 +36,16 @@ namespace wts{
     void writeParameter(std::ostream& os, param_init_bounded_number& p, int toR, int willBeActive);
     
     /**
+     * Write parameter number_vector information to an output stream.
+     * 
+     * @param os - output stream to write to
+     * @param p - the parameter number_vector
+     * @param toR - flag (0/1) to write info in R format
+     * @param willBeActive - flag (0/1) to write info ONLY IF parameters are or will be active in some phase
+     */
+    void writeParameter(std::ostream& os, param_init_bounded_number_vector& p, int toR, int willBeActive);
+    
+    /**
      * Write parameter vector information to an output stream.
      * 
      * @param os - output stream to write to
@@ -52,6 +64,16 @@ namespace wts{
      * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
      */
     void writeParameter(std::ostream& os, param_init_bounded_vector& p, int toR, int willBeActive);
+    
+    /**
+     * Write parameter vector_vector information to an output stream.
+     * 
+     * @param os - output stream to write to
+     * @param p - the parameter vector_vector
+     * @param toR - flag (0/1) to write info in R format
+     * @param willBeActive - flag (0/1) to write info ONLY IF parameter vector_vector is or will be active in some phase
+     */
+    void writeParameter(std::ostream& os, param_init_bounded_vector_vector& p, int toR, int willBeActive);
     
     /**
      * Write parameter vector information to an output stream.

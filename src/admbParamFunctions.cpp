@@ -1,6 +1,7 @@
 #include <admodel.h>
 #include "wtsConsts.hpp"
 #include "admbBasicFunctions.hpp"
+#include "admbStringFunctions.hpp"
 #include "admbParamFunctions.hpp"
 using namespace std;
 /**
@@ -9,6 +10,7 @@ using namespace std;
  *                  (double or dvector) because its not yet possible to set parameter values
  *                  outside tpl code.
  * 2014-12-03: 1. Changed to using std namespace
+ * 2015-06-15: 1. Centered jitterParameter() functions around input initial value
 */
 
 /**
@@ -53,6 +55,22 @@ void wts::writeParameter(ostream& os, param_init_bounded_number& p, int toR, int
         }
     }
     
+}
+
+/**
+ * Write parameter number_vector information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter number_vector
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter number_vector is or will be active in some phase
+ */
+void wts::writeParameter(ostream& os, param_init_bounded_number_vector& p, int toR, int willBeActive){
+    int mn = p.indexmin();
+    int mx = p.indexmax();
+    for (int i=mn;i<=mx;i++){
+        wts::writeParameter(os,p[i],toR,willBeActive);
+    }
 }
 
 /**
@@ -101,6 +119,22 @@ void wts::writeParameter(ostream& os, param_init_bounded_vector& p, int toR, int
         } else {
             for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_bounded_vector'"<<endl;
         }
+    }
+}
+
+/**
+ * Write parameter vector_vector information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter vector_vector
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+ */
+void wts::writeParameter(ostream& os, param_init_bounded_vector_vector& p, int toR, int willBeActive){
+    int mn = p.indexmin();
+    int mx = p.indexmax();
+    for (int i=mn;i<=mx;i++){
+        wts::writeParameter(os,p[i],toR,willBeActive);
     }
 }
 
@@ -171,10 +205,10 @@ double wts::jitterParameter(param_init_bounded_number& p, double fac, random_num
 //        cout<<"bounded number:"<<endl;
         double d = p.get_maxb()-p.get_minb();
         double r = rng.better_rand();
-        double vp = p.get_minb()+0.5*d+wts::min(1.0,fac)*(r-0.5)*d;
+        double vp = min(max(p.get_minb()+0.01*d,v+wts::min(1.0,fac)*(r-0.5)*d),p.get_maxb()-0.01*d);
 //        p.set_initial_value(vp);<-doesn't work
         cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<endl;
-        cout<<"orig = "<<v<<cc<<"new  = "<<p<<cc<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<endl;
+        cout<<"orig = "<<v<<cc<<"lims="<<p.get_minb()<<cc<<p.get_maxb()<<endl;
         return(vp);
     }
     return(v);
@@ -197,7 +231,7 @@ dvector wts::jitterParameter(param_init_bounded_vector& p, double fac, random_nu
         double d = p.get_maxb()-p.get_minb();
         for (int i=p.indexmin();i<=p.indexmax();i++){
             double r = rng.better_rand();
-            double vp = p.get_minb()+0.5*d+wts::min(1.0,fac)*(r-0.5)*d;
+            double vp = min(max(p.get_minb()+0.01*d,v(i)+wts::min(1.0,fac)*(r-0.5)*d),p.get_maxb()-0.01*d);
 //            p(i) = vp;<-doesn't work
             v(i) = vp;
 //            cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<endl;
@@ -226,7 +260,7 @@ dvector wts::jitterParameter(param_init_bounded_dev_vector& p, double fac, rando
         double d = p.get_maxb()-p.get_minb();
         for (int i=p.indexmin();i<=p.indexmax();i++){
             double r = rng.better_rand();
-            double vp = p.get_minb()+0.5*d+wts::min(1.0,fac)*(r-0.5)*d;
+            double vp = wts::min(wts::max(p.get_minb()+0.01*d,v(i)+wts::min(1.0,fac)*(r-0.5)*d),p.get_maxb()-0.01*d);
 //            p(i) = vp;<-doesn't work
             v(i) = vp;
 //            cout<<"r = "<<r<<cc<<"fac = "<<fac<<cc<<"minf = "<<wts::min(1.0,fac)<<cc<<"vp = "<<vp<<endl;
