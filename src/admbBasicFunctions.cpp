@@ -1,4 +1,6 @@
 //admbFunctions.cpp
+#include <iostream>
+#include <limits>
 #include <admodel.h>
 #include "wtsConsts.hpp"
 #include "admbBasicFunctions.hpp"
@@ -1242,7 +1244,7 @@ dvar_matrix wts::diag(const dvar_vector& v){
  * @param cout - output stream to print to
  * @param nt - number of tabs to insert
  */
-void wts::print(dmatrix& a, std::ostream& cout, int nt){
+void wts::print(dmatrix& a, ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
         for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": ";
         cout<<a(i)<<endl;
@@ -1254,7 +1256,7 @@ void wts::print(dmatrix& a, std::ostream& cout, int nt){
  * @param cout - output stream to print to
  * @param nt - number of tabs to insert
  */
-void wts::print(d3_array& a, std::ostream& cout, int nt){
+void wts::print(d3_array& a, ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
         for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
         wts::print(a(i),cout,nt+1);

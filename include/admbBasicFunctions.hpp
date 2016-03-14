@@ -4,6 +4,8 @@
 #ifndef ADMBFUNCTIONS_HPP
     #define ADMBFUNCTIONS_HPP
 
+using namespace std;
+
     extern int debugADMBFunctions;
 namespace wts{
     
@@ -565,13 +567,13 @@ namespace wts{
      * @param cout - output stream to print to
      * @param nt - number of tabs to insert
      */
-    void print(dmatrix& a, std::ostream& cout, int nt=0);
+    void print(dmatrix& a, ostream& cout, int nt=0);
     /**
      * Print a d3_array.
      * @param a - d3_array to print
      * @param cout - output stream to print to
      * @param nt - number of tabs to insert
      */
-    void print(d3_array& a, std::ostream& cout, int nt=0);
+    void print(d3_array& a, ostream& cout, int nt=0);
 } //namespace wts
 #endif
