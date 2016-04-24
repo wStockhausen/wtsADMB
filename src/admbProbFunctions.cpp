@@ -604,7 +604,7 @@ dvariable wts::logPDF_normal(const prevariable& x,const dvar_vector& params,cons
 }
 
 /**--------------------------------------------------------------------------*\n
- * Calculate log pdf based on a normal disctribution for the 1st differences
+ * Calculate log pdf based on a normal distribution for the 1st differences
  * of a vector of values.
  * 
  * pdf(diff(x)) = (2*pi*sigma^2)^-0.5 * exp(-0.5*(((diff(x)-mu)/sigma)^2) \n
@@ -616,7 +616,7 @@ dvariable wts::logPDF_normal(const prevariable& x,const dvar_vector& params,cons
  * 
  * @return dvar_vector with elements running x.indexmin() to x.indexmax()-1.
  */
-dvar_vector wts::logPDF_1stdiff_normal(const dvar_vector& x,const dvar_vector& params,const dvector& consts){
+dvar_vector wts::logPDF_AR1_normal(const dvar_vector& x,const dvar_vector& params,const dvector& consts){
     RETURN_ARRAYS_INCREMENT();
     dvariable mu     = params(1);//location param
     dvariable sigma  = params(2);//scale param
@@ -626,6 +626,28 @@ dvar_vector wts::logPDF_1stdiff_normal(const dvar_vector& x,const dvar_vector& p
     dvar_vector x1 = tmp(mn+1,mx).shift(1)-tmp(mn,mx-1);
     dvar_vector z1 = (x1-mu)/sigma;
     dvar_vector logPDF = -0.5*(log(2.0*PI)+2.0*log(sigma)+elem_prod(z1,z1));
+    RETURN_ARRAYS_DECREMENT();
+    return logPDF;
+}
+/**--------------------------------------------------------------------------*\n
+ * Calculate log pdf based on a normal distribution for the exponentiated variable
+ * 
+ * pdf(x) = (2*pi*sigma^2)^-0.5 * exp(-0.5*(((exp(x)-mu)/sigma)^2) \n
+  * 
+ * @param x      - dvariable to calculate logPDF with
+ * @param params - dvar_vector with elements mu, sigma \n
+ * @param consts - none (dvector, but any values are ignored)
+ * 
+ * @return ln-scale pdf as dvariable
+ */
+dvariable wts::logPDF_expnormal(const prevariable& x, const dvar_vector& params,const dvector& consts){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable logPDF = -0.5*(log(2.0*PI)+2.0*log(params(2))+square((mfexp(x)-params(1))/params(2)));
+    if (isnan(value(logPDF))){
+        std::cout<<"got a NAN in wts::logPDF_expnormal()"<<endl;
+        std::cout<<"x = "<<x<<endl;
+        std::cout<<"params = "<<params<<endl;
+    }
     RETURN_ARRAYS_DECREMENT();
     return logPDF;
 }
@@ -886,11 +908,24 @@ double wts::samplePDF_lognormal(random_number_generator& rng,const dvector& para
  * 
  * @return dvector of sample values
  */
-dvector wts::samplePDF_1stdiff_normal(int n, random_number_generator& rng,const dvector& params,const dvector& consts){
+dvector wts::samplePDF_AR1_normal(int n, random_number_generator& rng,const dvector& params,const dvector& consts){
     double mu = params(1);
     double sd = params(2);
     dvector vals(1,n); vals.initialize();
     return vals;
+}
+/**
+ * Draw a sample from a normal distribution, taking the log.
+ * @param rng  - random number generator
+ * @param params - pdf parameter vector (mean, std dev)
+ * @param consts - pdf constants vector (none)
+ * 
+ * @return sample value
+ */
+double wts::samplePDF_expnormal(random_number_generator& rng,const dvector& params,const dvector& consts){
+    double val = -1;
+    while (val<=0) {val = wts::samplePDF_normal(rng,params,consts);}
+    return log(val);
 }
 /*--------------------------------------------------------------*
 * name      : samplePDF_normal                                  *

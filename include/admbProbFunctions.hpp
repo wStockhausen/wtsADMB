@@ -237,14 +237,33 @@ dvariable logPDF_t(const prevariable& x,const dvar_vector& params,const dvector&
 *      constant and immaterial to derivative calcs.            *
 *-------------------------------------------------------------*/
 dvariable logPDF_truncated_normal(const prevariable& x,const dvar_vector& params,const dvector& consts);
-/*--------------------------------------------------------------------------*\n
-*   pdf(diff(x)) = f*(2*pi*sigma^2)^-0.5 * exp(-0.5*(((diff(x)-mu)/sigma)^2) \n
-*   params = mu, sigma \n
-*   consts = min, max  \n
-*NOTE: This gives the same value as logPDF_normal since f is a \n
-*      constant and immaterial to derivative calcs.            \n
-*----------------------------------------------------------------------------*/
-dvar_vector logPDF_1stdiff_normal(const dvar_vector& x,const dvar_vector& params,const dvector& consts);
+/**
+ * Compute probabilities for values distributed as AR1(mu, sigma), so
+ * x_i+1 = x_i + N(mu, sigma) 
+ * 
+ * @details  Calculated as 
+ *      pdf(diff(x)) = (2*pi*sigma^2)^-0.5 * exp(-0.5*(((diff(x)-mu)/sigma)^2) \n
+ * 
+ * @param x - dvar_vector to compute probabilities for
+ * @param params - mean, stdv as dvar_vector
+ * @param consts - none
+ * 
+ * @return ln-scale probabilities for x
+ * 
+ */
+dvar_vector logPDF_AR1_normal(const dvar_vector& x,const dvar_vector& params,const dvector& consts);
+/**
+ * Compute pdf for ln-scale variable based on arithmetic scale 
+ * pdf(x) = (2*pi*sigma^2)^-0.5 * exp(-0.5*(((exp(x)-mu)/sigma)^2) \n
+ * 
+ * @param x - dvariable to compute probabilities for
+ * @param params - mean, stdv on arithmetic scale as dvar_vector
+ * @param consts - none (needs a dummy dvector)
+ * 
+ * @return ln-scale probability for x
+ * 
+*/
+dvariable logPDF_expnormal(const prevariable& x,const dvar_vector& params,const dvector& consts);
 
 
     /********************************************
@@ -256,6 +275,7 @@ dvar_vector logPDF_1stdiff_normal(const dvar_vector& x,const dvar_vector& params
 //    double samplePDF_beta        (random_number_generator& rng,dvector& params,dvector& consts);
     double samplePDF_cauchy             (random_number_generator& rng,const dvector& params,const dvector& consts);
     double samplePDF_chisquare          (random_number_generator& rng,const dvector& params,const dvector& consts);
+    double samplePDF_expnormal          (random_number_generator& rng,const dvector& params,const dvector& consts);
     double samplePDF_exponential        (random_number_generator& rng,const dvector& params,const dvector& consts);
     double samplePDF_gamma              (random_number_generator& rng,const dvector& params,const dvector& consts);
     double samplePDF_invchisquare       (random_number_generator& rng,const dvector& params,const dvector& consts);
@@ -268,8 +288,8 @@ dvar_vector logPDF_1stdiff_normal(const dvar_vector& x,const dvar_vector& params
     double samplePDF_t                  (random_number_generator& rng,const dvector& params,const dvector& consts);
     double samplePDF_truncated_normal   (random_number_generator& rng,const dvector& params,const dvector& consts);
     
-    dvector samplePDF_1stdiff_normal     (int n,random_number_generator& rng,const dvector& params,const dvector& consts);
+    dvector samplePDF_AR1_normal        (int n,random_number_generator& rng,const dvector& params,const dvector& consts);
 
-}
+} //namespace wts
 #endif	/* ADMBPROBFUNCTIONS_HPP */
 
