@@ -174,6 +174,9 @@ wts::adstring_matrix::adstring_matrix(){
 * Constructor                                                   *
 ****************************************************************/
 wts::adstring_matrix::adstring_matrix(int rwmn, int rwmx, int clmn, int clmx){
+    nAAs = 0;
+    idxmn = 0;
+    ppAAs = 0;
     allocate(rwmn,rwmx,clmn,clmx);
 }
 
@@ -181,6 +184,9 @@ wts::adstring_matrix::adstring_matrix(int rwmn, int rwmx, int clmn, int clmx){
 * Constructor                                                   *
 ****************************************************************/
 wts::adstring_matrix::adstring_matrix(int rwmn, int rwmx, ivector& clmns, int clmx){
+    nAAs = 0;
+    idxmn = 0;
+    ppAAs = 0;
     allocate(rwmn,rwmx,clmns,clmx);
 }
 
@@ -188,6 +194,9 @@ wts::adstring_matrix::adstring_matrix(int rwmn, int rwmx, ivector& clmns, int cl
 * Constructor                                                   *
 ****************************************************************/
 wts::adstring_matrix::adstring_matrix(int rwmn, int rwmx, int clmn, ivector& clmxs){
+    nAAs = 0;
+    idxmn = 0;
+    ppAAs = 0;
     allocate(rwmn,rwmx,clmn,clmxs);
 }
 
@@ -195,6 +204,9 @@ wts::adstring_matrix::adstring_matrix(int rwmn, int rwmx, int clmn, ivector& clm
 * Constructor                                                   *
 ****************************************************************/
 wts::adstring_matrix::adstring_matrix(int rwmn, int rwmx, ivector& clmns, ivector& clmxs){
+    nAAs = 0;
+    idxmn = 0;
+    ppAAs = 0;
     allocate(rwmn,rwmx,clmns,clmxs);
 }
 
@@ -213,6 +225,7 @@ void wts::adstring_matrix::deallocate(void){
 }
 
 void wts::adstring_matrix::allocate(int rwmn, int rwmx){
+    if (debug) cout<<"starting adstring_matrix::allocate("<<rwmn<<","<<rwmx<<")"<<endl;
     deallocate();
     nAAs = rwmx-rwmn+1;
     if (nAAs<0) {
@@ -223,31 +236,38 @@ void wts::adstring_matrix::allocate(int rwmn, int rwmx){
         for (int r=0;r<nAAs;r++) ppAAs[r] = 0;
     }
     if (debug){
-        cout<<"adstring_matrix::allocate("<<rwmn<<","<<rwmx<<")"<<endl;
+        cout<<"finished adstring_matrix::allocate("<<rwmn<<","<<rwmx<<")"<<endl;
         cout<<"nAAs = "<<nAAs<<", ppAAs = "<<ppAAs<<endl;
     }
 }
 
 void wts::adstring_matrix::allocate(int rwmn, int rwmx, int clmn, int clmx){
+    if (debug) cout<<"starting adstring_matrix::allocate("<<rwmn<<","<<rwmx<<","<<clmn<<","<<clmx<<")"<<endl;
     deallocate();
     ivector clmns(rwmn,rwmx); clmns = clmn;
     ivector clmxs(rwmn,rwmx); clmxs = clmx;
     allocate(rwmn,rwmx,clmns,clmxs);
+    if (debug) cout<<"finished adstring_matrix::allocate("<<rwmn<<","<<rwmx<<","<<clmn<<","<<clmx<<")"<<endl;
 }
 
 void wts::adstring_matrix::allocate(int rwmn, int rwmx, ivector& clmns, int clmx){
+    if (debug) cout<<"starting adstring_matrix::allocate("<<rwmn<<","<<rwmx<<","<<clmns<<","<<clmx<<")"<<endl;
     deallocate();
     ivector clmxs(rwmn,rwmx); clmxs = clmx;
     allocate(rwmn,rwmx,clmns,clmxs);
+    if (debug) cout<<"finished adstring_matrix::allocate("<<rwmn<<","<<rwmx<<","<<clmns<<","<<clmx<<")"<<endl;
 }
 
 void wts::adstring_matrix::allocate(int rwmn, int rwmx, int clmn, ivector& clmxs){
+    if (debug) cout<<"starting adstring_matrix::allocate("<<rwmn<<","<<rwmx<<","<<clmn<<","<<clmxs<<")"<<endl;
     deallocate();
     ivector clmns(rwmn,rwmx); clmns = clmn;
     allocate(rwmn,rwmx,clmns,clmxs);
+    if (debug) cout<<"finished adstring_matrix::allocate("<<rwmn<<","<<rwmx<<","<<clmn<<","<<clmxs<<")"<<endl;
 }
 
 void wts::adstring_matrix::allocate(int rwmn, int rwmx, ivector& clmns, ivector& clmxs){
+    if (debug) cout<<"starting adstring_matrix::allocate("<<rwmn<<","<<rwmx<<endl<<clmns<<endl<<clmxs<<")"<<endl;
     allocate(rwmn,rwmx);
     if (rwmn!=clmns.indexmin()){
         cout<<"Error in adstring_matrix::allocate(int rwmn, int rwmx, ivector& clmns, ivector& clmxs)"<<endl;
@@ -277,7 +297,7 @@ void wts::adstring_matrix::allocate(int rwmn, int rwmx, ivector& clmns, ivector&
     //for other vlaues of r.  Thus need to check that ppAAs[r] is not a null ptr before accessing it.
     for (int r=0;r<nAAs;r++) if (clmns(r+rwmn)<=clmxs(r+rwmn)) ppAAs[r] = new adstring_array(clmns(r+rwmn),clmxs(r+rwmn));
     if (debug){
-        cout<<"adstring_matrix::allocate(int rwmn, int rwmx, ivector& clmns, ivector& clmxs)"<<endl;
+        cout<<"finished adstring_matrix::allocate(int rwmn, int rwmx, ivector& clmns, ivector& clmxs)"<<endl;
         cout<<"rwmn, rwmx = "<<rwmn<<", "<<rwmx<<endl;
         cout<<"clmns = "<<clmns<<",  clmxs = "<<clmxs<<endl;
         cout<<"ppAAs = "; for (int r=0;r<nAAs;r++) cout<<ppAAs[r]<<tb; cout<<endl;
