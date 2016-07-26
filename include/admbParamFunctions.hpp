@@ -9,7 +9,8 @@
  *                  outside tpl code.
  * 2015-03-24:  1. Added writeParameter functions for param_init_bounded_number_vector and 
  *                  param_init_bounded_vector_vector classes
- */
+ * 2016-07-26: 1. Added descr (description) to writeParameter() functions
+*/
 
 #ifndef ADMBPARAMFUNCTIONS_HPP
 #define	ADMBPARAMFUNCTIONS_HPP
@@ -84,6 +85,83 @@ namespace wts{
      * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
      */
     void writeParameter(std::ostream& os, param_init_bounded_dev_vector& p, int toR, int willBeActive);
+    
+    /**
+     * Write parameter information to an output stream.
+     * 
+     * @param os - output stream to write to
+     * @param p - the parameter
+     * @param toR - flag (0/1) to write info in R format
+     * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+     * @param descr - comma-separated description
+     */
+    void writeParameter(std::ostream& os, param_init_number& p, int toR, int willBeActive, adstring descr);
+    
+    /**
+     * Write parameter information to an output stream.
+     * 
+     * @param os - output stream to write to
+     * @param p - the parameter
+     * @param toR - flag (0/1) to write info in R format
+     * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+     * @param descr - comma-separated description
+     */
+    void writeParameter(std::ostream& os, param_init_bounded_number& p, int toR, int willBeActive, adstring descr);
+    
+    /**
+     * Write parameter number_vector information to an output stream.
+     * 
+     * @param os - output stream to write to
+     * @param p - the parameter number_vector
+     * @param toR - flag (0/1) to write info in R format
+     * @param willBeActive - flag (0/1) to write info ONLY IF parameters are or will be active in some phase
+     * @param descr - comma-separated description
+     */
+    void writeParameter(std::ostream& os, param_init_bounded_number_vector& p, int toR, int willBeActive, adstring descr);
+    
+    /**
+     * Write parameter vector information to an output stream.
+     * 
+     * @param os - output stream to write to
+     * @param p - the parameter vector
+     * @param toR - flag (0/1) to write info in R format
+     * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+     * @param descr - comma-separated description
+     */
+    void writeParameter(std::ostream& os, param_init_vector& p, int toR, int willBeActive, adstring descr);
+    
+    /**
+     * Write parameter vector information to an output stream.
+     * 
+     * @param os - output stream to write to
+     * @param p - the parameter vector
+     * @param toR - flag (0/1) to write info in R format
+     * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+     * @param descr - comma-separated description
+     */
+    void writeParameter(std::ostream& os, param_init_bounded_vector& p, int toR, int willBeActive, adstring descr);
+    
+    /**
+     * Write parameter vector_vector information to an output stream.
+     * 
+     * @param os - output stream to write to
+     * @param p - the parameter vector_vector
+     * @param toR - flag (0/1) to write info in R format
+     * @param willBeActive - flag (0/1) to write info ONLY IF parameter vector_vector is or will be active in some phase
+     * @param descr - comma-separated description
+     */
+    void writeParameter(std::ostream& os, param_init_bounded_vector_vector& p, int toR, int willBeActive, adstring descr);
+    
+    /**
+     * Write parameter vector information to an output stream.
+     * 
+     * @param os - output stream to write to
+     * @param p - the parameter vector
+     * @param toR - flag (0/1) to write info in R format
+     * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+     * @param descr - comma-separated description
+     */
+    void writeParameter(std::ostream& os, param_init_bounded_dev_vector& p, int toR, int willBeActive, adstring descr);
     
     /**
      * Jitter the initial parameter (p) value based on the jitter factor (fac).

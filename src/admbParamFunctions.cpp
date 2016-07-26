@@ -11,6 +11,7 @@ using namespace std;
  *                  outside tpl code.
  * 2014-12-03: 1. Changed to using std namespace
  * 2015-06-15: 1. Centered jitterParameter() functions around input initial value
+ * 2016-07-26: 1. Added descr (description) to writeParameter() functions
 */
 
 /**
@@ -29,7 +30,32 @@ void wts::writeParameter(ostream& os, param_init_number& p, int toR, int willBeA
                                 <<"value="<<value(p)
                                 <<"),";
         } else {
-            os<<1<<cc<<p.get_phase_start()<<cc<<1<<cc<<1<<cc<<"-Inf"<<cc<<"Inf"<<cc<<p<<cc<<p.get_name()<<cc<<"'param_init_number'"<<endl;
+            os<<1<<cc<<p.get_phase_start()<<cc<<1<<cc<<1<<cc<<"-Inf"<<cc<<"Inf"<<cc<<p;
+            os<<cc<<p.get_name()<<cc<<"'param_init_number'"<<endl;
+        }
+    }
+}
+
+/**
+ * Write parameter information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+ * @param descr - comma-separated description
+ */
+void wts::writeParameter(ostream& os, param_init_number& p, int toR, int willBeActive, adstring descr){                        //wts: new
+    if (!willBeActive||(willBeActive&&(p.get_phase_start()>0))){
+        if (toR){
+            os<<p.get_name()<<"=list("<<"type='param_init_number'"<<cc
+                                <<"phase="<<p.get_phase_start()<<cc
+                                <<"description='"<<descr<<"'"<<cc
+                                <<"value="<<value(p)
+                                <<"),";
+        } else {
+            os<<1<<cc<<p.get_phase_start()<<cc<<1<<cc<<1<<cc<<"-Inf"<<cc<<"Inf"<<cc<<p;
+            os<<cc<<p.get_name()<<cc<<"'param_init_number'"<<cc<<descr<<endl;
         }
     }
 }
@@ -51,7 +77,34 @@ void wts::writeParameter(ostream& os, param_init_bounded_number& p, int toR, int
                                 <<"value="<<value(p)
                                 <<"),";
         } else {
-            os<<1<<cc<<p.get_phase_start()<<cc<<1<<cc<<1<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p<<cc<<p.get_name()<<cc<<"'param_init_bounded_number'"<<endl;
+            os<<1<<cc<<p.get_phase_start()<<cc<<1<<cc<<1<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p;
+            os<<cc<<p.get_name()<<cc<<"'param_init_bounded_number'"<<endl;
+        }
+    }
+    
+}
+
+/**
+ * Write parameter information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+ * @param descr - comma-separated description
+ */
+void wts::writeParameter(ostream& os, param_init_bounded_number& p, int toR, int willBeActive, adstring descr){
+    if (!willBeActive||(willBeActive&&(p.get_phase_start()>0))){
+        if (toR){
+            os<<p.get_name()<<"=list("<<"type='param_init_bounded_number'"<<cc
+                                <<"phase="<<p.get_phase_start()<<cc
+                                <<"bounds=c("<<p.get_minb()<<cc<<p.get_maxb()<<")"<<cc
+                                <<"description='"<<descr<<"'"<<cc
+                                <<"value="<<value(p)
+                                <<"),";
+        } else {
+            os<<1<<cc<<p.get_phase_start()<<cc<<1<<cc<<1<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p;
+            os<<cc<<p.get_name()<<cc<<"'param_init_bounded_number'"<<cc<<descr<<endl;
         }
     }
     
@@ -74,6 +127,23 @@ void wts::writeParameter(ostream& os, param_init_bounded_number_vector& p, int t
 }
 
 /**
+ * Write parameter number_vector information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter number_vector
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter number_vector is or will be active in some phase
+ * @param descr - comma-separated description
+ */
+void wts::writeParameter(ostream& os, param_init_bounded_number_vector& p, int toR, int willBeActive, adstring descr){
+    int mn = p.indexmin();
+    int mx = p.indexmax();
+    for (int i=mn;i<=mx;i++){
+        wts::writeParameter(os,p[i],toR,willBeActive,descr);
+    }
+}
+
+/**
  * Write parameter vector information to an output stream.
  * 
  * @param os - output stream to write to
@@ -92,7 +162,39 @@ void wts::writeParameter(ostream& os, param_init_vector& p, int toR, int willBeA
                                 <<"value=c("; {for (int i=mn;i<mx;i++) os<<value(p(i))<<cc;} os<<value(p(mx))<<")";
             os<<"),";
         } else {        
-            for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<"-Inf"<<cc<<"Inf"<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_vector'"<<endl;
+            for (int i=mn;i<=mx;i++) {
+                os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<"-Inf"<<cc<<"Inf"<<cc<<p(i);
+                os<<cc<<p.get_name()<<cc<<"'param_init_vector'"<<endl;
+            }
+        }
+    }
+}
+
+/**
+ * Write parameter vector information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter vector
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+ * @param descr - comma-separated description
+ */
+void wts::writeParameter(ostream& os, param_init_vector& p, int toR, int willBeActive, adstring descr){
+    int mn = p.indexmin();
+    int mx = p.indexmax();
+    if (!willBeActive||(willBeActive&&(p.get_phase_start()>0))){
+        if (toR){
+            os<<p.get_name()<<"=list("<<"type='param_init_vector'"<<cc
+                                <<"dims=c("<<mn<<cc<<mx<<")"<<cc
+                                <<"phase="<<p.get_phase_start()<<cc
+                                <<"description='"<<descr<<"'"<<cc
+                                <<"value=c("; {for (int i=mn;i<mx;i++) os<<value(p(i))<<cc;} os<<value(p(mx))<<")";
+            os<<"),";
+        } else {        
+            for (int i=mn;i<=mx;i++) {
+                os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<"-Inf"<<cc<<"Inf"<<cc<<p(i);
+                os<<cc<<p.get_name()<<cc<<"'param_init_vector'"<<cc<<descr<<endl;
+            }
         }
     }
 }
@@ -117,7 +219,40 @@ void wts::writeParameter(ostream& os, param_init_bounded_vector& p, int toR, int
                                 <<"value=c("; {for (int i=mn;i<mx;i++) os<<value(p(i))<<cc;} os<<value(p(mx))<<")";
            os<<"),";
         } else {
-            for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_bounded_vector'"<<endl;
+            for (int i=mn;i<=mx;i++) {
+                os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i);
+                os<<cc<<p.get_name()<<cc<<"'param_init_bounded_vector'"<<endl;
+            }
+        }
+    }
+}
+
+/**
+ * Write parameter vector information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter vector
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+ * @param descr - comma-separated description
+ */
+void wts::writeParameter(ostream& os, param_init_bounded_vector& p, int toR, int willBeActive, adstring descr){
+    int mn = p.indexmin();
+    int mx = p.indexmax();
+    if (!willBeActive||(willBeActive&&(p.get_phase_start()>0))){
+        if (toR){
+            os<<p.get_name()<<"=list("<<"type='param_init_bounded_vector'"<<cc
+                                <<"dims=c("<<p.indexmin()<<cc<<p.indexmax()<<")"<<cc
+                                <<"phase="<<p.get_phase_start()<<cc
+                                <<"bounds=c("<<p.get_minb()<<cc<<p.get_maxb()<<")"<<cc
+                                <<"description='"<<descr<<"'"<<cc
+                                <<"value=c("; {for (int i=mn;i<mx;i++) os<<value(p(i))<<cc;} os<<value(p(mx))<<")";
+           os<<"),";
+        } else {
+            for (int i=mn;i<=mx;i++) {
+                os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i);
+                os<<cc<<p.get_name()<<cc<<"'param_init_bounded_vector'"<<cc<<descr<<endl;
+            }
         }
     }
 }
@@ -135,6 +270,23 @@ void wts::writeParameter(ostream& os, param_init_bounded_vector_vector& p, int t
     int mx = p.indexmax();
     for (int i=mn;i<=mx;i++){
         wts::writeParameter(os,p[i],toR,willBeActive);
+    }
+}
+
+/**
+ * Write parameter vector_vector information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter vector_vector
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+ * @param descr - comma-separated description
+ */
+void wts::writeParameter(ostream& os, param_init_bounded_vector_vector& p, int toR, int willBeActive, adstring descr){
+    int mn = p.indexmin();
+    int mx = p.indexmax();
+    for (int i=mn;i<=mx;i++){
+        wts::writeParameter(os,p[i],toR,willBeActive,descr);
     }
 }
 
@@ -158,7 +310,40 @@ void wts::writeParameter(ostream& os, param_init_bounded_dev_vector& p, int toR,
                                 <<"value=c("; {for (int i=mn;i<mx;i++) os<<value(p(i))<<cc;} os<<value(p(mx))<<")";
            os<<"),";
         } else {
-            for (int i=mn;i<=mx;i++) os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i)<<cc<<p.get_name()<<cc<<"'param_init_bounded_dev_vector'"<<endl;
+            for (int i=mn;i<=mx;i++) {
+                os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i);
+                os<<cc<<p.get_name()<<cc<<"'param_init_bounded_dev_vector'"<<endl;
+            }
+        }
+    }
+}
+
+/**
+ * Write parameter vector information to an output stream.
+ * 
+ * @param os - output stream to write to
+ * @param p - the parameter vector
+ * @param toR - flag (0/1) to write info in R format
+ * @param willBeActive - flag (0/1) to write info ONLY IF parameter is or will be active in some phase
+ * @param descr - comma-separated description
+ */
+void wts::writeParameter(ostream& os, param_init_bounded_dev_vector& p, int toR, int willBeActive, adstring descr){
+    int mn = p.indexmin();
+    int mx = p.indexmax();
+    if (!willBeActive||(willBeActive&&(p.get_phase_start()>0))){
+        if (toR){
+            os<<p.get_name()<<"=list("<<"type=param_init_bounded_dev_vector"<<cc
+                                <<"dims=c("<<p.indexmin()<<cc<<p.indexmax()<<")"<<cc
+                                <<"phase="<<p.get_phase_start()<<cc
+                                <<"bounds=c("<<p.get_minb()<<cc<<p.get_maxb()<<")"<<cc
+                                <<"description='"<<descr<<"'"<<cc
+                                <<"value=c("; {for (int i=mn;i<mx;i++) os<<value(p(i))<<cc;} os<<value(p(mx))<<")";
+           os<<"),";
+        } else {
+            for (int i=mn;i<=mx;i++) {
+                os<< i<<cc<<p.get_phase_start()<<cc<<mn<<cc<<mx<<cc<<p.get_minb()<<cc<<p.get_maxb()<<cc<<p(i);
+                os<<cc<<p.get_name()<<cc<<"'param_init_bounded_dev_vector'"<<cc<<descr<<endl;
+            }
         }
     }
 }
