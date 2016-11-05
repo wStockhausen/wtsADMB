@@ -9,6 +9,34 @@ using namespace std;
 int debugADMBFunctions= 0;
     
 /**
+ * Returns one of two results based on a logical test.
+ * 
+ * @param test - logical test
+ * @param x - returned if test is true
+ * @param y - returned if test is false
+ * 
+ * @return 
+ */
+int ifelse(const bool test, int x, int y){
+    int r=0;
+    if (test) r=x; else r=y;
+    return r;
+}
+/**
+ * Returns one of two results based on a logical test.
+ * 
+ * @param test - logical test
+ * @param x - returned if test is true
+ * @param y - returned if test is false
+ * 
+ * @return 
+ */
+double ifelse(const bool test, double x, double y){
+    double r=0.0;
+    if (test) r=x; else r=y;
+    return r;
+}
+/**
  * Returns an ivector representing the results of x[i] == y for
  * each element of x.
  * 

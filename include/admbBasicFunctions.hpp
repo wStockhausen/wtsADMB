@@ -10,6 +10,26 @@ using namespace std;
 namespace wts{
     
     /**
+     * Returns one of two results based on a logical test.
+     * 
+     * @param test - logical test
+     * @param x - returned if test is true
+     * @param y - returned if test is false
+     * 
+     * @return 
+     */
+    int ifelse(const bool test, int x, int y);
+    /**
+     * Returns one of two results based on a logical test.
+     * 
+     * @param test - logical test
+     * @param x - returned if test is true
+     * @param y - returned if test is false
+     * 
+     * @return 
+     */
+    double ifelse(const bool test, double x, double y);
+    /**
      * Returns an ivector representing the results of x[i] == y for
      * each element of x.
      * 
