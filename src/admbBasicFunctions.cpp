@@ -17,7 +17,7 @@ int debugADMBFunctions= 0;
  * 
  * @return 
  */
-int ifelse(const bool test, int x, int y){
+int wts::ifelse(bool test, int x, int y){
     int r=0;
     if (test) r=x; else r=y;
     return r;
@@ -31,7 +31,7 @@ int ifelse(const bool test, int x, int y){
  * 
  * @return 
  */
-double ifelse(const bool test, double x, double y){
+double wts::ifelse(bool test, double x, double y){
     double r=0.0;
     if (test) r=x; else r=y;
     return r;
