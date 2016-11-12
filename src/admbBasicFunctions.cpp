@@ -9,6 +9,21 @@ using namespace std;
 int debugADMBFunctions= 0;
     
 /**
+ * Compares a dvector to a value and returns an ivector with 1's (0's) where the 
+ * x(i) > v is true (false).
+ * 
+ * @param x - the dvector of values to check
+ * @param v - the value to compare to
+ * 
+ * @return an ivector with 1's where x(i) > v is true, 0's where false
+ */
+ivector wts::gt(const dvector& x, double v){
+    ivector r(x.indexmin(),x.indexmax());
+    for (int i=x.indexmin();i<=x.indexmax();i++) if (x(i)>v) r(i) = 1; else r(i) = 0;
+    return r;
+}
+
+/**
  * Returns one of two results based on a logical test.
  * 
  * @param test - logical test

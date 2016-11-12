@@ -10,6 +10,17 @@ using namespace std;
 namespace wts{
     
     /**
+     * Compares a dvector to a value and returns an ivector with 1's (0's) where the 
+     * condition is true (false).
+     * 
+     * @param x - the dvector of values to check
+     * @param v - the value to compare to
+     * 
+     * @return an ivector with 1's where 
+     */
+    ivector gt(const dvector& x, double v);
+    
+    /**
      * Returns one of two results based on a logical test.
      * 
      * @param test - logical test
