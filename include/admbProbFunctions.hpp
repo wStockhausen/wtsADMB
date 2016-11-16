@@ -61,7 +61,10 @@ namespace wts{
 ************************************************************************/
     dvector     log_gamma_density(const dvector& x,    const double& r,   const double& mu);
     dvar_vector log_gamma_density(const dvar_vector& x,const double& r,   const double& mu);
-    dvar_vector log_gamma_density(const dvar_vector& x,const dvariable& r,const dvariable& mu);
+    dvar_vector log_gamma_density(const dvector& x,    const prevariable& r,const prevariable& mu);
+    dvar_vector log_gamma_density(const dvar_vector& x,const prevariable& r,const prevariable& mu);
+    dvar_vector log_gamma_density(const dvector& x,    const dvar_vector& r,const dvar_vector& mu);
+    dvar_vector log_gamma_density(const dvar_vector& x,const dvar_vector& r,const dvar_vector& mu);
 
     /****************************************************************
     * name      : cdf_normal                                        *

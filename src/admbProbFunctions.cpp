@@ -206,52 +206,121 @@ dvar_vector wts::log_lognormal_density(const dvar_vector& x,const double& med,co
 /************************************************************************
 * name      : log_gamma_density                                         *
 * purpose   : compute log of gamma pdf                                  *
+ *                                                                      *
 * log_gamma_density(x,r,mu) = r*log(mu)-log_gamma(r)+(r-1)*log(x)-mu*x  *
 * gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
 * This is SAME as Gelman et al., Bayesian Data Analysis                 *
 *   parameters:                                                         *
 *       x : value                                                       *
-*       r : ??                                                          *
+*       r : location parameter (r = mu*E[x])                            *
 *       mu: rate (inverse scale) parameter                              *
 ************************************************************************/
-//-------------------------------------------------------------
 dvector wts::log_gamma_density(const dvector& xv,const double& r,const double& mu){
-    int mn = xv.indexmin();
-    int mx = xv.indexmax();
-    dvector d(mn,mx);
-    for (int i=mn;i<=mx;i++) {
-        d(i) = ::log_gamma_density(xv(i),r,mu);
-    }
+    dvector xp = xv+1.0e-10;
+    dvector d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
     return d;
 }
-//-------------------------------------------------------------
+/************************************************************************
+* name      : log_gamma_density                                         *
+* purpose   : compute log of gamma pdf                                  *
+ *                                                                      *
+* log_gamma_density(x,r,mu) = r*log(mu)-log_gamma(r)+(r-1)*log(x)-mu*x  *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* This is SAME as Gelman et al., Bayesian Data Analysis                 *
+*   parameters:                                                         *
+*       x : value                                                       *
+*       r : location parameter (r = mu*E[x])                            *
+*       mu: rate (inverse scale) parameter                              *
+************************************************************************/
 dvar_vector wts::log_gamma_density(const dvar_vector& xv,const double& r,const double& mu){
     RETURN_ARRAYS_INCREMENT();
-    int mn = xv.indexmin();
-    int mx = xv.indexmax();
-    dvar_vector d(mn,mx);
-    for (int i=mn;i<=mx;i++) {
-        d(i) = log_gamma_density(xv(i),r,mu);
-    }
+    dvar_vector xp = xv+1.0e-10;
+    dvar_vector d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
     RETURN_ARRAYS_DECREMENT();
     return d;
 }
-//-------------------------------------------------------------
-dvar_vector wts::log_gamma_density(const dvar_vector& xv,const dvariable& r,const dvariable& mu){
-    cout<<"Starting log_gamma_density(dvar_vector&, dvariable&, dvariable&)"<<endl;
+/************************************************************************
+* name      : log_gamma_density                                         *
+* purpose   : compute log of gamma pdf                                  *
+ *                                                                      *
+* log_gamma_density(x,r,mu) = r*log(mu)-log_gamma(r)+(r-1)*log(x)-mu*x  *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* This is SAME as Gelman et al., Bayesian Data Analysis                 *
+*   parameters:                                                         *
+*       x : value                                                       *
+*       r : location parameter (r = mu*E[x])                            *
+*       mu: rate (inverse scale) parameter                              *
+************************************************************************/
+dvar_vector wts::log_gamma_density(const dvector& xv,const prevariable& r,const prevariable& mu){
+    //cout<<"Starting log_gamma_density(dvar_vector&, prevariable&, prevariable&)"<<endl;
     RETURN_ARRAYS_INCREMENT();
-    int mn = xv.indexmin();
-    int mx = xv.indexmax();
-    dvar_vector d(mn,mx);
-    dvariable xp;
-    for (int i=mn;i<=mx;i++) {
-        cout<<xv(i)<<tb<<r<<tb<<mu<<tb;
-        xp = xv(i)+(1.0e-10);
-        d(i) = log_gamma_density(xp,r,mu);
-        cout<<d(i)<<endl;
-    }
+    dvector xp = xv+1.0e-10;
+    dvar_vector d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
     RETURN_ARRAYS_DECREMENT();
-    cout<<"Finished log_gamma_density(dvar_vector&, dvariable&, dvariable&)"<<endl;
+    //cout<<"Finished log_gamma_density(dvector&, prevariable&, prevariable&)"<<endl;
+    return d;
+}
+/************************************************************************
+* name      : log_gamma_density                                         *
+* purpose   : compute log of gamma pdf                                  *
+ *                                                                      *
+* log_gamma_density(x,r,mu) = r*log(mu)-log_gamma(r)+(r-1)*log(x)-mu*x  *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* This is SAME as Gelman et al., Bayesian Data Analysis                 *
+*   parameters:                                                         *
+*       x : value                                                       *
+*       r : location parameter (r = mu*E[x])                            *
+*       mu: rate (inverse scale) parameter                              *
+************************************************************************/
+dvar_vector wts::log_gamma_density(const dvar_vector& xv,const prevariable& r,const prevariable& mu){
+    //cout<<"Starting log_gamma_density(dvar_vector&, prevariable&, prevariable&)"<<endl;
+    RETURN_ARRAYS_INCREMENT();
+    dvar_vector xp = xv+1.0e-10;
+    dvar_vector d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
+    RETURN_ARRAYS_DECREMENT();
+    //cout<<"Finished log_gamma_density(dvar_vector&, prevariable&, prevariable&)"<<endl;
+    return d;
+}
+/************************************************************************
+* name      : log_gamma_density                                         *
+* purpose   : compute log of gamma pdf                                  *
+ *                                                                      *
+* log_gamma_density(x,r,mu) = r*log(mu)-log_gamma(r)+(r-1)*log(x)-mu*x  *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* This is SAME as Gelman et al., Bayesian Data Analysis                 *
+*   parameters:                                                         *
+*       x : value                                                       *
+*       r : location parameter (r = mu*E[x])                            *
+*       mu: rate (inverse scale) parameter                              *
+************************************************************************/
+dvar_vector wts::log_gamma_density(const dvector& xv,const dvar_vector& r,const dvar_vector& mu){
+    //cout<<"Starting log_gamma_density(dvector&, dvar_vector&, dvar_vector&)"<<endl;
+    RETURN_ARRAYS_INCREMENT();
+    dvector xp = xv+1.0e-10;
+    dvar_vector d = elem_prod(r,log(mu))-::gammln(r)+elem_prod((r-1.0),log(xp))-elem_prod(mu,xp);
+    RETURN_ARRAYS_DECREMENT();
+    //cout<<"Finished log_gamma_density(dvector&, dvar_vector&, dvar_vector&)"<<endl;
+    return d;
+}
+/************************************************************************
+* name      : log_gamma_density                                         *
+* purpose   : compute log of gamma pdf                                  *
+ *                                                                      *
+* log_gamma_density(x,r,mu) = r*log(mu)-log_gamma(r)+(r-1)*log(x)-mu*x  *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* This is SAME as Gelman et al., Bayesian Data Analysis                 *
+*   parameters:                                                         *
+*       x : value                                                       *
+*       r : location parameter (r = mu*E[x])                            *
+*       mu: rate (inverse scale) parameter                              *
+************************************************************************/
+dvar_vector wts::log_gamma_density(const dvar_vector& xv,const dvar_vector& r,const dvar_vector& mu){
+    //cout<<"Starting log_gamma_density(dvar_vector&, dvar_vector&, dvar_vector&)"<<endl;
+    RETURN_ARRAYS_INCREMENT();
+    dvar_vector xp = xv+1.0e-10;
+    dvar_vector d = elem_prod(r,log(mu))-::gammln(r)+elem_prod((r-1.0),log(xp))-elem_prod(mu,xp);
+    RETURN_ARRAYS_DECREMENT();
+    //cout<<"Finished log_gamma_density(dvar_vector&, dvar_vector&, dvar_vector&)"<<endl;
     return d;
 }
 /****************************************************************
