@@ -689,10 +689,11 @@ dvar_vector wts::logPDF_AR1_normal(const dvar_vector& x,const dvar_vector& param
     RETURN_ARRAYS_INCREMENT();
     dvariable mu     = params(1);//location param
     dvariable sigma  = params(2);//scale param
-    int mn = x.indexmin();
-    int mx = x.indexmax();
-    dvar_vector tmp; tmp.allocate(x); tmp = x; //make copy because x may be const
-    dvar_vector x1 = tmp(mn+1,mx).shift(1)-tmp(mn,mx-1);
+//    int mn = x.indexmin();
+//    int mx = x.indexmax();
+//    dvar_vector tmp; tmp.allocate(x); tmp = x; //make copy because x may be const
+//    dvar_vector x1 = tmp(mn+1,mx).shift(1)-tmp(mn,mx-1);
+    dvar_vector x1 = first_difference(x);
     dvar_vector z1 = (x1-mu)/sigma;
     dvar_vector logPDF = -0.5*(log(2.0*PI)+2.0*log(sigma)+elem_prod(z1,z1));
     RETURN_ARRAYS_DECREMENT();
