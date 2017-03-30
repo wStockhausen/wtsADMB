@@ -10,6 +10,24 @@ using namespace std;
 namespace wts{
     
     /**
+     * Extracts all values falling between min and max from an ivector
+     * @param min
+     * @param max
+     * @param v
+     * @return - ivector
+     */
+    ivector extractVector(int min, int max, ivector v);
+    
+    /**
+     * Extracts all values falling between min and max from a dvector
+     * @param min
+     * @param max
+     * @param v
+     * @return - dvector
+     */
+    dvector extractVector(double min, double max, dvector v);
+    
+    /**
      * Compares a dvector to a value and returns an ivector with 1's (0's) where the 
      * condition is true (false).
      * 

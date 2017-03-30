@@ -9,6 +9,46 @@ using namespace std;
 int debugADMBFunctions= 0;
     
 /**
+ * Extracts all values falling between min and max from an ivector
+ * @param min
+ * @param max
+ * @param v
+ * @return - ivector
+ */
+ivector extractVector(int min, int max, ivector v){
+    int n = 0;
+    for (int i=v.indexmin();i<=v.indexmax();i++){
+        if ((min<=v(i))&&(v(i)<=max)) n++;
+    }
+    ivector r(1,n);
+    n = 0;
+    for (int i=v.indexmin();i<=v.indexmax();i++){
+        if ((min<=v(i))&&(v(i)<=max)) r(++n) = v(i);
+    }
+    return(r);
+}
+
+/**
+ * Extracts all values falling between min and max from a dvector
+ * @param min
+ * @param max
+ * @param v
+ * @return - dvector
+ */
+dvector extractVector(double min, double max, dvector v){
+    int n = 0;
+    for (int i=v.indexmin();i<=v.indexmax();i++){
+        if ((min<=v(i))&&(v(i)<=max)) n++;
+    }
+    dvector r(1,n);
+    n = 0;
+    for (int i=v.indexmin();i<=v.indexmax();i++){
+        if ((min<=v(i))&&(v(i)<=max)) r(++n) = v(i);
+    }
+    return(r);
+}
+
+/**
  * Compares a dvector to a value and returns an ivector with 1's (0's) where the 
  * x(i) > v is true (false).
  * 
