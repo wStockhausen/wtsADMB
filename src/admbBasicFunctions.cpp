@@ -15,7 +15,7 @@ int debugADMBFunctions= 0;
  * @param v
  * @return - ivector
  */
-ivector extractVector(int min, int max, ivector v){
+ivector wts::extractVector(int min, int max, ivector v){
     int n = 0;
     for (int i=v.indexmin();i<=v.indexmax();i++){
         if ((min<=v(i))&&(v(i)<=max)) n++;
@@ -35,7 +35,7 @@ ivector extractVector(int min, int max, ivector v){
  * @param v
  * @return - dvector
  */
-dvector extractVector(double min, double max, dvector v){
+dvector wts::extractVector(double min, double max, dvector v){
     int n = 0;
     for (int i=v.indexmin();i<=v.indexmax();i++){
         if ((min<=v(i))&&(v(i)<=max)) n++;
