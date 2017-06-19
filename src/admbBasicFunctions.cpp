@@ -1345,3 +1345,27 @@ void wts::print(d3_array& a, ostream& cout, int nt){
         wts::print(a(i),cout,nt+1);
     }
 }
+/**
+ * Print a d4_array.
+ * @param a - d4_array to print
+ * @param cout - output stream to print to
+ * @param nt - number of tabs to insert
+ */
+void wts::print(d4_array& a, ostream& cout, int nt){
+    for (int i=a.indexmin(); i<=a.indexmax(); i++){
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        wts::print(a(i),cout,nt+1);
+    }
+}
+/**
+ * Print a d5_array.
+ * @param a - d5_array to print
+ * @param cout - output stream to print to
+ * @param nt - number of tabs to insert
+ */
+void wts::print(d5_array& a, ostream& cout, int nt){
+    for (int i=a.indexmin(); i<=a.indexmax(); i++){
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        wts::print(a(i),cout,nt+1);
+    }
+}

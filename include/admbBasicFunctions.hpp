@@ -624,5 +624,19 @@ namespace wts{
      * @param nt - number of tabs to insert
      */
     void print(d3_array& a, ostream& cout, int nt=0);
+    /**
+     * Print a d4_array.
+     * @param a - d4_array to print
+     * @param cout - output stream to print to
+     * @param nt - number of tabs to insert
+     */
+    void print(d4_array& a, ostream& cout, int nt=0);
+    /**
+     * Print a d5_array.
+     * @param a - d5_array to print
+     * @param cout - output stream to print to
+     * @param nt - number of tabs to insert
+     */
+    void print(d5_array& a, ostream& cout, int nt=0);
 } //namespace wts
 #endif
