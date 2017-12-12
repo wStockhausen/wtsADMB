@@ -9,6 +9,37 @@ using namespace std;
 int debugADMBFunctions= 0;
     
 /**
+ * Convert a vector of values to and ivector of indices corresponding to 
+ * the bins defined by a vector of equally-spaced cut points.
+ *  
+ * @param values - vector of values to bin
+ * @param cutPts - vector of equally-spaced cut points to use for binning
+ * @param accumLo - flag (0/1) to assign values less than the min cut point to the lowest bin
+ * @param accumHi - flag (0/1) to assign values higher the the max cut point to highest bin
+ * 
+ * @return - ivector of indices with the bin assigned to each value
+ * 
+ * @details Values smaller than the lowest cutpoint will be assigned to 0 if accumLo is false (=0) 
+ * or to 1 (the lowest bin) if accumLo is true (>0). Values larger than the highest cutpoint will 
+ * be assigned to nBins+1 if accumHi is false (=0), or to nBins (the largest bin) if accumHi is true (>0), 
+ * where nBins is the number of bins defined by the cutpoints. 
+ * 
+ */
+ivector wts::assignBinIndices(const dvector& values, const dvector& cutPts, int accumLo, int accumHi){  
+    int nBins = cutPts.size()-1;
+    double binSize = cutPts(2)-cutPts(1);//bin size assumed equal for all bins
+    dvector dv = (values-cutPts(1))/binSize;
+    ivector iv = wts::to_ivector(dv)+1;
+    if (accumLo) {accumLo = 1;}     else {accumLo = 0;}
+    if (accumHi) {accumHi = nBins;} else {accumHi = nBins+1;}
+    for (int i=iv.indexmin();i<=iv.indexmax();i++){
+        if (iv(i)<1)     {iv(i) = accumLo;} else
+        if (iv(i)>nBins) {iv(i) = accumHi;} 
+    }
+    return iv;
+}
+
+/**
  * Extracts all values falling between min and max from an ivector
  * @param min
  * @param max

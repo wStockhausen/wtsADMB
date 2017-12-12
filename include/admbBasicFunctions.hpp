@@ -8,6 +8,19 @@ using namespace std;
 
     extern int debugADMBFunctions;
 namespace wts{
+
+    /**
+     * Convert a vector of values to and ivector of indices corresponding to 
+     * the bins defined by a vector of cut points.
+     *  
+     * @param values - vector of values to bin
+     * @param cutPts - vector of cut points to use for binning
+     * @param accumLow - flag (0/1) to assign values less than the min cut point to the lowest bin
+     * @param accumHigh - flag (0/1) to assign values higher the the max cut point to highest bin
+     * 
+     * @return - ivector of indices corresponding to the bin assigned to each value
+     */
+    ivector assignBinIndices(const dvector& values, const dvector& cutPts, int accumLow, int accumHigh);
     
     /**
      * Extracts all values falling between min and max from an ivector
