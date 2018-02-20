@@ -5,7 +5,7 @@ using namespace std;
 
 const adstring cc = ", ";
 const adstring qt = "'";
-const adstring tb = "  ";
+const adstring tb = "   ";
 
 const int OFF = 0;
 const int ON  = 1;

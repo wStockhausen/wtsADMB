@@ -11,7 +11,7 @@
 
     extern const adstring cc;//comma
     extern const adstring qt;//quote
-    extern const adstring tb;//tab
+    extern const adstring tb;//2 spaces
 
     extern const int OFF;
     extern const int ON;
