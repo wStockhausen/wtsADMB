@@ -262,6 +262,152 @@ namespace wts{
     double min(d7_array& a);
 
     /**
+     * Returns the max of two dvariables.
+     * 
+     * @param x1
+     * @param x2
+     * 
+     * @return - the max of x1, x2
+     */
+    dvariable max(dvariable x1,dvariable x2);
+    
+    /**
+     * Returns the max of the vector
+     * 
+     * @param a - dvar_vector
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable max(dvar_vector& a);
+    
+    /**
+     * Returns the max of the matrix
+     * 
+     * @param a - dvar_matrix
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable max(dvar_matrix& a);
+    
+    /**
+     * Returns the max of the array
+     * 
+     * @param a - dvar3_array
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable max(dvar3_array& a);
+    
+    /**
+     * Returns the max of the array
+     * 
+     * @param a - dvar4_array
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable max(dvar4_array& a);
+    
+    /**
+     * Returns the max of the array
+     * 
+     * @param a - dvar5_array
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable max(dvar5_array& a);
+    
+    /**
+     * Returns the max of the array
+     * 
+     * @param a - dvar6_array
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable max(dvar6_array& a);
+    
+    /**
+     * Returns the max of the array
+     * 
+     * @param a - dvar7_array
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable max(dvar7_array& a);
+
+    /**
+     * Returns the min of two dvariables.
+     * 
+     * @param x1
+     * @param x2
+     * 
+     * @return - the min of x1, x2
+     */
+    dvariable min(dvariable x1,dvariable x2);
+    
+    /**
+     * Returns the min of the vector
+     * 
+     * @param a - dvar_vector
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable min(dvar_vector& a);
+    
+    /**
+     * Returns the min of the matrix
+     * 
+     * @param a - dvar_matrix
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable min(dvar_matrix& a);
+    
+    /**
+     * Returns the min of the array
+     * 
+     * @param a - dvar3_array
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable min(dvar3_array& a);
+    
+    /**
+     * Returns the min of the array
+     * 
+     * @param a - dvar4_array
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable min(dvar4_array& a);
+    
+    /**
+     * Returns the min of the array
+     * 
+     * @param a - d5_array
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable min(dvar5_array& a);
+    
+    /**
+     * Returns the min of the array
+     * 
+     * @param a - dvar6_array
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable min(dvar6_array& a);
+    
+    /**
+     * Returns the min of the array
+     * 
+     * @param a - dvar7_array
+     * 
+     * @return - the maximum value in the array
+     */
+    dvariable min(dvar7_array& a);
+
+    /**
      * Converts a dvector (doubles) to an ivector (integers).
      * 
      * @param v - the dvector to convert

@@ -427,6 +427,270 @@ double wts::min(d7_array& a){
 }
 
 /**
+ * Returns the max of two (dvariable) numbers.
+ * 
+ * @param x1
+ * @param x2
+ * 
+ * @return - the max of x1, x2
+ */
+dvariable wts::max(dvariable x1, dvariable x2){
+    if (x1<x2) return x2;
+    return x1;
+}
+    
+/**
+ * Returns the maximum of the vector
+ * 
+ * @param a - dvar_vector
+ * 
+ * @return - the maximum value in the array
+ */
+dvariable wts::max(dvar_vector& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,a(i));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - dvar_matrix
+ * 
+ * @return - the maximum value in the array
+ */
+dvariable wts::max(dvar_matrix& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,max(a(i)));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - dvar3_array
+ * 
+ * @return - the maximum value in the array
+ */
+dvariable wts::max(dvar3_array& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,max(a(i)));//admb max function for dmatrix
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - dvar4_array
+ * 
+ * @return - the maximum value in the array
+ */
+dvariable wts::max(dvar4_array& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,wts::max(a(i)));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - dvar5_array
+ * 
+ * @return - the maximum value in the array
+ */
+dvariable wts::max(dvar5_array& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,wts::max(a(i)));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - dvar6_array
+ * 
+ * @return - the maximum value in the array
+ */
+dvariable wts::max(dvar6_array& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,wts::max(a(i)));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the maximum of the array
+ * 
+ * @param a - dvar7_array
+ * 
+ * @return - the maximum value in the array
+ */
+dvariable wts::max(dvar7_array& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::max(m,wts::max(a(i)));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the min of two (dvariable) numbers.
+ * 
+ * @param x1
+ * @param x2
+ * 
+ * @return - the min of x1, x2
+ */
+dvariable wts::min(dvariable x1,dvariable x2){
+    if (x1<x2) return x1;
+    return x2;
+}
+    
+/**
+ * Returns the minimum of the vector
+ * 
+ * @param a - dvar_vector
+ * 
+ * @return - the minimum value in the array
+ */
+dvariable wts::min(dvar_vector& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,a(i));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - dvar_matrix
+ * 
+ * @return - the minimum value in the array
+ */
+dvariable wts::min(dvar_matrix& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,min(a(i)));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - dvar3_array
+ * 
+ * @return - the minimum value in the array
+ */
+dvariable wts::min(dvar3_array& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,min(a(i)));//admb min function for dmatrix
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - dvar4_array
+ * 
+ * @return - the minimum value in the array
+ */
+dvariable wts::min(dvar4_array& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,wts::min(a(i)));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - dvar5_array
+ * 
+ * @return - the minimum value in the array
+ */
+dvariable wts::min(dvar5_array& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,wts::min(a(i)));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - dvar6_array
+ * 
+ * @return - the minimum value in the array
+ */
+dvariable wts::min(dvar6_array& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,wts::min(a(i)));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
+ * Returns the minimum of the array
+ * 
+ * @param a - dvar7_array
+ * 
+ * @return - the minimum value in the array
+ */
+dvariable wts::min(dvar7_array& a){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable m = -std::numeric_limits<dvariable>::infinity();
+    for (int i=a.indexmin();i<=a.indexmax();i++){
+        m = wts::min(m,wts::min(a(i)));
+    }
+    RETURN_ARRAYS_DECREMENT();
+    return m;
+}
+
+/**
  * Converts a dvector (doubles) to an ivector (integers).
  * 
  * @param v - the dvector to convert
