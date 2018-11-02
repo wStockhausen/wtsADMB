@@ -797,5 +797,33 @@ namespace wts{
      * @param nt - number of tabs to insert
      */
     void print(d5_array& a, ostream& cout, int nt=0);
+    /**
+     * Print a dvar_matrix.
+     * @param a - dvar_matrix to print
+     * @param cout - output stream to print to
+     * @param nt - number of tabs to insert
+     */
+    void print(dvar_matrix& a, ostream& cout, int nt=0);
+    /**
+     * Print a dvar3_array.
+     * @param a - dvar3_array to print
+     * @param cout - output stream to print to
+     * @param nt - number of tabs to insert
+     */
+    void print(dvar3_array& a, ostream& cout, int nt=0);
+    /**
+     * Print a dvar4_array.
+     * @param a - dvar4_array to print
+     * @param cout - output stream to print to
+     * @param nt - number of tabs to insert
+     */
+    void print(dvar4_array& a, ostream& cout, int nt=0);
+    /**
+     * Print a dvar5_array.
+     * @param a - dvar5_array to print
+     * @param cout - output stream to print to
+     * @param nt - number of tabs to insert
+     */
+    void print(dvar5_array& a, ostream& cout, int nt=0);
 } //namespace wts
 #endif

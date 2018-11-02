@@ -1664,3 +1664,51 @@ void wts::print(d5_array& a, ostream& cout, int nt){
         wts::print(a(i),cout,nt+1);
     }
 }
+/**
+ * Print a dvar_matrix.
+ * @param a - dvar_matrix to print
+ * @param cout - output stream to print to
+ * @param nt - number of tabs to insert
+ */
+void wts::print(dvar_matrix& a, ostream& cout, int nt){
+    for (int i=a.indexmin(); i<=a.indexmax(); i++){
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": ";
+        cout<<a(i)<<endl;
+    }
+}
+/**
+ * Print a dvar3_array.
+ * @param a - dvar3_array to print
+ * @param cout - output stream to print to
+ * @param nt - number of tabs to insert
+ */
+void wts::print(dvar3_array& a, ostream& cout, int nt){
+    for (int i=a.indexmin(); i<=a.indexmax(); i++){
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        wts::print(a(i),cout,nt+1);
+    }
+}
+/**
+ * Print a dvar4_array.
+ * @param a - dvar4_array to print
+ * @param cout - output stream to print to
+ * @param nt - number of tabs to insert
+ */
+void wts::print(dvar4_array& a, ostream& cout, int nt){
+    for (int i=a.indexmin(); i<=a.indexmax(); i++){
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        wts::print(a(i),cout,nt+1);
+    }
+}
+/**
+ * Print a dvar5_array.
+ * @param a - dvar5_array to print
+ * @param cout - output stream to print to
+ * @param nt - number of tabs to insert
+ */
+void wts::print(dvar5_array& a, ostream& cout, int nt){
+    for (int i=a.indexmin(); i<=a.indexmax(); i++){
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        wts::print(a(i),cout,nt+1);
+    }
+}
