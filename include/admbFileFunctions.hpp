@@ -10,7 +10,7 @@
 
 using namespace std;
 
-namespace wts{
+namespace wts{    
     /**
      * Return the path separator
      * @return 
@@ -25,9 +25,11 @@ namespace wts{
     adstring getParentFolder(const adstring& path);
     
     /**
+     * Get the parent folder associated with the input file stream.
      * 
-     * @param is
-     * @return 
+     * @param is - the input file stream
+     * 
+     * @return - the parent folder
      */
     adstring getParentFolder(cifstream& is);
     
@@ -38,6 +40,7 @@ namespace wts{
      * @return 
      */
     adstring concatenateFilePaths(const adstring& path1, const adstring& path2);
+    
 }//namespace wts
 
 
