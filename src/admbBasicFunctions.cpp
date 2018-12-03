@@ -1624,7 +1624,7 @@ dvar_matrix wts::diag(const dvar_vector& v){
  */
 void wts::print(dmatrix& a, ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
-        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": ";
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<"#"<<i<<": "<<endl;
         cout<<a(i)<<endl;
     }
 }
@@ -1636,7 +1636,7 @@ void wts::print(dmatrix& a, ostream& cout, int nt){
  */
 void wts::print(d3_array& a, ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
-        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<"#"<<i<<": "<<endl;
         wts::print(a(i),cout,nt+1);
     }
 }
@@ -1648,7 +1648,7 @@ void wts::print(d3_array& a, ostream& cout, int nt){
  */
 void wts::print(d4_array& a, ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
-        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<"#"<<i<<": "<<endl;
         wts::print(a(i),cout,nt+1);
     }
 }
@@ -1660,7 +1660,7 @@ void wts::print(d4_array& a, ostream& cout, int nt){
  */
 void wts::print(d5_array& a, ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
-        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<"#"<<i<<": "<<endl;
         wts::print(a(i),cout,nt+1);
     }
 }
@@ -1672,7 +1672,7 @@ void wts::print(d5_array& a, ostream& cout, int nt){
  */
 void wts::print(dvar_matrix& a, ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
-        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": ";
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<"#"<<i<<": "<<endl;
         cout<<a(i)<<endl;
     }
 }
@@ -1684,7 +1684,7 @@ void wts::print(dvar_matrix& a, ostream& cout, int nt){
  */
 void wts::print(dvar3_array& a, ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
-        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<"#"<<i<<": "<<endl;
         wts::print(a(i),cout,nt+1);
     }
 }
@@ -1696,7 +1696,7 @@ void wts::print(dvar3_array& a, ostream& cout, int nt){
  */
 void wts::print(dvar4_array& a, ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
-        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<"#"<<i<<": "<<endl;
         wts::print(a(i),cout,nt+1);
     }
 }
@@ -1708,7 +1708,7 @@ void wts::print(dvar4_array& a, ostream& cout, int nt){
  */
 void wts::print(dvar5_array& a, ostream& cout, int nt){
     for (int i=a.indexmin(); i<=a.indexmax(); i++){
-        for (int t=1;t<=nt;t++) cout<<tb; cout<<i<<": "<<endl;
+        for (int t=1;t<=nt;t++) cout<<tb; cout<<"#"<<i<<": "<<endl;
         wts::print(a(i),cout,nt+1);
     }
 }
