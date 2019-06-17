@@ -10,6 +10,13 @@ using namespace std;
 namespace wts{
     namespace Rpr{
         /**
+         * ADMB FUNCTION to write an ivector as an array structure.
+         * @param os - stream for output file.
+         * @param xx - ivector of data to be written.
+         * @return - dims for writing the ivector as an array structure.
+         */
+        adstring writeDataToR(ostream& os, const ivector& xx);
+        /**
          * ADMB FUNCTION to write an imatrix as an array structure.
          * @param os - stream for output file.
          * @param xx - imatrix of data to be written.
@@ -26,14 +33,14 @@ namespace wts{
         /**
          * ADMB FUNCTION to write a dvector as an array structure.
          * @param os - stream for output file.
-         * @param xx - matrix of data to be written.
+         * @param xx - dvector of data to be written.
          * @return - dims for writing the dvector as an array structure.
          */
         adstring writeDataToR(ostream& os, const dvector& xx);
         /**
-         * ADMB FUNCTION to write a dvector as an R array strucure.
+         * ADMB FUNCTION to write a dvector as an R array structure.
          * @param os - stream for output file.
-         * @param xx - matrix of data to be written.
+         * @param xx - dvector of data to be written.
          * @param dimnames - adstring with dimnames.
          */
         void writeToR(ostream& os, const dvector& xx, adstring dimnames);

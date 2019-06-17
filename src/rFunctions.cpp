@@ -11,13 +11,34 @@ using namespace std;
 /**
  * Changes:
  * 2014-12-03: 1. Changed to using std namespace
- * 2015-03-02: 1. Added wts::Rpr::writeToR(...) functions for dvector
+ * 2015-03-02: 1. Added wts::Rpr::writeDataToR(...) functions for dvector
+ * 2019-06-05: 1. Added wts::Rpr::writeDataToR(...) functions for ivector
+ *             2. Revised wts::writeToR(...) functions for dvector and ivector
+ *                  to write 100 or fewer entries per text line.
 */
 
 /***********************************************************
- * ADMB FUNCTION to write a matrix as part of an array structure.
+ * ADMB FUNCTION to write a ivector as part of an R array structure.
  * @param os - stream for output file.
- * @param xx - matrix of data to be written.
+ * @param xx - ivector of data to be written.
+ * @return - dims for writing the ivector to an R array structure.
+ */
+adstring wts::Rpr::writeDataToR(ostream& os, const ivector& xx){
+    ivector bds = wts::getBounds(xx);
+    int ctr = 1;
+    for (int i=bds(1);i<bds(2);i++)  {
+        os<<xx(i)<<cc;
+        if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+    }
+    os<<xx(bds(2));
+    adstring dim = str(bds(2)-bds(1)+1);
+    return dim;
+}
+
+/***********************************************************
+ * ADMB FUNCTION to write an imatrix as part of an array structure.
+ * @param os - stream for output file.
+ * @param xx - imatrix of data to be written.
  * @return - dims for writing the matrix to an array structure.
  */
 adstring wts::Rpr::writeDataToR(ostream& os, const imatrix& xx){
@@ -39,7 +60,7 @@ adstring wts::Rpr::writeDataToR(ostream& os, const imatrix& xx){
     return dim;
 }
 /***********************************************************
- * ADMB FUNCTION to write a matrix as part of an R list.
+ * ADMB FUNCTION to write an imatrix as part of an R list.
  * @param os - stream for output file.
  * @param xx - matrix of data to be written.
  * @param dimnames - adstring with dimnames.
@@ -53,10 +74,10 @@ void wts::Rpr::writeToR(ostream& os, const imatrix& xx, adstring dimnames){
 }
 
 /***********************************************************
- * ADMB FUNCTION to write a dmatrix as an R array structure.
+ * ADMB FUNCTION to write a dvector as part of an R array structure.
  * @param os - stream for output file.
- * @param xx - dmatrix of data to be written.
- * @return - dims for writing the dmatrix to an R array structure.
+ * @param xx - dvector of data to be written.
+ * @return - dims for writing the dvector to an R array structure.
  */
 adstring wts::Rpr::writeDataToR(ostream& os, const dvector& xx){
     ivector bds = wts::getBounds(xx);
@@ -895,7 +916,8 @@ void wts::writeToR(ostream& os, const ivector& xx){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
-    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
+//    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
+    wts::Rpr::writeDataToR(os,xx); os<<"),";
     os<<"names="<<mn<<":"<<mx<<",dim=c("<<mx-mn+1<<"))";
 }
 
@@ -946,7 +968,8 @@ void wts::writeToR(ostream& os, const dvector& xx){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
-    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
+//    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
+    wts::Rpr::writeDataToR(os,xx); os<<"),";
     os<<"names="<<mn<<":"<<mx<<",dim=c("<<mx-mn+1<<"))";
 }
 
@@ -968,7 +991,8 @@ void wts::writeToR(ostream& os, const dvector& xx, adstring names){
         int mn = xx.indexmin();
         int mx = xx.indexmax();
         os<<"structure(c(";
-        for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
+//        for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
+        wts::Rpr::writeDataToR(os,xx); os<<"),";
         os<<"names=c("<<names<<"),dim=c("<<mx-mn+1<<"))";
     }
 }
@@ -982,7 +1006,8 @@ void wts::writeToR(ostream& os, const dvector& xx, adstring_array names){
     int mn = xx.indexmin();
     int mx = xx.indexmax();
     os<<"structure(c(";
-    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
+//    for (int i=mn;i<mx;i++) os<<xx(i)<<cc;  os<<xx(mx)<<"),";
+    wts::Rpr::writeDataToR(os,xx); os<<"),";
     os<<"names=c('"; for (int i=mn;i<mx;i++) os<<names(i)<<"','"; os<<names(mx)<<"'))";
 }
 
