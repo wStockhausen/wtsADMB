@@ -110,7 +110,7 @@ namespace wts{
     *   parameters:                                                 *
     *       lam: rate parameter                                     *
     ****************************************************************/
-    double drawSamplePoisson(random_number_generator& rng, const double mu, const double sd);
+    double drawSamplePoisson(random_number_generator& rng, const double lam);
     /****************************************************************
     * name      : drawSampleUniform                                 *
     * purpose   : draw sample from Uniform distribution             *

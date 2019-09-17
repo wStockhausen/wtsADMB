@@ -355,12 +355,14 @@ double wts::drawSampleNormal(random_number_generator& rng, const double mu, cons
 }
 /****************************************************************
 * name      : drawSamplePoisson                                 *
-* purpose   : draw sample from Normal distribution              *
+* purpose   : draw sample from Poisson distribution              *
 *   parameters:                                                 *
 *       lam: rate parameter                                     *
 ****************************************************************/
-double wts::drawSamplePoisson(random_number_generator& rng, const double mu, const double sd) {
-    return mu+randn(rng)*sd;
+double wts::drawSamplePoisson(random_number_generator& rng, const double lam) {
+    dvector r(1,1);
+    r.fill_randpoisson(lam,rng);
+    return r(1);
 }
 /****************************************************************
 * name      : drawSampleUniform                                 *
