@@ -215,6 +215,61 @@ dvar_vector wts::log_lognormal_density(const dvar_vector& x,const double& med,co
 *       r : location parameter (r = mu*E[x])                            *
 *       mu: rate (inverse scale) parameter                              *
 ************************************************************************/
+double wts::log_gamma_density(const double& x,const double& r,const double& mu){
+    double xp = x+1.0e-10;
+    double d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
+    return d;
+}
+/************************************************************************
+* name      : log_gamma_density                                         *
+* purpose   : compute log of gamma pdf                                  *
+ *                                                                      *
+* log_gamma_density(x,r,mu) = r*log(mu)-log_gamma(r)+(r-1)*log(x)-mu*x  *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* This is SAME as Gelman et al., Bayesian Data Analysis                 *
+*   parameters:                                                         *
+*       x : value                                                       *
+*       r : location parameter (r = mu*E[x])                            *
+*       mu: rate (inverse scale) parameter                              *
+************************************************************************/
+dvariable wts::log_gamma_density(const prevariable& x,const double& r,const double& mu){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable xp = x+1.0e-10;
+    dvariable d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
+    RETURN_ARRAYS_DECREMENT();
+    return d;
+}
+/************************************************************************
+* name      : log_gamma_density                                         *
+* purpose   : compute log of gamma pdf                                  *
+ *                                                                      *
+* log_gamma_density(x,r,mu) = r*log(mu)-log_gamma(r)+(r-1)*log(x)-mu*x  *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* This is SAME as Gelman et al., Bayesian Data Analysis                 *
+*   parameters:                                                         *
+*       x : value                                                       *
+*       r : location parameter (r = mu*E[x])                            *
+*       mu: rate (inverse scale) parameter                              *
+************************************************************************/
+dvariable wts::log_gamma_density(const prevariable& x,const prevariable& r,const prevariable& mu){
+    RETURN_ARRAYS_INCREMENT();
+    dvariable xp = x+1.0e-10;
+    dvariable d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
+    RETURN_ARRAYS_DECREMENT();
+    return d;
+}
+/************************************************************************
+* name      : log_gamma_density                                         *
+* purpose   : compute log of gamma pdf                                  *
+ *                                                                      *
+* log_gamma_density(x,r,mu) = r*log(mu)-log_gamma(r)+(r-1)*log(x)-mu*x  *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* This is SAME as Gelman et al., Bayesian Data Analysis                 *
+*   parameters:                                                         *
+*       x : value                                                       *
+*       r : location parameter (r = mu*E[x])                            *
+*       mu: rate (inverse scale) parameter                              *
+************************************************************************/
 dvector wts::log_gamma_density(const dvector& xv,const double& r,const double& mu){
     dvector xp = xv+1.0e-10;
     dvector d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
@@ -466,7 +521,7 @@ dvariable wts::logPDF_chisquare(const prevariable& x,const dvar_vector& params,c
     *---------------------------------------------------*/
     dvariable r  = params(1)/2.0; //k in wikipedia article on gamma pdf
     dvariable mu = 0.5;           //1/theta in wikipedia article on gamma pdf
-    dvariable logPDF = log_gamma_density(x,r,mu);//chi-square
+    dvariable logPDF = wts::log_gamma_density(x,r,mu);//chi-square
     RETURN_ARRAYS_DECREMENT();
     return logPDF;
 }
@@ -501,7 +556,7 @@ dvariable wts::logPDF_chisqdevs(const prevariable& x,const dvar_vector& params,c
     RETURN_ARRAYS_INCREMENT();
     dvariable r  = consts(1)/2.0; //k in wikipedia article on gamma pdf
     dvariable mu = 0.5;           //1/theta in wikipedia article on gamma pdf
-    dvariable logPDF = log_gamma_density(x,r,mu);//chi-square
+    dvariable logPDF = wts::log_gamma_density(x,r,mu);//chi-square
     RETURN_ARRAYS_DECREMENT();
     return logPDF;
 }
@@ -562,11 +617,11 @@ dvariable wts::logPDF_gamma(const prevariable& x,const dvar_vector& params,const
     if (params.indexmax()==2) {
         dvariable r  = params(1); //shape parameter: k in wikipedia article on gamma pdf
         dvariable mu = params(2); //rate parameter : 1/theta in wikipedia article on gamma pdf
-        logPDF = log_gamma_density(x,r,mu);
+        logPDF = wts::log_gamma_density(x,r,mu);
     } else {
         double r  = consts(1); //shape parameter: k in wikipedia article on gamma pdf
         double mu = consts(2); //rate parameter : 1/theta in wikipedia article on gamma pdf
-        logPDF = log_gamma_density(x,r,mu);
+        logPDF = wts::log_gamma_density(x,r,mu);
     }
     RETURN_ARRAYS_DECREMENT();
     return logPDF;
@@ -581,7 +636,7 @@ dvar_vector wts::logPDF_gamma(const dvar_vector& x,const dvar_vector& params,con
     } else {
         double r  = consts(1); //shape parameter: k in wikipedia article on gamma pdf
         double mu = consts(2); //rate parameter : 1/theta in wikipedia article on gamma pdf
-        logPDF = log_gamma_density(x,r,mu);
+        logPDF = wts::log_gamma_density(x,r,mu);
     }
     RETURN_ARRAYS_DECREMENT();
     return logPDF;
