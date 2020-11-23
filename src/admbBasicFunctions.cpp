@@ -874,6 +874,30 @@ ivector wts::getBounds(const imatrix& o){
     return(b);
 }
 //-------------------------------------------------------------
+ivector wts::getBounds(const i3_array& o){
+    ivector b(1,6);
+    b(1) = o.indexmin();
+    b(2) = o.indexmax();
+    --(--b(3,6)) = getBounds(o(b(1)));
+    return(b);
+}
+//-------------------------------------------------------------
+ivector wts::getBounds(const i4_array& o){
+    ivector b(1,8);
+    b(1) = o.indexmin();
+    b(2) = o.indexmax();
+    --(--b(3,8)) = getBounds(o(b(1)));
+    return(b);
+}
+//-------------------------------------------------------------
+ivector wts::getBounds(const i5_array& o){
+    ivector b(1,10);
+    b(1) = o.indexmin();
+    b(2) = o.indexmax();
+    --(--b(3,10)) = getBounds(o(b(1)));
+    return(b);
+}
+//-------------------------------------------------------------
 ivector wts::getBounds(const dvector& o){
     ivector b(1,2);
     b(1) = o.indexmin();

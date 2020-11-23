@@ -576,6 +576,9 @@ namespace wts{
     ivector getBounds(const  prevariable& o);
     ivector getBounds(const  ivector& o);
     ivector getBounds(const  imatrix& o);
+    ivector getBounds(const  i3_array& o);
+    ivector getBounds(const  i4_array& o);
+    ivector getBounds(const  i5_array& o);
     ivector getBounds(const  dvector& o);
     ivector getBounds(const  dmatrix& o);
     ivector getBounds(const  d3_array& o);

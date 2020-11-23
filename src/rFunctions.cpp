@@ -15,6 +15,7 @@ using namespace std;
  * 2019-06-05: 1. Added wts::Rpr::writeDataToR(...) functions for ivector
  *             2. Revised wts::writeToR(...) functions for dvector and ivector
  *                  to write 100 or fewer entries per text line.
+ * 2020-11-23: 1. Added wts::writeToR(...) for i3,i4, and i5_arrays
 */
 
 /***********************************************************
@@ -66,6 +67,188 @@ adstring wts::Rpr::writeDataToR(ostream& os, const imatrix& xx){
  * @param dimnames - adstring with dimnames.
  */
 void wts::Rpr::writeToR(ostream& os, const imatrix& xx, adstring dimnames){
+    os<<"structure(c(";
+    adstring dims = Rpr::writeDataToR(os,xx);
+    os<<"),"<<endl<<tb<<tb;    
+    os<<"dimnames=list("<<dimnames<<"),";
+    os<<"dim=c("<<dims<<"))";
+}
+
+/***********************************************************
+ * ADMB FUNCTION to write a i3_array to stream as part of an R array structure.
+ * 
+ * @param os - stream for output file.
+ * @param xx - i3_array to be written.
+ * @return - dims for completing the writing the i3_array as an array structure
+ */
+adstring wts::Rpr::writeDataToR(ostream& os, const i3_array& xx){
+    ivector bds = wts::getBounds(xx);
+    int ctr = 1;
+    for (int k=bds(5);k<bds(6);k++) {
+        for (int j=bds(3);j<=bds(4);j++) {
+            for (int i=bds(1);i<=bds(2);i++)  {
+                os<<xx(i,j,k)<<cc;
+                if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+            }
+        }
+    }
+    for (int j=bds(3);j<bds(4);j++) {
+        for (int i=bds(1);i<=bds(2);i++)  {
+            os<<xx(i,j,bds(6))<<cc;
+            if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+        }
+    }
+    for (int i=bds(1);i<bds(2);i++)  {
+        os<<xx(i,bds(4),bds(6))<<cc;
+        if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+    }            
+    os<<xx(bds(2),bds(4),bds(6));
+    adstring dim = str(bds(2)-bds(1)+1)+cc+
+                   str(bds(4)-bds(3)+1)+cc+
+                   str(bds(6)-bds(5)+1);
+    return dim;
+}
+/***********************************************************
+ * ADMB FUNCTION to write a i3_array to stream as an R array.
+ * 
+ * @param os - stream for output file.
+ * @param xx - i3_array to be written.
+ * @param dimnames - adstring with dimnames.
+ */
+void wts::Rpr::writeToR(ostream& os, const i3_array& xx, adstring dimnames){
+    os<<"structure(c(";
+    adstring dims = wts::Rpr::writeDataToR(os,xx);
+    os<<"),"<<endl<<tb<<tb;    
+    os<<"dimnames=list("<<dimnames<<"),";
+    os<<"dim=c("<<dims<<"))";
+}
+
+/***********************************************************
+ * ADMB FUNCTION to write a i4_array to stream as part of an R array structure.
+ * 
+ * @param os - stream for output file.
+ * @param xx - i4_array to be written.
+ * @return - dims for completing the writing the i4_array as an array structure
+ */
+adstring wts::Rpr::writeDataToR(ostream& os, const i4_array& xx){
+    ivector bds = wts::getBounds(xx);
+    int ctr = 1;
+    for (int l=bds(7);l<bds(8);l++) {
+        for (int k=bds(5);k<=bds(6);k++) {
+            for (int j=bds(3);j<=bds(4);j++) {
+                for (int i=bds(1);i<=bds(2);i++)  {
+                    os<<xx(i,j,k,l)<<cc;
+                    if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+                }
+            }
+        }
+    }
+    for (int k=bds(5);k<bds(6);k++) {
+        for (int j=bds(3);j<=bds(4);j++) {
+            for (int i=bds(1);i<=bds(2);i++)  {
+                os<<xx(i,j,k,bds(8))<<cc;
+                if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+            }
+        }
+    }
+    for (int j=bds(3);j<bds(4);j++) {
+        for (int i=bds(1);i<=bds(2);i++)  {
+            os<<xx(i,j,bds(6),bds(8))<<cc;
+            if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+        }
+    }
+    for (int i=bds(1);i<bds(2);i++)  {
+        os<<xx(i,bds(4),bds(6),bds(8))<<cc;
+        if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+    }            
+    os<<xx(bds(2),bds(4),bds(6),bds(8));
+    adstring dim = str(bds(2)-bds(1)+1)+cc+
+                   str(bds(4)-bds(3)+1)+cc+
+                   str(bds(6)-bds(5)+1)+cc+
+                   str(bds(8)-bds(7)+1);
+    return dim;
+}
+/***********************************************************
+ * ADMB FUNCTION to write a i4_array to stream as an R array.
+ * 
+ * @param os - stream for output file.
+ * @param xx - i4_array to be written.
+ * @param dimnames - adstring with dimnames.
+ */
+void wts::Rpr::writeToR(ostream& os, const i4_array& xx, adstring dimnames){
+    os<<"structure(c(";
+    adstring dims = Rpr::writeDataToR(os,xx);
+    os<<"),"<<endl<<tb<<tb;    
+    os<<"dimnames=list("<<dimnames<<"),";
+    os<<"dim=c("<<dims<<"))";
+}
+
+/***********************************************************
+ * ADMB FUNCTION to write a i5_array to stream as part of an R array structure.
+ * 
+ * @param os - stream for output file.
+ * @param xx - i5_array to be written.
+ * @return - dims for completing the writing the i5_array as an array structure
+ */
+adstring wts::Rpr::writeDataToR(ostream& os, const i5_array& xx){
+    ivector bds = wts::getBounds(xx);
+    int ctr = 1;
+    for (int m=bds(9);m<bds(10);m++) {
+        for (int l=bds(7);l<=bds(8);l++) {
+            for (int k=bds(5);k<=bds(6);k++) {
+                for (int j=bds(3);j<=bds(4);j++) {
+                    for (int i=bds(1);i<=bds(2);i++)  {
+                        os<<xx(i,j,k,l,m)<<cc;
+                        if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+                    }
+                }
+            }
+        }
+    }
+    for (int l=bds(7);l<bds(8);l++) {
+        for (int k=bds(5);k<=bds(6);k++) {
+            for (int j=bds(3);j<=bds(4);j++) {
+                for (int i=bds(1);i<=bds(2);i++)  {
+                    os<<xx(i,j,k,l,bds(10))<<cc;
+                    if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+                }
+            }
+        }
+    }
+    for (int k=bds(5);k<bds(6);k++) {
+        for (int j=bds(3);j<=bds(4);j++) {
+            for (int i=bds(1);i<=bds(2);i++)  {
+                os<<xx(i,j,k,bds(8),bds(10))<<cc;
+                if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+            }
+        }
+    }
+    for (int j=bds(3);j<bds(4);j++) {
+        for (int i=bds(1);i<=bds(2);i++)  {
+            os<<xx(i,j,bds(6),bds(8),bds(10))<<cc;
+            if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+        }
+    }
+    for (int i=bds(1);i<bds(2);i++)  {
+        os<<xx(i,bds(4),bds(6),bds(8),bds(10))<<cc;
+        if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
+    }            
+    os<<xx(bds(2),bds(4),bds(6),bds(8),bds(10));
+    adstring dim = str(bds(2)-bds(1)+1)+cc+
+                   str(bds(4)-bds(3)+1)+cc+
+                   str(bds(6)-bds(5)+1)+cc+
+                   str(bds(8)-bds(7)+1)+cc+
+                   str(bds(10)-bds(9)+1);
+    return dim;
+}
+/***********************************************************
+ * ADMB FUNCTION to write a i5_array to stream as an R array.
+ * 
+ * @param os - stream for output file.
+ * @param xx - i5_array to be written.
+ * @param dimnames - adstring with dimnames.
+ */
+void wts::Rpr::writeToR(ostream& os, const i5_array& xx, adstring dimnames){
     os<<"structure(c(";
     adstring dims = Rpr::writeDataToR(os,xx);
     os<<"),"<<endl<<tb<<tb;    
@@ -957,6 +1140,48 @@ void wts::writeToR(ostream& os, const imatrix& xx, adstring colnames){
  */
 void wts::writeToR(ostream& os, const imatrix& xx, adstring n1, adstring n2){
     adstring dimnames=n1+cc+n2;
+    wts::Rpr::writeToR(os,xx,dimnames);
+}
+/****************************************************************
+ * ADMB FUNCTION to write a i3_array to stream as an R structure.
+ * 
+ * @param os - stream for output file.
+ * @param xx - data to be written.
+ * @param n1 - comma-delimited, single-quoted string of names for 1st (leftmost) index
+ * @param n2 - comma-delimited, single-quoted string of names for 2nd index
+ * @param n3 - comma-delimited, single-quoted string of names for 3rd index
+ */
+void wts::writeToR(ostream& os, const i3_array& xx, adstring n1, adstring n2, adstring n3){
+    adstring dimnames=n1+cc+n2+cc+n3;
+    wts::Rpr::writeToR(os,xx,dimnames);
+}
+/****************************************************************
+ * ADMB FUNCTION to write a i4_array to stream as an R structure.
+ * 
+ * @param os - stream for output file.
+ * @param xx - data to be written.
+ * @param n1 - comma-delimited, single-quoted string of names for 1st (leftmost) index
+ * @param n2 - comma-delimited, single-quoted string of names for 2nd index
+ * @param n3 - comma-delimited, single-quoted string of names for 3rd index
+ * @param n4 - comma-delimited, single-quoted string of names for 4th index
+  */
+void wts::writeToR(ostream& os, const i4_array& xx, adstring n1, adstring n2, adstring n3, adstring n4){
+    adstring dimnames=n1+cc+n2+cc+n3+cc+n4;
+    wts::Rpr::writeToR(os,xx,dimnames);
+}
+/****************************************************************
+ * ADMB FUNCTION to write a i5_array to stream as an R structure.
+ * 
+ * @param os - stream for output file.
+ * @param xx - data to be written.
+ * @param n1 - comma-delimited, single-quoted string of names for 1st (leftmost) index
+ * @param n2 - comma-delimited, single-quoted string of names for 2nd index
+ * @param n3 - comma-delimited, single-quoted string of names for 3rd index
+ * @param n4 - comma-delimited, single-quoted string of names for 4th index
+ * @param n5 - comma-delimited, single-quoted string of names for 5th index
+ */
+void wts::writeToR(ostream& os, const i5_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5){
+    adstring dimnames=n1+cc+n2+cc+n3+cc+n4+cc+n5;
     wts::Rpr::writeToR(os,xx,dimnames);
 }
 /********************************************************

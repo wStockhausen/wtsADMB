@@ -16,6 +16,7 @@ namespace wts{
          * @return - dims for writing the ivector as an array structure.
          */
         adstring writeDataToR(ostream& os, const ivector& xx);
+        
         /**
          * ADMB FUNCTION to write an imatrix as an array structure.
          * @param os - stream for output file.
@@ -30,6 +31,56 @@ namespace wts{
          * @param dimnames - adstring with dimnames.
          */
          void writeToR(ostream& os, const imatrix& xx, adstring dimnames);
+        //===========================================================================================
+        // ADMB FUNCTION to write a i3_array as part of an array structure
+        // ----------Arguments----------
+        // os   stream for output file.
+        // xx   i3_array to be written.
+        // ----------Value--------------
+        // dim  dims for writing the matrix to an array structure
+        adstring writeDataToR(ostream& os, const i3_array& xx);    
+        //===========================================================================================
+        // ADMB FUNCTION to write a i3_array as part of an R list
+        // ----------Arguments----------
+        // os       stream for output file.
+        // xx       i3_array to be written.
+        // dimnames adstring with dimnames.
+        void writeToR(ostream& os, const i3_array& xx, adstring dimnames);
+
+        //===========================================================================================
+        // ADMB FUNCTION to write a i4_array as part of an array structure
+        // ----------Arguments----------
+        // os   stream for output file.
+        // xx   i4_array to be written.
+        // ----------Value--------------
+        // dim    dims for writing the i4_array to an array structure
+        adstring writeDataToR(ostream& os, const i4_array& xx);
+        //===========================================================================================
+        // ADMB FUNCTION to write a i4_array as part of an R list
+        // ----------Arguments----------
+        // os       stream for output file.
+        // xx       i4_array to be written.
+        // dimnames adstring with dimnames.
+        void writeToR(ostream& os, const i4_array& xx, adstring dimnames);
+        
+        /***********************************************************
+         * ADMB FUNCTION to write a i5_array to stream as part of an R array structure.
+         * 
+         * @param os - stream for output file.
+         * @param xx - i5_array to be written.
+         * @return - dims for completing the writing the i5_array as an array structure
+         */
+        adstring writeDataToR(ostream& os, const i5_array& xx);
+
+        /***********************************************************
+         * ADMB FUNCTION to write a i5_array to stream as an R array.
+         * 
+         * @param os - stream for output file.
+         * @param xx - i5_array to be written.
+         * @param dimnames - adstring with dimnames.
+         */
+        void writeToR(ostream& os, const i5_array& xx, adstring dimnames);
+        
         /**
          * ADMB FUNCTION to write a dvector as an array structure.
          * @param os - stream for output file.
@@ -254,6 +305,37 @@ namespace wts{
      * @param n2 - comma-delimited, single-quoted string of names for 2nd index
      */
     void writeToR(ostream& os, const imatrix& xx, adstring n1, adstring n2);
+    //===========================================================================================
+    // ADMB FUNCTION to write a i3_array as part of an R list
+    // ----------Arguments----------
+    // os  stream for output file.
+    // xx  data to be written.
+    // n1  comma-delimited, single-quoted string of names for 1st (leftmost) index
+    // n2  comma-delimited, single-quoted string of names for 2nd index
+    // n3  comma-delimited, single-quoted string of names for 3rd index
+    void writeToR(ostream& os, const i3_array& xx, adstring n1, adstring n2, adstring n3);
+    //===========================================================================================
+    // ADMB FUNCTION to write a i4_array as part of an R list
+    // ----------Arguments----------
+    // os  stream for output file.
+    // xx  data to be written.
+    // n1  comma-delimited, single-quoted string of names for 1st (leftmost) index
+    // n2  comma-delimited, single-quoted string of names for 2nd index
+    // n3  comma-delimited, single-quoted string of names for 3rd index
+    // n4  comma-delimited, single-quoted string of names for 4th index
+    void writeToR(ostream& os, const i4_array& xx, adstring n1, adstring n2, adstring n3, adstring n4);
+    /****************************************************************
+     * ADMB FUNCTION to write a i5_array to stream as an R structure.
+     * 
+     * @param os - stream for output file.
+     * @param xx - data to be written.
+     * @param n1 - comma-delimited, single-quoted string of names for 1st (leftmost) index
+     * @param n2 - comma-delimited, single-quoted string of names for 2nd index
+     * @param n3 - comma-delimited, single-quoted string of names for 3rd index
+     * @param n4 - comma-delimited, single-quoted string of names for 4th index
+     * @param n5 - comma-delimited, single-quoted string of names for 5th index
+     */
+    void writeToR(ostream& os, const i5_array& xx, adstring n1, adstring n2, adstring n3, adstring n4, adstring n5);
     /********************************************************
      * ADMB FUNCTION to write a dvector to file as an R vector
      * @param os - stream for output file.
