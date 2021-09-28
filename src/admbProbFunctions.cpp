@@ -427,7 +427,71 @@ double wts::drawSamplePoisson(random_number_generator& rng, const double lam) {
 *       ub:  upper bound                                        *
 ****************************************************************/
 double wts::drawSampleUniform(random_number_generator& rng, const double lb, const double ub) {
-    return lb+randn(rng)*(ub-lb);
+    return lb+randu(rng)*(ub-lb);
+}
+/****************************************************************
+* name      : resampleIndex                                     *
+* purpose   : draw sample of n indices with replacement.        *
+*   parameters:                                                 *
+*       rng  : random number generator                          *
+*       n    : number of samples to draw, with replacement      *
+*       indx : ivector with indices to draw                     *
+****************************************************************/
+ivector wts::resampleIndex(random_number_generator& rng, int n, ivector& indx, int debug, ostream& cout){
+    if (debug) cout<<"in resampleIndex: n="<<n<<",indx="<<indx<<endl;
+    ivector res(1,n);
+    int np = indx.size();
+    int nq = indx.size()+1;
+    for (int i=1;i<=n;i++){
+        int u = (int)(wts::drawSampleUniform(rng,1,nq));
+        if (u>np) u=np;
+        if (debug) cout<<i<<tb<<u<<tb<<np<<endl;
+        res[i] = indx[u];        
+    }
+    if (debug) cout<<"resampled index = "<<res<<endl;
+    return(res);
+}
+/****************************************************************
+* name      : resampleVector                                    *
+* purpose   : resample a vector with replacement.               *
+*   parameters:                                                 *
+*       rng  : random number generator                          *
+*       n    : number of samples to draw, with replacement      *
+*       vec  : dvar_vector with values to resample              *
+****************************************************************/
+dvar_vector wts::resampleVector(random_number_generator& rng, int n, dvar_vector& vec, int debug, ostream& cout){
+    RETURN_ARRAYS_INCREMENT();
+    if (debug) {
+        cout<<"in dvar_vector wts::resampleVector. n = "<<n<<endl<<tb<<"vec = "<<vec<<endl;
+        cout<<vec.indexmin()<<tb<<vec.indexmax()<<endl;
+    }
+    ivector indx(1,vec.size());
+    indx.fill_seqadd(vec.indexmin(),1);
+    if (debug) cout<<"indx: "<<indx<<endl;
+    ivector resIndx = wts::resampleIndex(rng,n,indx,debug,cout);
+    if (debug) cout<<"resIndx: "<<resIndx<<endl;
+    dvar_vector res(1,n);
+    if (debug) cout<<"resIndx: "<<resIndx<<endl;
+    for (int i=1;i<=n;i++) res[i] = vec[resIndx[i]];
+    if (debug) cout<<"res: "<<res<<endl;
+    RETURN_ARRAYS_DECREMENT();
+    return(res);
+}
+/****************************************************************
+* name      : resampleVector                                    *
+* purpose   : resample a vector with replacement.               *
+*   parameters:                                                 *
+*       rng  : random number generator                          *
+*       n    : number of samples to draw, with replacement      *
+*       vec  : dvector with values to resample                  *
+****************************************************************/
+dvector wts::resampleVector(random_number_generator& rng, int n, dvector& vec, int debug, ostream& cout){
+    ivector indx(1,vec.size());
+    indx.fill_seqadd(vec.indexmin(),1);
+    ivector resIndx = wts::resampleIndex(rng,n,indx);
+    dvector res(1,n);
+    for (int i=1;i<=n;i++) res[i] = vec[resIndx[i]];
+    return(res);
 }
 
 /**

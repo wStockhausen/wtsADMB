@@ -122,6 +122,33 @@ namespace wts{
     *       ub:  upper bound                                        *
     ****************************************************************/
     double drawSampleUniform(random_number_generator& rng, const double lb, const double ub);
+    /****************************************************************
+    * name      : resampleIndex                                     *
+    * purpose   : draw sample of n indices with replacement.        *
+    *   parameters:                                                 *
+    *       rng  : random number generator                          *
+    *       n    : number of samples to draw, with replacement      *
+    *       indx : ivector with indices to draw                     *
+    ****************************************************************/
+    ivector resampleIndex(random_number_generator& rng, int n, ivector& indx,int debug=0,ostream& cout=std::cout);
+    /****************************************************************
+    * name      : resampleVector                                    *
+    * purpose   : resample a vector with replacement.               *
+    *   parameters:                                                 *
+    *       rng  : random number generator                          *
+    *       n    : number of samples to draw, with replacement      *
+    *       vec  : dvar_vector with values to resample              *
+    ****************************************************************/
+    dvar_vector resampleVector(random_number_generator& rng, int n, dvar_vector& vec,int debug=0,ostream& cout=std::cout);
+    /****************************************************************
+    * name      : resampleVector                                    *
+    * purpose   : resample a vector with replacement.               *
+    *   parameters:                                                 *
+    *       rng  : random number generator                          *
+    *       n    : number of samples to draw, with replacement      *
+    *       vec  : dvector with values to resample                  *
+    ****************************************************************/
+    dvector resampleVector(random_number_generator& rng, int n, dvector& vec,int debug=0,ostream& cout=std::cout);
 
     /**
      * Function to generate a stochastic version of a multinomial probability distribution.
