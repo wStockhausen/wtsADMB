@@ -2,12 +2,20 @@
 // file contains some general ADMB functions
 #pragma once
 #ifndef ADMBFUNCTIONS_HPP
+
+#include <ivector.h>
+
     #define ADMBFUNCTIONS_HPP
 
 using namespace std;
 
     extern int debugADMBFunctions;
+    bool operator ==(const ivector & i1, const ivector & i2);
+    
 namespace wts{
+    
+    
+    ivector abs(const ivector& i1);
 
     /**
      * Convert a vector of values to and ivector of indices corresponding to 

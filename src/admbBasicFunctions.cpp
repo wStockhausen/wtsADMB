@@ -7,6 +7,22 @@
 using namespace std;
 
 int debugADMBFunctions= 0;
+
+bool operator==(const ivector & i1, const ivector i2){
+    int i = sum(wts::abs(i1-i2));
+    return i==0;
+}
+/**
+ * Get the absolute values of an ivector
+ * @param i1
+ * @return 
+ */
+ivector wts::abs(const ivector& i1){
+    ivector i2(i1.indexmin(),i1.indexmax()); 
+    for (int i=i1.indexmin(); i<=i1.indexmax(); i++) i2[i] = std::abs(i1[i]);
+    return i2;
+}
+
     
 /**
  * Convert a vector of values to and ivector of indices corresponding to 
