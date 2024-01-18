@@ -3,3 +3,5 @@
 /build/
 /dist/
 /wtsADMB-Makefile.mk
+/_build/
+/.vscode/
