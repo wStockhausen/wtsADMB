@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.24)
 
 project(
     wtsADMB
@@ -9,7 +9,7 @@ project(
 
 #--set some local variables
 set(LIB "wtsADMB")
-set(ADMB_HOME "/Users/williamstockhausen/Work/Programming/admb/build/admb")
+set(ADMB_HOME $ENV{ADMB_HOME})
 set(WTSADMB_INCLUDE "include")
 set(WTSADMB_SRC "src")
 set(myCXX_FLAGS "-DUSE_ADMB_CONTRIBS")
