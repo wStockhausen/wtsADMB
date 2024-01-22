@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.24)
 
+message(" Using CMAKE version ${CMAKE_VERSION}")
+
 project(
     wtsADMB
     LANGUAGES CXX
@@ -7,12 +9,23 @@ project(
     DESCRIPTION "CMake script to build wtsADMB library"
 )
 
+#--print some informative messages
+message("  Project: '${PROJECT_NAME}'")
+message("  Source:  '${PROJECT_SOURCE_DIR}'")
+message("  Binary:  '${PROJECT_BINARY_DIR}'")
+message("  Version: '${PROJECT_VERSION}'")
+message("  Host:    '${CMAKE_HOST_SYSTEM_NAME}'")
+message("  C:       '${CMAKE_C_COMPILER}'")
+message("  C++:     '${CMAKE_CXX_COMPILER}'")
+
 #--set some local variables
 set(LIB "wtsADMB")
 set(ADMB_HOME $ENV{ADMB_HOME})
 set(WTSADMB_INCLUDE "include")
 set(WTSADMB_SRC "src")
 set(myCXX_FLAGS "-DUSE_ADMB_CONTRIBS")
+
+message("ADMB_HOME:    ${ADMB_HOME}")
 
 #--add "global" libraries
 add_library(libadmb STATIC IMPORTED)
