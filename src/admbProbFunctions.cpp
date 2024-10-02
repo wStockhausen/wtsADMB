@@ -211,12 +211,12 @@ dvar_vector wts::log_lognormal_density(const dvar_vector& x,const double& med,co
 * gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
 * This is SAME as Gelman et al., Bayesian Data Analysis                 *
 *   parameters:                                                         *
-*       x : value                                                       *
+*       x : value > 0                                                   *
 *       r : location parameter (r = mu*E[x])                            *
 *       mu: rate (inverse scale) parameter                              *
 ************************************************************************/
 double wts::log_gamma_density(const double& x,const double& r,const double& mu){
-    double xp = x+1.0e-10;
+    double xp = x;//+1.0e-10;
     double d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
     return d;
 }
@@ -228,13 +228,13 @@ double wts::log_gamma_density(const double& x,const double& r,const double& mu){
 * gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
 * This is SAME as Gelman et al., Bayesian Data Analysis                 *
 *   parameters:                                                         *
-*       x : value                                                       *
+*       x : value > 0                                                   *
 *       r : location parameter (r = mu*E[x])                            *
 *       mu: rate (inverse scale) parameter                              *
 ************************************************************************/
 dvariable wts::log_gamma_density(const prevariable& x,const double& r,const double& mu){
     RETURN_ARRAYS_INCREMENT();
-    dvariable xp = x+1.0e-10;
+    dvariable xp = x;//+1.0e-10;
     dvariable d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
     RETURN_ARRAYS_DECREMENT();
     return d;
@@ -247,13 +247,13 @@ dvariable wts::log_gamma_density(const prevariable& x,const double& r,const doub
 * gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
 * This is SAME as Gelman et al., Bayesian Data Analysis                 *
 *   parameters:                                                         *
-*       x : value                                                       *
+*       x : value  > 0                                                  *
 *       r : location parameter (r = mu*E[x])                            *
 *       mu: rate (inverse scale) parameter                              *
 ************************************************************************/
 dvariable wts::log_gamma_density(const prevariable& x,const prevariable& r,const prevariable& mu){
     RETURN_ARRAYS_INCREMENT();
-    dvariable xp = x+1.0e-10;
+    dvariable xp = x; //+1.0e-10;
     dvariable d = r*log(mu)-::gammln(r)+(r-1.0)*log(xp)-mu*xp;
     RETURN_ARRAYS_DECREMENT();
     return d;
@@ -369,6 +369,25 @@ dvar_vector wts::log_gamma_density(const dvector& xv,const dvar_vector& r,const 
 *       r : location parameter (r = mu*E[x])                            *
 *       mu: rate (inverse scale) parameter                              *
 ************************************************************************/
+dvector wts::log_gamma_density(const dvector& xv,const dvector& r,const dvector& mu){
+    //cout<<"Starting log_gamma_density(dvector&, dvar_vector&, dvar_vector&)"<<endl;
+    dvector xp = xv+1.0e-10;
+    dvector d = elem_prod(r,log(mu))-::gammln(r)+elem_prod((r-1.0),log(xp))-elem_prod(mu,xp);
+    //cout<<"Finished log_gamma_density(dvector&, dvector&, dvector&)"<<endl;
+    return d;
+}
+/************************************************************************
+* name      : log_gamma_density                                         *
+* purpose   : compute log of gamma pdf                                  *
+ *                                                                      *
+* log_gamma_density(x,r,mu) = r*log(mu)-log_gamma(r)+(r-1)*log(x)-mu*x  *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* This is SAME as Gelman et al., Bayesian Data Analysis                 *
+*   parameters:                                                         *
+*       x : value                                                       *
+*       r : location parameter (r = mu*E[x])                            *
+*       mu: rate (inverse scale) parameter                              *
+************************************************************************/
 dvar_vector wts::log_gamma_density(const dvar_vector& xv,const dvar_vector& r,const dvar_vector& mu){
     //cout<<"Starting log_gamma_density(dvar_vector&, dvar_vector&, dvar_vector&)"<<endl;
     RETURN_ARRAYS_INCREMENT();
@@ -377,6 +396,51 @@ dvar_vector wts::log_gamma_density(const dvar_vector& xv,const dvar_vector& r,co
     RETURN_ARRAYS_DECREMENT();
     //cout<<"Finished log_gamma_density(dvar_vector&, dvar_vector&, dvar_vector&)"<<endl;
     return d;
+}
+/************************************************************************
+* name      : digamma                                                   *
+* purpose   : compute digamma function (dLnGamma/dx)                    *
+ *                                                                      *
+* digamma(x) = d/dx(ln(gamma(x)))                                       *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* Code provided by David Wright in response to a StackOverflow question *
+* https://stackoverflow.com/questions/43840335/accurately-calculate-harmonic-numbers-for-values-between-1-and-10 *
+************************************************************************/
+double wts::digamma(double x) {
+
+    // Reflect to positive x
+    if (x < 0.25) {
+        // For x very close to a negative integer, this will loose accuracy
+        // due to finite PI. To fix this, we need sinpi and cospi functions. 
+        return (digamma(1.0 - x) - M_PI * cos(M_PI * x) / sin(M_PI * x));
+    }
+
+    // Shift out to large enough x
+    double s = 0.0;
+    while (x < 16.0) {
+        s += 1.0 / x;
+        x += 1.0;
+    }
+
+    // Use the asymptotic expansion
+    double psi = log(x) - 1.0 / (2.0 * x);
+    double x2 = x * x;
+    double x2k = 1.0;
+    for (int k = 0; k < wts::bernoulli_length; k++) {
+        double psi_old = psi;
+        x2k *= x2;
+        psi -= wts::bernoulli[k] / (2 * (k + 1) * x2k);
+        if (psi == psi_old) {
+            return(psi - s);
+        }
+    }
+    //throw std::range_error("Convergence failure.");
+}
+dvector wts::digamma(const dvector& x) {
+  dvector psi(x);
+  for (int i=x.indexmin();i<=x.indexmax();i++)
+    psi(i) = wts::digamma(x(i));
+  return(psi);
 }
 /****************************************************************
 * name      : drawSampleLognormal                               *

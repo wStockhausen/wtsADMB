@@ -67,7 +67,27 @@ namespace wts{
     dvar_vector log_gamma_density(const dvector& x,    const prevariable& r,const prevariable& mu);
     dvar_vector log_gamma_density(const dvar_vector& x,const prevariable& r,const prevariable& mu);
     dvar_vector log_gamma_density(const dvector& x,    const dvar_vector& r,const dvar_vector& mu);
+    dvector     log_gamma_density(const dvector& x,    const dvector& r,    const dvector& mu);
     dvar_vector log_gamma_density(const dvar_vector& x,const dvar_vector& r,const dvar_vector& mu);
+
+/************************************************************************
+* name      : digamma                                                   *
+* purpose   : compute digamma function (dLnGamma/dx)                    *
+ *                                                                      *
+* digamma(x) = d/dx(ln(gamma(x)))                                       *
+* gamma(x,r,mu) = (mu^r)/gamma(r) * x^(r-1) * exp(-mu*x)                *
+* Code provided by David Wright in response to a StackOverflow question *
+* https://stackoverflow.com/questions/43840335/accurately-calculate-harmonic-numbers-for-values-between-1-and-10 *
+************************************************************************/
+    static const int bernoulli_length = 15;
+    static const double bernoulli[] = {
+        1.0 / 6.0, -1.0 / 30.0, 1.0 / 42.0, -1.0 / 30.0,
+        5.0 / 66.0, -691.0 / 2730.0, 7.0 / 6.0, -3617.0 / 510.0,
+        43867.0 / 798.0, -174611.0 / 330.0, 854513.0 /138.0 ,-236364091.0 / 2730.0,
+        8553103.0 / 6.0, -23749461029.0 / 870.0, 8615841276005.0 / 14322.0
+    };
+    double digamma(double x);
+    dvector digamma(const dvector& x);
 
     /****************************************************************
     * name      : cdf_normal                                        *
