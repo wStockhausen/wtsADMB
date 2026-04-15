@@ -296,18 +296,34 @@ void wts::Rpr::writeToR(ostream& os, const dvector& xx, adstring dimnames){
  */
 adstring wts::Rpr::writeDataToR(ostream& os, const dmatrix& xx){
     ivector bds = wts::getBounds(xx);
-    int ctr = 1;
-    for (int j=bds(3);j<bds(4);j++) {
-        for (int i=bds(1);i<=bds(2);i++)  {
-            os<<xx(i,j)<<cc;
-            if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
-        }
+    // int ctr = 1;
+    // for (int j=bds(3);j<bds(4);j++) {
+    //   // std::cout<<j<<endl;
+    //     for (int i=bds(1);i<=bds(2);i++)  {
+    //         // std::cout<<i<<" "; std::cout.flush();
+    //         os<<xx(i,j)<<cc;
+    //         if (++ctr>20){
+    //           // std::cout<<endl<<tb<<tb; std::cout.flush(); 
+    //           os<<endl<<tb<<tb; ctr=0;
+    //         }
+    //     }
+    // }
+    // for (int i=bds(1);i<bds(2);i++)  {
+    //     std::cout<<i<<" "; std::cout.flush();
+    //     if (++ctr>20){
+    //       os<<endl<<tb<<tb; ctr=0;
+    //     }
+    // }
+    // os<<xx(bds(2),bds(4));
+    dmatrix txx = trans(xx); //--need to write out the transposed version to get order correct for R
+    for (int i=txx.indexmin();i<txx.indexmax();i++) {
+      dvector rw = txx(i);
+      for (int j=rw.indexmin();j<rw.indexmax();j++) os<<rw(j)<<cc;
+      os<<rw(rw.indexmax())<<cc<<endl;
     }
-    for (int i=bds(1);i<bds(2);i++)  {
-        os<<xx(i,bds(4))<<cc;
-        if (++ctr>100){os<<endl<<tb<<tb; ctr=0;}
-    }
-    os<<xx(bds(2),bds(4));
+    dvector rw = txx(txx.indexmax());
+    for (int j=rw.indexmin();j<rw.indexmax();j++) os<<rw(j)<<cc;
+    os<<rw(rw.indexmax());
     adstring dim = str(bds(2)-bds(1)+1)+cc+
                    str(bds(4)-bds(3)+1);
     return dim;

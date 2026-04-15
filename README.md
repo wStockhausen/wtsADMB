@@ -27,10 +27,12 @@ On Windows, an executable version of cmake comes with the RTools installation (i
 
 To create the wtsADMB library, open a command prompt (Windows) or terminal window (OSX or linux), change to the top folder in the wtsADMB directory tree (the one with src and include sub-folders) and enter the following commands:
 
-    * cmake --S . --build _build
+    * cmake -S . -B _build
     * cmake --build _build
 
-These will create the "_build" folder and create the wtsADMB library (as libwtsADMB.a). [Note: do not replace "_build" in the above with another folder name of your choosing]. For future reference, create an environment variable WTSADMB_HOME with the path to the paraent folder of _build.
+These will create the "_build" folder and create the wtsADMB library (as libwtsADMB.a). [Note: do not replace "_build" in the above with another folder name of your choosing]. 
+The library can be recompiled from the _build directory by simply running "make" on the command line. 
+For future reference, create an environment variable WTSADMB_HOME with the path to the paraent folder of _build.
 
 
 ## Setting up wtsADMB as a Netbeans Project
